@@ -4,7 +4,7 @@ The current version only deals with portability of NSAttributedString and its co
 
 - NSFont to UIFont
 - NSColor to UIColor
-- NSParagraphStyle to <Some CoreText Alignment Value>
+- NSParagraphStyle to < Some CoreText Alignment Value >
 
 #### How
 MNCoder works by having intermediate objects that are actually serializable that when unarchived on various platforms will have platform specific representations generated. This currently only works for the fonts and colors. NSParagraphStyles may require regeneration of the entire Attributed string and is currently under investigation as it seems to require explicit setting of Alignments via CoreText.
