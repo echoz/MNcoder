@@ -17,6 +17,8 @@
 		3F18E44014B7D74600303392 /* MNViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F18E43E14B7D74600303392 /* MNViewController.xib */; };
 		3F18E44D14B7D7A300303392 /* MNKeyedArchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F18E44C14B7D7A300303392 /* MNKeyedArchiver.m */; };
 		3F18E45314B7D8C800303392 /* MNKeyedUnarchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F18E45214B7D8C800303392 /* MNKeyedUnarchiver.m */; };
+		3F18E46914B7DB5800303392 /* MNFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F18E46614B7DB5800303392 /* MNFont.m */; };
+		3F18E46A14B7DB5800303392 /* MNColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F18E46814B7DB5800303392 /* MNColor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,10 @@
 		3F18E44C14B7D7A300303392 /* MNKeyedArchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNKeyedArchiver.m; sourceTree = "<group>"; };
 		3F18E45114B7D8C400303392 /* MNKeyedUnarchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNKeyedUnarchiver.h; sourceTree = "<group>"; };
 		3F18E45214B7D8C800303392 /* MNKeyedUnarchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNKeyedUnarchiver.m; sourceTree = "<group>"; };
+		3F18E46514B7DB5800303392 /* MNFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNFont.h; path = ../MNCoder/IntermediateObjects/MNFont.h; sourceTree = "<group>"; };
+		3F18E46614B7DB5800303392 /* MNFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNFont.m; path = ../MNCoder/IntermediateObjects/MNFont.m; sourceTree = "<group>"; };
+		3F18E46714B7DB5800303392 /* MNColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNColor.h; path = ../MNCoder/IntermediateObjects/MNColor.h; sourceTree = "<group>"; };
+		3F18E46814B7DB5800303392 /* MNColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNColor.m; path = ../MNCoder/IntermediateObjects/MNColor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +114,7 @@
 		3F18E44A14B7D7A300303392 /* MNCoder */ = {
 			isa = PBXGroup;
 			children = (
+				3F18E46414B7DB5800303392 /* Intermediate Objects */,
 				3F18E45114B7D8C400303392 /* MNKeyedUnarchiver.h */,
 				3F18E45214B7D8C800303392 /* MNKeyedUnarchiver.m */,
 				3F18E44B14B7D7A300303392 /* MNKeyedArchiver.h */,
@@ -115,6 +122,18 @@
 			);
 			name = MNCoder;
 			path = ../MNCoder;
+			sourceTree = "<group>";
+		};
+		3F18E46414B7DB5800303392 /* Intermediate Objects */ = {
+			isa = PBXGroup;
+			children = (
+				3F18E46514B7DB5800303392 /* MNFont.h */,
+				3F18E46614B7DB5800303392 /* MNFont.m */,
+				3F18E46714B7DB5800303392 /* MNColor.h */,
+				3F18E46814B7DB5800303392 /* MNColor.m */,
+			);
+			name = "Intermediate Objects";
+			path = ../Mac;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +203,8 @@
 				3F18E43D14B7D74600303392 /* MNViewController.m in Sources */,
 				3F18E44D14B7D7A300303392 /* MNKeyedArchiver.m in Sources */,
 				3F18E45314B7D8C800303392 /* MNKeyedUnarchiver.m in Sources */,
+				3F18E46914B7DB5800303392 /* MNFont.m in Sources */,
+				3F18E46A14B7DB5800303392 /* MNColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +314,7 @@
 				3F18E44514B7D74600303392 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
