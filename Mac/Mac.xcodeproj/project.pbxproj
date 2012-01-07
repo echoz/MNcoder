@@ -13,6 +13,8 @@
 		3F18E40E14B7D6EE00303392 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3F18E40C14B7D6EE00303392 /* Credits.rtf */; };
 		3F18E41114B7D6EE00303392 /* MNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F18E41014B7D6EE00303392 /* MNAppDelegate.m */; };
 		3F18E41414B7D6EE00303392 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F18E41214B7D6EE00303392 /* MainMenu.xib */; };
+		3F18E44914B7D79700303392 /* MNKeyedArchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F18E44814B7D79700303392 /* MNKeyedArchiver.m */; };
+		3F18E45014B7D8B900303392 /* MNKeyedUnarchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F18E44F14B7D8B900303392 /* MNKeyedUnarchiver.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,10 @@
 		3F18E40F14B7D6EE00303392 /* MNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MNAppDelegate.h; sourceTree = "<group>"; };
 		3F18E41014B7D6EE00303392 /* MNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNAppDelegate.m; sourceTree = "<group>"; };
 		3F18E41314B7D6EE00303392 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		3F18E44714B7D79700303392 /* MNKeyedArchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNKeyedArchiver.h; path = ../MNCoder/MNKeyedArchiver.h; sourceTree = "<group>"; };
+		3F18E44814B7D79700303392 /* MNKeyedArchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNKeyedArchiver.m; path = ../MNCoder/MNKeyedArchiver.m; sourceTree = "<group>"; };
+		3F18E44E14B7D8B900303392 /* MNKeyedUnarchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNKeyedUnarchiver.h; path = ../MNCoder/MNKeyedUnarchiver.h; sourceTree = "<group>"; };
+		3F18E44F14B7D8B900303392 /* MNKeyedUnarchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNKeyedUnarchiver.m; path = ../MNCoder/MNKeyedUnarchiver.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +52,7 @@
 		3F18E3EE14B7D6ED00303392 = {
 			isa = PBXGroup;
 			children = (
+				3F18E44614B7D77700303392 /* MNCoder */,
 				3F18E40314B7D6EE00303392 /* Mac */,
 				3F18E3FC14B7D6EE00303392 /* Frameworks */,
 				3F18E3FA14B7D6EE00303392 /* Products */,
@@ -100,6 +107,17 @@
 				3F18E40C14B7D6EE00303392 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3F18E44614B7D77700303392 /* MNCoder */ = {
+			isa = PBXGroup;
+			children = (
+				3F18E44714B7D79700303392 /* MNKeyedArchiver.h */,
+				3F18E44814B7D79700303392 /* MNKeyedArchiver.m */,
+				3F18E44E14B7D8B900303392 /* MNKeyedUnarchiver.h */,
+				3F18E44F14B7D8B900303392 /* MNKeyedUnarchiver.m */,
+			);
+			name = MNCoder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +185,8 @@
 			files = (
 				3F18E40A14B7D6EE00303392 /* main.m in Sources */,
 				3F18E41114B7D6EE00303392 /* MNAppDelegate.m in Sources */,
+				3F18E44914B7D79700303392 /* MNKeyedArchiver.m in Sources */,
+				3F18E45014B7D8B900303392 /* MNKeyedUnarchiver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
