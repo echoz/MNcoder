@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MNColor : NSObject
+@interface MNColor : NSObject <NSCoding>
 
 @end
