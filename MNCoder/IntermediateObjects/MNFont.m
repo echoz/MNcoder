@@ -11,6 +11,8 @@
 @implementation MNFont
 @synthesize familyName, size;
 
+#pragma mark - NSCoding Protocol
+
 -(id)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
 		self.familyName = [aDecoder decodeObjectForKey:@"familyName"];
@@ -27,15 +29,38 @@
 
 #pragma mark - Platform specific representation
 
-#ifdef TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE
+
+-(id)initWithFont:(UIFont *)font {
+	if ((self = [super init])) {
+		self.familyName = font.familyName;
+		self.size = font.pointSize;
+	}
+	return self;
+}
+
 -(UIFont *)font {
 	return [UIFont fontWithName:self.familyName size:self.size];	
 }
+
 #else
+
+-(id)initWithFont:(NSFont *)font {
+	if ((self = [super init])) {
+		self.familyName = font.familyName;
+		self.size = font.pointSize;
+	}
+	return self;
+}
+
 -(NSFont *)font {
 	return [NSFont fontWithName:self.familyName size:self.size];
 }
 #endif
 
+#pragma mark - MNCIntermediateObject Protocol
 
+-(id)platformRepresetnation {
+	return [self font];
+}
 @end

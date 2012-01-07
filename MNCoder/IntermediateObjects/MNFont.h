@@ -6,21 +6,24 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-
-#ifdef TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 #else
 #import <Foundation/Foundation.h>
 #endif
 
-@interface MNFont : NSObject <NSCoding>
+#import "MNCIntermediateObjectProtocol.h"
+
+@interface MNFont : NSObject <NSCoding, MNCIntermediateObjectProtocol>
 
 @property (nonatomic, retain) NSString *familyName;
 @property (readwrite) CGFloat size;
 
-#ifdef TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE
+-(id)initWithFont:(UIFont *)font;
 -(UIFont *)font;
 #else 
+-(id)initWithFont:(NSFont *)font;
 -(NSFont *)font;
 #endif
 
