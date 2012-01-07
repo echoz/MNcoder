@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @protocol MNCIntermediateObjectProtocol <NSObject>
-
-<#methods#>
-
+@required
+-(id)platformRepresetnation;
 @end
