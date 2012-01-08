@@ -1,5 +1,5 @@
 //
-//  MNKeyedUnarchiver.h
+//  MNUnarchiver.h
 //  Mac
 //
 //  Created by Jeremy Foo on 1/7/12.
@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MNKeyedUnarchiver : NSKeyedUnarchiver
+@interface MNUnarchiver : NSObject {
+@private
+	NSKeyedUnarchiver *__unarchiver;
+}
 
 @end

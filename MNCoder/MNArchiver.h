@@ -1,5 +1,5 @@
 //
-//  MNKeyedArchiver.h
+//  MNArchiver.h
 //  Mac
 //
 //  Created by Jeremy Foo on 1/7/12.
@@ -8,5 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MNKeyedArchiver : NSKeyedArchiver
+@interface MNArchiver : NSObject <NSKeyedArchiverDelegate> {
+	NSMutableData *__resultData;
+@private
+	NSKeyedArchiver *__archiver;
+}
+-(id)initForWritingWithMutableData:(NSMutableData *)data;
 @end
