@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MNUnarchiver : NSObject {
+@interface MNUnarchiver : NSObject <NSKeyedUnarchiverDelegate> {
 @private
 	NSKeyedUnarchiver *__unarchiver;
 }
+-(id)initForReadingWithData:(NSData *)data;
 
 @end

@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface MNArchiver : NSObject <NSKeyedArchiverDelegate> {
-	NSMutableData *__resultData;
 @private
 	NSKeyedArchiver *__archiver;
 }

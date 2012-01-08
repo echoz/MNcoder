@@ -12,16 +12,29 @@
 
 #pragma mark - Object Life Cycle
 
+-(id)init {
+	NSAssert(YES, @"Use initForReadingWithData: instead of init", nil);
+	return nil;
+}
+
 -(id)initForReadingWithData:(NSData *)data {
 	if ((self = [super init])) {
 		__unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+		__unarchiver.delegate = self;
 	}
 	return self;
 }
 
 -(void)dealloc {
+	__unarchiver.delegate = nil;
 	[__unarchiver release], __unarchiver = nil;
 	[super dealloc];
+}
+
+#pragma mark - NSKeyedUnarchiver Delegate Methods
+
+-(id)unarchiver:(NSKeyedUnarchiver *)unarchiver didDecodeObject:(id)object {
+	return nil;
 }
 
 @end

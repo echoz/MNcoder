@@ -14,8 +14,8 @@
 #pragma mark - Object Life Cycle
 
 -(id)init {
-	__resultData = [[NSMutableData dataWithCapacity:0] retain];
-	return [self initForWritingWithMutableData:__resultData];
+	NSAssert(YES, @"Use initForWritingWithMutableData: instead of init", nil);
+	return nil;
 }
 
 -(id)initForWritingWithMutableData:(NSMutableData *)data {
@@ -27,9 +27,7 @@
 	return self;
 }
 
--(void)dealloc {
-	[__resultData release], __resultData = nil;
-	
+-(void)dealloc {	
 	__archiver.delegate = nil;
 	[__archiver release], __archiver = nil;
 	[super dealloc];
