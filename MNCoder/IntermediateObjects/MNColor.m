@@ -64,6 +64,15 @@
 
 #pragma mark - MNCIntermediateObject Protocol
 
+-(id)initWithSubsituteObject:(id)object {
+	return [self initWithColor:object];
+}
+
++(NSArray *)subsituteClasses {
+	return [NSArray arrayWithObjects:@"NSColor", @"UIColor", nil];
+}
+
+
 -(id)platformRepresetnation {
 	return [self color];
 }

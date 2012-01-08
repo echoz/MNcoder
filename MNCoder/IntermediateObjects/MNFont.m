@@ -60,6 +60,14 @@
 
 #pragma mark - MNCIntermediateObject Protocol
 
+-(id)initWithSubsituteObject:(id)object {
+	return [self initWithFont:object];
+}
+
++(NSArray *)subsituteClasses {
+	return [NSArray arrayWithObjects:@"NSFont", @"UIFont", nil];
+}
+
 -(id)platformRepresetnation {
 	return [self font];
 }

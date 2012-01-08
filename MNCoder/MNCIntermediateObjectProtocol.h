@@ -9,5 +9,7 @@
 
 @protocol MNCIntermediateObjectProtocol <NSObject>
 @required
++(NSArray *)subsituteClasses;
+-(id)initWithSubsituteObject:(id)object;
 -(id)platformRepresetnation;
 @end
