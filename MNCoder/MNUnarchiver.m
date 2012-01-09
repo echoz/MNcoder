@@ -9,6 +9,10 @@
 #import "MNUnarchiver.h"
 #import "MNCIntermediateObjectProtocol.h"
 
+// preconfigured intermediate objects
+#import "MNFont.h"
+#import "MNColor.h"
+
 @implementation MNUnarchiver
 
 #pragma mark - Object Life Cycle
@@ -30,6 +34,35 @@
 	__unarchiver.delegate = nil;
 	[__unarchiver release], __unarchiver = nil;
 	[super dealloc];
+}
+
+#pragma mark - Instance Methods
+-(id)decodedRootObject {
+    id root = [__unarchiver decodeObjectForKey:MNCoderRootObjectName];
+    [__unarchiver finishDecoding];
+    
+    return root;
+}
+
+#pragma mark - Static Methods
+
++(id)unarchiveObjectWithData:(NSData *)data {
+    MNUnarchiver *unarchiver = [[MNUnarchiver alloc] initForReadingWithData:data];
+    [unarchiver registerSubstituteClass:[MNFont class]];
+    [unarchiver registerSubstituteClass:[MNColor class]];
+    
+    return [unarchiver decodedRootObject];
+}
+
++(id)unarchiveObjectWithFile:(NSString *)path {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if (![fileManager fileExistsAtPath:path])
+        return nil;
+    
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    
+    return [MNUnarchiver unarchiveObjectWithData:data];
 }
 
 #pragma mark - NSKeyedUnarchiver Delegate Methods
