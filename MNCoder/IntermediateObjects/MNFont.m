@@ -9,13 +9,13 @@
 #import "MNFont.h"
 
 @implementation MNFont
-@synthesize familyName, size;
+@synthesize fontName, size;
 
 #pragma mark - NSCoding Protocol
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
-		self.familyName = [aDecoder decodeObjectForKey:@"familyName"];
+		self.fontName = [aDecoder decodeObjectForKey:@"fontName"];
 		self.size = [aDecoder decodeFloatForKey:@"size"];
 	}
 	
@@ -23,7 +23,7 @@
 }
 
 -(void)encodeWithCoder:(NSCoder *)aCoder {
-	[aCoder encodeObject:self.familyName forKey:@"familyName"];
+	[aCoder encodeObject:self.fontName forKey:@"fontName"];
 	[aCoder encodeFloat:self.size forKey:@"size"];
 }
 
@@ -33,28 +33,28 @@
 
 -(id)initWithFont:(UIFont *)font {
 	if ((self = [super init])) {
-		self.familyName = font.familyName;
+		self.fontName = font.fontName;
 		self.size = font.pointSize;
 	}
 	return self;
 }
 
 -(UIFont *)font {
-	return [UIFont fontWithName:self.familyName size:self.size];	
+	return [UIFont fontWithName:self.fontName size:self.size];	
 }
 
 #else
 
 -(id)initWithFont:(NSFont *)font {
 	if ((self = [super init])) {
-		self.familyName = font.familyName;
+		self.fontName = font.fontName;
 		self.size = font.pointSize;
 	}
 	return self;
 }
 
 -(NSFont *)font {
-	return [NSFont fontWithName:self.familyName size:self.size];
+	return [NSFont fontWithName:self.fontName size:self.size];
 }
 #endif
 
