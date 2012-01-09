@@ -67,6 +67,11 @@
 
 #pragma mark - NSKeyedUnarchiver Delegate Methods
 
+-(Class)unarchiver:(NSKeyedUnarchiver *)unarchiver cannotDecodeObjectOfClassName:(NSString *)name originalClasses:(NSArray *)classNames {
+    NSLog(@"Class %@ does not exist for this platform -> %@", name, classNames);
+    return nil;
+}
+
 -(id)unarchiver:(NSKeyedUnarchiver *)unarchiver didDecodeObject:(id)object {
     
     for (Class cls in __subsituteClasses) {
