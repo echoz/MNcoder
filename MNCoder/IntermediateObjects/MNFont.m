@@ -40,7 +40,13 @@
 }
 
 -(UIFont *)font {
-	return [UIFont fontWithName:self.fontName size:self.size];	
+    UIFont *test = [UIFont fontWithName:self.fontName size:self.size];
+    
+    if (test) {
+        return test;
+    } else {
+        return [UIFont systemFontOfSize:self.size];
+    }
 }
 
 #else
@@ -57,6 +63,11 @@
 	return [NSFont fontWithName:self.fontName size:self.size];
 }
 #endif
+
+-(NSString *)description {
+    return [NSString stringWithFormat:@"MNFont: fontName(%@) pointSize(%f)", self.fontName, self.size];
+}
+
 
 #pragma mark - MNCIntermediateObject Protocol
 

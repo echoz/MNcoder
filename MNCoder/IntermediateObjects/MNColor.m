@@ -62,6 +62,10 @@
 }
 #endif
 
+-(NSString *)description {
+    return [NSString stringWithFormat:@"MNColor: red(%f) green(%f) blue(%f) alpha(%f)", self.red, self.green, self.blue, self.alpha];
+}
+
 #pragma mark - MNCIntermediateObject Protocol
 
 -(id)initWithSubsituteObject:(id)object {
