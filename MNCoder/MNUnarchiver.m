@@ -68,11 +68,11 @@
 #pragma mark - NSKeyedUnarchiver Delegate Methods
 
 -(id)unarchiver:(NSKeyedUnarchiver *)unarchiver didDecodeObject:(id)object {
-    NSString *objClassName = NSStringFromClass([object class]);
     
     for (Class cls in __subsituteClasses) {
-        if ([NSStringFromClass(cls) isEqualToString:objClassName]) {
-            return [object platformRepresetnation];
+        
+        if ([object isKindOfClass:cls]) {
+            return [object platformRepresentation];
         }
     }
     
