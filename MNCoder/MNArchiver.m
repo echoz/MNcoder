@@ -90,13 +90,21 @@
 #pragma mark - NSKeyedArchiver Delegate Methods
 
 -(id)archiver:(NSKeyedArchiver *)archiver willEncodeObject:(id)object {
-    NSString *objClassName = NSStringFromClass([object class]);
-
-    //    NSLog(@"Object(%@): %@", NSStringFromClass([object class]), object);
+    NSLog(@"Object(%@): %@", NSStringFromClass([object class]), object);
     
     for (Class cls in __subsituteClasses) {
-        if ([[cls subsituteClasses] indexOfObject:objClassName] != NSNotFound) {            
-            return [[[cls alloc] initWithSubsituteObject:object] autorelease];
+        for (NSString *classString in [cls subsituteClasses]) {
+
+            Class realClass = NSClassFromString(classString);
+            
+            if (realClass) {
+                if ([object isKindOfClass:realClass]) {
+                    NSLog(@"Match Classes! ->>> %@ = %@", NSStringFromClass([object class]), classString);
+                    
+                    return [[[cls alloc] initWithSubsituteObject:object] autorelease];
+                }
+            }
+
         }
     }
     
