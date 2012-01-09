@@ -14,7 +14,7 @@
 
 #import "MNCIntermediateObjectProtocol.h"
 
-@interface MNColor : NSObject <NSCoding, MNCIntermediateObjectProtocol>
+@interface MNColor : NSObject <MNCIntermediateObjectProtocol>
 
 @property (readwrite) CGFloat red;
 @property (readwrite) CGFloat green;

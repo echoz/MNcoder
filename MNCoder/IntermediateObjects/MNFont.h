@@ -14,7 +14,7 @@
 
 #import "MNCIntermediateObjectProtocol.h"
 
-@interface MNFont : NSObject <NSCoding, MNCIntermediateObjectProtocol>
+@interface MNFont : NSObject <MNCIntermediateObjectProtocol>
 
 @property (nonatomic, retain) NSString *fontName;
 @property (readwrite) CGFloat size;

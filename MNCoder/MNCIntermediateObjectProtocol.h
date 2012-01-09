@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol MNCIntermediateObjectProtocol <NSObject>
+@protocol MNCIntermediateObjectProtocol <NSObject, NSCoding>
 @required
 +(NSArray *)subsituteClasses;
 -(id)initWithSubsituteObject:(id)object;
