@@ -78,9 +78,11 @@
     NSData *serializedData = [MNArchiver archivedDataWithRootObject:object];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-
-    if (![fileManager isWritableFileAtPath:path])
-        return NO;
+    
+    if ([fileManager fileExistsAtPath:path]) {
+        if (![fileManager isWritableFileAtPath:path])
+            return NO;        
+    } 
     
     return [serializedData writeToFile:path atomically:YES];
 }
@@ -90,9 +92,11 @@
 -(id)archiver:(NSKeyedArchiver *)archiver willEncodeObject:(id)object {
     NSString *objClassName = NSStringFromClass([object class]);
 
+    //    NSLog(@"Object(%@): %@", NSStringFromClass([object class]), object);
+    
     for (Class cls in __subsituteClasses) {
-        if ([[cls subsituteClasses] indexOfObject:objClassName] != NSNotFound) {
-            return [cls initWithSubsituteObject:object];
+        if ([[cls subsituteClasses] indexOfObject:objClassName] != NSNotFound) {            
+            return [[[cls alloc] initWithSubsituteObject:object] autorelease];
         }
     }
     
