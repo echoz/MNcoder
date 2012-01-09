@@ -13,7 +13,7 @@
 @implementation MNAppDelegate
 
 @synthesize window = _window;
-@synthesize colorWell;
+@synthesize colorWell, textField;
 
 - (void)dealloc
 {
@@ -27,7 +27,10 @@
 }
 
 -(IBAction)archiveTapped:(id)sender {
-    [MNArchiver archiveRootObject:colorWell.color toFile:@"/Users/jeremy/test.plist"];
+    
+    NSDictionary *test = [NSDictionary dictionaryWithObjectsAndKeys:colorWell.color, @"color", textField.font, @"font", nil];
+    
+    [MNArchiver archiveRootObject:test toFile:@"/Users/jeremy/test.plist"];
 }
 
 @end
