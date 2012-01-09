@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const MNCoderRootObjectName;
+
 @interface MNCoder : NSObject {
     NSMutableSet *__subsituteClasses;
 }

@@ -9,6 +9,8 @@
 #import "MNCoder.h"
 #import "MNCIntermediateObjectProtocol.h"
 
+NSString *const MNCoderRootObjectName = @"MNC0derRootObject";
+
 @implementation MNCoder
 
 #pragma mark - Object Life Cycle
