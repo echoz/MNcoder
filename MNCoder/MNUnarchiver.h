@@ -11,7 +11,10 @@
 @interface MNUnarchiver : NSObject <NSKeyedUnarchiverDelegate> {
 @private
 	NSKeyedUnarchiver *__unarchiver;
+    NSMutableArray *__subsituteClasses;
 }
 -(id)initForReadingWithData:(NSData *)data;
+-(void)registerSubstituteClass:(Class)cls;
+-(void)unregisterSubtituteClass:(Class)cls;
 
 @end

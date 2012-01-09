@@ -7,6 +7,7 @@
 //
 
 #import "MNUnarchiver.h"
+#import "MNCIntermediateObjectProtocol.h"
 
 @implementation MNUnarchiver
 
@@ -31,10 +32,29 @@
 	[super dealloc];
 }
 
+#pragma mark - Instance Methods
+-(void)registerSubstituteClass:(Class)cls {
+    if ([cls conformsToProtocol:@protocol(MNCIntermediateObjectProtocol)])
+        [__subsituteClasses addObject:cls];
+}
+
+-(void)unregisterSubtituteClass:(Class)cls {
+    if ([cls conformsToProtocol:@protocol(MNCIntermediateObjectProtocol)])
+        [__subsituteClasses removeObject:cls];
+}
+
 #pragma mark - NSKeyedUnarchiver Delegate Methods
 
 -(id)unarchiver:(NSKeyedUnarchiver *)unarchiver didDecodeObject:(id)object {
-	return nil;
+    NSString *objClassName = NSStringFromClass([object class]);
+    
+    for (Class cls in __subsituteClasses) {
+        if ([NSStringFromClass(cls) isEqualToString:objClassName]) {
+            return [object platformRepresetnation];
+        }
+    }
+    
+	return object;
 }
 
 @end

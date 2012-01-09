@@ -11,6 +11,9 @@
 @interface MNArchiver : NSObject <NSKeyedArchiverDelegate> {
 @private
 	NSKeyedArchiver *__archiver;
+    NSMutableSet *__subsituteClasses;    
 }
 -(id)initForWritingWithMutableData:(NSMutableData *)data;
+-(void)registerSubstituteClass:(Class)cls;
+-(void)unregisterSubtituteClass:(Class)cls;
 @end
