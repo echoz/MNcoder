@@ -73,7 +73,7 @@
 }
 
 
--(id)platformRepresetnation {
+-(id)platformRepresentation {
 	return [self color];
 }
 

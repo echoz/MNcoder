@@ -68,7 +68,7 @@
 	return [NSArray arrayWithObjects:@"NSFont", @"UIFont", nil];
 }
 
--(id)platformRepresetnation {
+-(id)platformRepresentation {
 	return [self font];
 }
 @end

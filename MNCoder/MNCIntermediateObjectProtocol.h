@@ -11,5 +11,5 @@
 @required
 +(NSArray *)subsituteClasses;
 -(id)initWithSubsituteObject:(id)object;
--(id)platformRepresetnation;
+-(id)platformRepresentation;
 @end
