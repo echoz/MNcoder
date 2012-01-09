@@ -60,7 +60,13 @@
 }
 
 -(NSFont *)font {
-	return [NSFont fontWithName:self.fontName size:self.size];
+    NSFont *test = [NSFont fontWithName:self.fontName size:self.size];
+    
+    if (test) {
+        return test;
+    } else {
+        return [NSFont systemFontOfSize:self.size];
+    }
 }
 #endif
 
