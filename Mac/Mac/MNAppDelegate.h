@@ -8,8 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface MNAppDelegate : NSObject <NSApplicationDelegate>
+@interface MNAppDelegate : NSObject <NSApplicationDelegate> {
+    NSColorWell *_colorWell;
+}
+
 
 @property (assign) IBOutlet NSWindow *window;
 
+@property (assign) IBOutlet NSColorWell *colorWell;
+- (IBAction)archiveTapped:(id)sender;
 @end

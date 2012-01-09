@@ -13,6 +13,7 @@
 @implementation MNAppDelegate
 
 @synthesize window = _window;
+@synthesize colorWell;
 
 - (void)dealloc
 {
@@ -23,11 +24,10 @@
 {
 	// Insert code here to initialize your application
     
-    NSDictionary *test = [NSDictionary dictionaryWithObjectsAndKeys:@"hello", @"hello string", @"bye", @"bye string", nil];
-    
-    [MNArchiver archiveRootObject:test toFile:@"/Users/jeremy/test.plist"];
-    
-    NSLog(@"%@", [MNUnarchiver unarchiveObjectWithFile:@"/Users/jeremy/test.plist"]);
+}
+
+-(IBAction)archiveTapped:(id)sender {
+    [MNArchiver archiveRootObject:colorWell.color toFile:@"/Users/jeremy/test.plist"];
 }
 
 @end
