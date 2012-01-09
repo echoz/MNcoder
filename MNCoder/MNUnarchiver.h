@@ -13,8 +13,9 @@
 @private
 	NSKeyedUnarchiver *__unarchiver;
 }
--(id)initForReadingWithData:(NSData *)data;
 +(id)unarchiveObjectWithData:(NSData *)data;
 +(id)unarchiveObjectWithFile:(NSString *)path;
+
+-(id)initForReadingWithData:(NSData *)data;
 -(id)decodedRootObject;
 @end

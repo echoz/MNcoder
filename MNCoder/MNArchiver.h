@@ -12,6 +12,13 @@
 @interface MNArchiver : MNCoder <NSKeyedArchiverDelegate> {
 @private
 	NSKeyedArchiver *__archiver;
+    BOOL encoded;
 }
+@property (nonatomic, readwrite) NSPropertyListFormat outputFormat;
+
++(NSData *)archivedDataWithRootObject:(id)object;
++(BOOL)archiveRootObject:(id)object toFile:(NSString *)path;
+
 -(id)initForWritingWithMutableData:(NSMutableData *)data;
+-(void)encodeRootObject;
 @end

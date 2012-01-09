@@ -9,7 +9,11 @@
 #import "MNArchiver.h"
 #import "MNCIntermediateObjectProtocol.h"
 
+#import "MNFont.h"
+#import "MNColor.h"
+
 @implementation MNArchiver
+@synthesize outputFormat = _outputFormat;
 
 #pragma mark - Object Life Cycle
 
@@ -22,9 +26,8 @@
 	if ((self = [super init])) {
 		__archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
 		__archiver.delegate = self;
-        
-        __subsituteClasses = [[NSMutableSet setWithCapacity:0] retain];
-	}
+        encoded = NO;
+    }
 	
 	return self;
 }
@@ -33,6 +36,53 @@
 	__archiver.delegate = nil;
 	[__archiver release], __archiver = nil;
 	[super dealloc];
+}
+
+#pragma mark - Override Accessors
+
+-(void)setOutputFormat:(NSPropertyListFormat)outputFormat {
+    [__archiver setOutputFormat:outputFormat];
+}
+
+-(NSPropertyListFormat)outputFormat {
+    return __archiver.outputFormat;
+}
+
+#pragma mark - Instance Methods
+
+-(void)encodeRootObject:(id)object {
+    if (!encoded) {
+        NSDictionary *rootDict = [NSDictionary dictionaryWithObject:object forKey:MNCoderRootObjectName];
+        [__archiver encodeObject:rootDict forKey:MNCoderRootObjectName];
+        [__archiver finishEncoding];
+        encoded = YES;        
+    }
+}
+
+#pragma mark - Static Methods
+
++(NSData *)archivedDataWithRootObject:(id)object {
+    NSMutableData *resultData = [NSMutableData dataWithCapacity:0];
+    
+    MNArchiver *archiver = [[MNArchiver alloc] initForWritingWithMutableData:resultData];
+    archiver.outputFormat = NSPropertyListBinaryFormat_v1_0;
+    [archiver registerSubstituteClass:[MNFont class]];
+    [archiver registerSubstituteClass:[MNColor class]];
+    
+    [archiver encodeRootObject:object];
+    
+    return resultData;
+}
+
++(BOOL)archiveRootObject:(id)object toFile:(NSString *)path {
+    NSData *serializedData = [MNArchiver archivedDataWithRootObject:object];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+
+    if (![fileManager isWritableFileAtPath:path])
+        return NO;
+    
+    return [serializedData writeToFile:path atomically:YES];
 }
 
 #pragma mark - NSKeyedArchiver Delegate Methods
