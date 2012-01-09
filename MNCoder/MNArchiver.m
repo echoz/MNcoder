@@ -30,22 +30,9 @@
 }
 
 -(void)dealloc {	
-    [__subsituteClasses release], __subsituteClasses = nil;
-    
 	__archiver.delegate = nil;
 	[__archiver release], __archiver = nil;
 	[super dealloc];
-}
-
-#pragma mark - Instance Methods
--(void)registerSubstituteClass:(Class)cls {
-    if ([cls conformsToProtocol:@protocol(MNCIntermediateObjectProtocol)])
-        [__subsituteClasses addObject:cls];
-}
-
--(void)unregisterSubtituteClass:(Class)cls {
-    if ([cls conformsToProtocol:@protocol(MNCIntermediateObjectProtocol)])
-        [__subsituteClasses removeObject:cls];
 }
 
 #pragma mark - NSKeyedArchiver Delegate Methods

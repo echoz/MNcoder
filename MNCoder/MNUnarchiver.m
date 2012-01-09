@@ -32,17 +32,6 @@
 	[super dealloc];
 }
 
-#pragma mark - Instance Methods
--(void)registerSubstituteClass:(Class)cls {
-    if ([cls conformsToProtocol:@protocol(MNCIntermediateObjectProtocol)])
-        [__subsituteClasses addObject:cls];
-}
-
--(void)unregisterSubtituteClass:(Class)cls {
-    if ([cls conformsToProtocol:@protocol(MNCIntermediateObjectProtocol)])
-        [__subsituteClasses removeObject:cls];
-}
-
 #pragma mark - NSKeyedUnarchiver Delegate Methods
 
 -(id)unarchiver:(NSKeyedUnarchiver *)unarchiver didDecodeObject:(id)object {

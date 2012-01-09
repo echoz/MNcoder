@@ -7,13 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MNCoder.h"
 
-@interface MNArchiver : NSObject <NSKeyedArchiverDelegate> {
+@interface MNArchiver : MNCoder <NSKeyedArchiverDelegate> {
 @private
 	NSKeyedArchiver *__archiver;
-    NSMutableSet *__subsituteClasses;    
 }
 -(id)initForWritingWithMutableData:(NSMutableData *)data;
--(void)registerSubstituteClass:(Class)cls;
--(void)unregisterSubtituteClass:(Class)cls;
 @end
