@@ -17,6 +17,8 @@
 		3F18E45014B7D8B900303392 /* MNUnarchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F18E44F14B7D8B900303392 /* MNUnarchiver.m */; };
 		3F18E46014B7DB4600303392 /* MNFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F18E45F14B7DB4600303392 /* MNFont.m */; };
 		3F18E46314B7DB5300303392 /* MNColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F18E46214B7DB5300303392 /* MNColor.m */; };
+		3FE9DD7B14BAF36D00261727 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F18E40214B7D6EE00303392 /* Foundation.framework */; };
+		3FE9DD7E14BAF38200261727 /* MNCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9DD7D14BAF38200261727 /* MNCoder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,15 +35,17 @@
 		3F18E40F14B7D6EE00303392 /* MNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MNAppDelegate.h; sourceTree = "<group>"; };
 		3F18E41014B7D6EE00303392 /* MNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNAppDelegate.m; sourceTree = "<group>"; };
 		3F18E41314B7D6EE00303392 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		3F18E44714B7D79700303392 /* MNArchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; name = MNArchiver.h; path = ../MNCoder/MNArchiver.h; sourceTree = "<group>"; };
+		3F18E44714B7D79700303392 /* MNArchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNArchiver.h; path = ../MNCoder/MNArchiver.h; sourceTree = "<group>"; };
 		3F18E44814B7D79700303392 /* MNArchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNArchiver.m; path = ../MNCoder/MNArchiver.m; sourceTree = "<group>"; };
-		3F18E44E14B7D8B900303392 /* MNUnarchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; name = MNUnarchiver.h; path = ../MNCoder/MNUnarchiver.h; sourceTree = "<group>"; };
+		3F18E44E14B7D8B900303392 /* MNUnarchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNUnarchiver.h; path = ../MNCoder/MNUnarchiver.h; sourceTree = "<group>"; };
 		3F18E44F14B7D8B900303392 /* MNUnarchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNUnarchiver.m; path = ../MNCoder/MNUnarchiver.m; sourceTree = "<group>"; };
 		3F18E45E14B7DB4600303392 /* MNFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNFont.h; path = ../MNCoder/IntermediateObjects/MNFont.h; sourceTree = "<group>"; };
 		3F18E45F14B7DB4600303392 /* MNFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNFont.m; path = ../MNCoder/IntermediateObjects/MNFont.m; sourceTree = "<group>"; };
 		3F18E46114B7DB5300303392 /* MNColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNColor.h; path = ../MNCoder/IntermediateObjects/MNColor.h; sourceTree = "<group>"; };
 		3F18E46214B7DB5300303392 /* MNColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNColor.m; path = ../MNCoder/IntermediateObjects/MNColor.m; sourceTree = "<group>"; };
 		3F2E56DB14B82A3800B9A12E /* MNCIntermediateObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNCIntermediateObjectProtocol.h; path = ../MNCoder/MNCIntermediateObjectProtocol.h; sourceTree = "<group>"; };
+		3FE9DD7C14BAF38200261727 /* MNCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNCoder.h; path = ../MNCoder/MNCoder.h; sourceTree = "<group>"; };
+		3FE9DD7D14BAF38200261727 /* MNCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNCoder.m; path = ../MNCoder/MNCoder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FE9DD7B14BAF36D00261727 /* Foundation.framework in Frameworks */,
 				3F18E3FE14B7D6EE00303392 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,6 +125,8 @@
 			isa = PBXGroup;
 			children = (
 				3F2E56DB14B82A3800B9A12E /* MNCIntermediateObjectProtocol.h */,
+				3FE9DD7C14BAF38200261727 /* MNCoder.h */,
+				3FE9DD7D14BAF38200261727 /* MNCoder.m */,
 				3F18E45C14B7DB2C00303392 /* Intermediate Objects */,
 				3F18E44714B7D79700303392 /* MNArchiver.h */,
 				3F18E44814B7D79700303392 /* MNArchiver.m */,
@@ -209,6 +216,7 @@
 				3F18E45014B7D8B900303392 /* MNUnarchiver.m in Sources */,
 				3F18E46014B7DB4600303392 /* MNFont.m in Sources */,
 				3F18E46314B7DB5300303392 /* MNColor.m in Sources */,
+				3FE9DD7E14BAF38200261727 /* MNCoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +298,7 @@
 		3F18E41814B7D6EE00303392 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mac/Mac-Prefix.pch";
 				INFOPLIST_FILE = "Mac/Mac-Info.plist";
@@ -301,6 +310,7 @@
 		3F18E41914B7D6EE00303392 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mac/Mac-Prefix.pch";
 				INFOPLIST_FILE = "Mac/Mac-Info.plist";
