@@ -20,5 +20,5 @@
 +(BOOL)archiveRootObject:(id)object toFile:(NSString *)path;
 
 -(id)initForWritingWithMutableData:(NSMutableData *)data;
--(void)encodeRootObject;
+-(void)encodeRootObject:(id)object;
 @end
