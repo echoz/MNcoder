@@ -69,7 +69,7 @@
 }
 
 +(NSArray *)subsituteClasses {
-	return [NSArray arrayWithObjects:@"NSCalibratedRGBColor", @"UIColor", nil];
+	return [NSArray arrayWithObjects:@"NSColor", @"UIColor", nil];
 }
 
 
