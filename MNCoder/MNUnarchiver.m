@@ -38,10 +38,10 @@
 
 #pragma mark - Instance Methods
 -(id)decodedRootObject {
-    id root = [__unarchiver decodeObjectForKey:MNCoderRootObjectName];
+    NSDictionary *rootDict = [__unarchiver decodeObjectForKey:MNCoderRootObjectName];
     [__unarchiver finishDecoding];
     
-    return root;
+    return [rootDict objectForKey:MNCoderRootObjectName];
 }
 
 #pragma mark - Static Methods
