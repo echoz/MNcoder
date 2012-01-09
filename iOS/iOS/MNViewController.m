@@ -7,7 +7,7 @@
 //
 
 #import "MNViewController.h"
-
+#import "MNUnarchiver.h"
 @implementation MNViewController
 
 - (void)didReceiveMemoryWarning
@@ -22,6 +22,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    NSLog(@"%@", [MNUnarchiver unarchiveObjectWithFile:@"/Users/jeremy/test.plist"]);
+    
+    
 }
 
 - (void)viewDidUnload
