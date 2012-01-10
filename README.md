@@ -19,3 +19,7 @@ It is fairly easy to implement the intermediate objects that will handle the tra
 `-(id)platformRepresentation;` returns the object that is to be represented for the current platform that the serialzied version is decoded for.
 
 In addition to these methods, the intermediate object protocol also requires that the NSCoding protocol be implemented such that these intermediate objects can be serialized by the Archiver.
+
+#### Proposed Solution for NSParagraphStyle in NSAttributedString
+
+It will have an intermediate class that will inspect its attributes and serialize them accordingly. So in this case, it will selectively hunt for NSParagraphStyle and perform some sort of translation function such that it can render as CoreText and vice versa.
