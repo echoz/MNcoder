@@ -17,6 +17,8 @@
 		3F18E45014B7D8B900303392 /* MNUnarchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F18E44F14B7D8B900303392 /* MNUnarchiver.m */; };
 		3F18E46014B7DB4600303392 /* MNFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F18E45F14B7DB4600303392 /* MNFont.m */; };
 		3F18E46314B7DB5300303392 /* MNColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F18E46214B7DB5300303392 /* MNColor.m */; };
+		3FCCF30E14BD6F6A0065A6B4 /* MNAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCCF30D14BD6F6A0065A6B4 /* MNAttributedString.m */; };
+		3FCCF31914BD6FFE0065A6B4 /* MNParagraphStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCCF31814BD6FFE0065A6B4 /* MNParagraphStyle.m */; };
 		3FE9DD7B14BAF36D00261727 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F18E40214B7D6EE00303392 /* Foundation.framework */; };
 		3FE9DD7E14BAF38200261727 /* MNCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9DD7D14BAF38200261727 /* MNCoder.m */; };
 /* End PBXBuildFile section */
@@ -44,6 +46,10 @@
 		3F18E46114B7DB5300303392 /* MNColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNColor.h; path = ../MNCoder/IntermediateObjects/MNColor.h; sourceTree = "<group>"; };
 		3F18E46214B7DB5300303392 /* MNColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNColor.m; path = ../MNCoder/IntermediateObjects/MNColor.m; sourceTree = "<group>"; };
 		3F2E56DB14B82A3800B9A12E /* MNCIntermediateObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNCIntermediateObjectProtocol.h; path = ../MNCoder/MNCIntermediateObjectProtocol.h; sourceTree = "<group>"; };
+		3FCCF30C14BD6F6A0065A6B4 /* MNAttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNAttributedString.h; path = ../MNCoder/IntermediateObjects/MNAttributedString.h; sourceTree = "<group>"; };
+		3FCCF30D14BD6F6A0065A6B4 /* MNAttributedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNAttributedString.m; path = ../MNCoder/IntermediateObjects/MNAttributedString.m; sourceTree = "<group>"; };
+		3FCCF31714BD6FFE0065A6B4 /* MNParagraphStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNParagraphStyle.h; path = ../MNCoder/IntermediateObjects/MNParagraphStyle.h; sourceTree = "<group>"; };
+		3FCCF31814BD6FFE0065A6B4 /* MNParagraphStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNParagraphStyle.m; path = ../MNCoder/IntermediateObjects/MNParagraphStyle.m; sourceTree = "<group>"; };
 		3FE9DD7C14BAF38200261727 /* MNCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNCoder.h; path = ../MNCoder/MNCoder.h; sourceTree = "<group>"; };
 		3FE9DD7D14BAF38200261727 /* MNCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNCoder.m; path = ../MNCoder/MNCoder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,6 +149,10 @@
 				3F18E45F14B7DB4600303392 /* MNFont.m */,
 				3F18E46114B7DB5300303392 /* MNColor.h */,
 				3F18E46214B7DB5300303392 /* MNColor.m */,
+				3FCCF30C14BD6F6A0065A6B4 /* MNAttributedString.h */,
+				3FCCF30D14BD6F6A0065A6B4 /* MNAttributedString.m */,
+				3FCCF31714BD6FFE0065A6B4 /* MNParagraphStyle.h */,
+				3FCCF31814BD6FFE0065A6B4 /* MNParagraphStyle.m */,
 			);
 			name = "Intermediate Objects";
 			sourceTree = "<group>";
@@ -217,6 +227,8 @@
 				3F18E46014B7DB4600303392 /* MNFont.m in Sources */,
 				3F18E46314B7DB5300303392 /* MNColor.m in Sources */,
 				3FE9DD7E14BAF38200261727 /* MNCoder.m in Sources */,
+				3FCCF30E14BD6F6A0065A6B4 /* MNAttributedString.m in Sources */,
+				3FCCF31914BD6FFE0065A6B4 /* MNParagraphStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
