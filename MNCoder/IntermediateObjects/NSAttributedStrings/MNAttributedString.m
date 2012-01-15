@@ -56,9 +56,9 @@
 
 -(void)_buildIntermediateRepresentationFromString:(NSAttributedString *)string {
 	_string = [string.string copy];
-	NSMutableArray *attrs = [NSMutableArray arrayWithCapacity:string];
+	NSMutableArray *attrs = [NSMutableArray arrayWithCapacity:0];
 	
-	[string enumerateAttributesInRange:NSMakeRange(0, [_string length]) options:nil usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
+	[string enumerateAttributesInRange:NSMakeRange(0, [_string length]) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
 		
 	}];
 	
