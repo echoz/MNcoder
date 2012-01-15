@@ -9,5 +9,51 @@
 #import "MNParagraphyStyle.h"
 
 @implementation MNParagraphyStyle
+@synthesize alignment = _alignment, firstLineHeadIndent = _firstLineHeadIndent, headIndent = _headIndent;
+@synthesize tailIndent = _tailIndent, defaultTabInterval = _defaultTabInterval, lineHeightMultiple = _lineHeightMultiple;
+@synthesize maximumLineHeight = _maximumLineHeight, minimumLineHeight = _minimumLineHeight, lineSpacing = _lineSpacing;
+@synthesize paragraphSpacing = _paragraphSpacing, paragraphSpacingBefore = _paragraphSpacingBefore;
+@synthesize lineBreakMode = _lineBreakMode, baseWritingDirection = _baseWritingDirection;
+
+#pragma mark - NSCoding Protocol
+
+-(id)initWithCoder:(NSCoder *)aDecoder {
+	if ((self = [super init])) {
+		
+	}
+	return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)aCoder {
+	
+}
+
+#if TARGET_OS_IPHONE
+-(id)initwithParagraphStyle:(CTParagraphStyleRef)paragraphStyle {
+	if ((self = [super init])) {
+
+	}
+	return self;
+}
+
+-(CTParagraphStyleRef)platformRepresentation {
+	return nil;
+}
+
+#else
+
+-(id)initwithParagraphStyle:(NSParagraphStyle *)paragraphStyle {
+	if ((self = [super init])) {
+		
+	}
+	
+	return self;
+}
+
+-(NSParagraphStyle *)platformRepresentation {
+	return nil;
+}
+
+#endif
 
 @end

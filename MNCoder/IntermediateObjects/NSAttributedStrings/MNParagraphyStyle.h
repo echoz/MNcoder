@@ -23,7 +23,7 @@
 @property (readonly) CGFloat paragraphSpacing;
 @property (readonly) CGFloat paragraphSpacingBefore;
 
-@property (readonly) NSArray *textBlocks;
+// ADD Text Blocks
 
 @property (readonly) NSUInteger lineBreakMode;
 
@@ -31,4 +31,13 @@
 // ADD tighteningFactorForTruncation
 
 @property (readonly) NSInteger baseWritingDirection;
+
+#if TARGET_OS_IPHONE
+-(id)initWithParagraphStyle:(CTParagraphStyleRef)paragraphStyle;
+-(CTParagraphStyleRef)platformRepresentation;
+#else
+-(id)initwithParagraphStyle:(NSParagraphStyle *)paragraphStyle;
+-(NSParagraphStyle *)platformRepresentation;
+#endif
+
 @end
