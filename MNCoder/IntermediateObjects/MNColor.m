@@ -15,10 +15,10 @@
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
-		self.red = [aDecoder decodeFloatForKey:@"red"];
-		self.green = [aDecoder decodeFloatForKey:@"green"];
-		self.blue = [aDecoder decodeFloatForKey:@"blue"];
-		self.alpha = [aDecoder decodeFloatForKey:@"alpha"];
+		_red = [aDecoder decodeFloatForKey:@"red"];
+		_green = [aDecoder decodeFloatForKey:@"green"];
+		_blue = [aDecoder decodeFloatForKey:@"blue"];
+		_alpha = [aDecoder decodeFloatForKey:@"alpha"];
 	}
 	
 	return self;

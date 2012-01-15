@@ -16,10 +16,10 @@
 
 @interface MNColor : NSObject <MNCIntermediateObjectProtocol>
 
-@property (readwrite) CGFloat red;
-@property (readwrite) CGFloat green;
-@property (readwrite) CGFloat blue;
-@property (readwrite) CGFloat alpha;
+@property (readonly) CGFloat red;
+@property (readonly) CGFloat green;
+@property (readonly) CGFloat blue;
+@property (readonly) CGFloat alpha;
 
 #if TARGET_OS_IPHONE
 -(id)initWithColor:(UIColor *)color;
