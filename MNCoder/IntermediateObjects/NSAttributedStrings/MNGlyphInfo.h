@@ -17,11 +17,12 @@
 @property (readonly) NSUInteger characterIdentifier;
 @property (readonly) NSString *baseString;
 
--(id)initWithGlyphRef:(CTGlyphInfoRef)glyphref baseString:(NSString *)baseString;
 
 #if TARGET_OS_IPHONE
+-(id)initWithGlyph:(CTGlyphInfoRef)glyph baseString:(NSString *)baseString;
 -(CTGlyphInfoRef)platformRepresentation;
 #else
+-(id)initWithGlyph:(NSGlyphInfo *)glyph baseString:(NSString *)baseString;
 -(NSGlyphInfo *)platformRepresentation;
 #endif
 

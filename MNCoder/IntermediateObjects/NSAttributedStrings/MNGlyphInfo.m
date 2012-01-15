@@ -30,7 +30,9 @@
 
 #pragma mark - Object Life Cycle
 
--(id)initWithGlyphRef:(CTGlyphInfoRef)glyphref baseString:(NSString *)baseString {
+#if TARGET_OS_IPHONE
+
+-(id)initWithGlyph:(CTGlyphInfoRef)glyph baseString:(NSString *)baseString {
 	if ((self = [super init])) {
 		_characterIdentifier = (NSUInteger)CTGlyphInfoGetCharacterIdentifier(glyphref);
 		_characterCollection = (NSUInteger)CTGlyphInfoGetCharacterCollection(glyphref);
@@ -38,6 +40,19 @@
 	}
 	return self;
 }
+
+#else
+
+-(id)initWithGlyph:(NSGlyphInfo *)glyph baseString:(NSString *)baseString {
+	if ((self = [super init])) {
+		_characterCollection = glyph.characterCollection;
+		_characterIdentifier = glyph.characterIdentifier;
+		_baseString = [baseString copy];
+	}
+	return self;
+}
+
+#endif
 
 -(void)dealloc {
 	[_baseString release], _baseString = nil;
