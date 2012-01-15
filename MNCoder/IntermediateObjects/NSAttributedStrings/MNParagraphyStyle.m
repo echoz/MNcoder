@@ -10,7 +10,7 @@
 
 @implementation MNParagraphyStyle
 @synthesize alignment = _alignment, firstLineHeadIndent = _firstLineHeadIndent, headIndent = _headIndent;
-@synthesize tailIndent = _tailIndent, defaultTabInterval = _defaultTabInterval, lineHeightMultiple = _lineHeightMultiple;
+@synthesize tailIndent = _tailIndent, tabStops = _tabStops, defaultTabInterval = _defaultTabInterval, lineHeightMultiple = _lineHeightMultiple;
 @synthesize maximumLineHeight = _maximumLineHeight, minimumLineHeight = _minimumLineHeight, lineSpacing = _lineSpacing;
 @synthesize paragraphSpacing = _paragraphSpacing, paragraphSpacingBefore = _paragraphSpacingBefore;
 @synthesize lineBreakMode = _lineBreakMode, baseWritingDirection = _baseWritingDirection;
@@ -55,5 +55,10 @@
 }
 
 #endif
+
+-(void)dealloc {
+	[_tabStops release], _tabStops = nil;
+	[super dealloc];
+}
 
 @end
