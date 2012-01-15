@@ -11,6 +11,7 @@
 @interface MNAttributedString (/* Private Methods */)
 -(void)_buildIntermediateRepresentationFromString:(NSAttributedString *)string;
 -(NSDictionary *)dictionaryForAttribute:(NSString *)attributeName value:(id<NSCoding>)value range:(NSRange)aRange;
+
 @end
 
 @implementation MNAttributedString
@@ -55,13 +56,13 @@
 
 -(void)_buildIntermediateRepresentationFromString:(NSAttributedString *)string {
 	_string = [string.string copy];
+	NSMutableArray *attrs = [NSMutableArray arrayWithCapacity:string];
 	
-#if TARGET_OS_IPHONE
-	// translate for iOS
-#else
-	// translate for Mac
+	[string enumerateAttributesInRange:NSMakeRange(0, [_string length]) options:nil usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
+		
+	}];
 	
-#endif
+
 }
 
 -(NSDictionary *)dictionaryForAttribute:(NSString *)attributeName value:(id<NSCoding>)value range:(NSRange)aRange {

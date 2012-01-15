@@ -18,6 +18,8 @@
 		3F18E46014B7DB4600303392 /* MNFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F18E45F14B7DB4600303392 /* MNFont.m */; };
 		3F18E46314B7DB5300303392 /* MNColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F18E46214B7DB5300303392 /* MNColor.m */; };
 		3F54A0AC14C3535D003D5928 /* MNAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F54A0AB14C3535D003D5928 /* MNAttributedString.m */; };
+		3F54A0C214C357AC003D5928 /* MNParagraphyStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F54A0C114C357AC003D5928 /* MNParagraphyStyle.m */; };
+		3F54A0C514C357B8003D5928 /* MNGlyphInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F54A0C414C357B8003D5928 /* MNGlyphInfo.m */; };
 		3FE9DD7B14BAF36D00261727 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F18E40214B7D6EE00303392 /* Foundation.framework */; };
 		3FE9DD7E14BAF38200261727 /* MNCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9DD7D14BAF38200261727 /* MNCoder.m */; };
 /* End PBXBuildFile section */
@@ -47,6 +49,10 @@
 		3F2E56DB14B82A3800B9A12E /* MNCIntermediateObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNCIntermediateObjectProtocol.h; path = ../MNCoder/MNCIntermediateObjectProtocol.h; sourceTree = "<group>"; };
 		3F54A0AA14C3535D003D5928 /* MNAttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNAttributedString.h; sourceTree = "<group>"; };
 		3F54A0AB14C3535D003D5928 /* MNAttributedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNAttributedString.m; sourceTree = "<group>"; };
+		3F54A0C014C357AC003D5928 /* MNParagraphyStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNParagraphyStyle.h; sourceTree = "<group>"; };
+		3F54A0C114C357AC003D5928 /* MNParagraphyStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNParagraphyStyle.m; sourceTree = "<group>"; };
+		3F54A0C314C357B8003D5928 /* MNGlyphInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNGlyphInfo.h; sourceTree = "<group>"; };
+		3F54A0C414C357B8003D5928 /* MNGlyphInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNGlyphInfo.m; sourceTree = "<group>"; };
 		3FE9DD7C14BAF38200261727 /* MNCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNCoder.h; path = ../MNCoder/MNCoder.h; sourceTree = "<group>"; };
 		3FE9DD7D14BAF38200261727 /* MNCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNCoder.m; path = ../MNCoder/MNCoder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,6 +162,10 @@
 			children = (
 				3F54A0AA14C3535D003D5928 /* MNAttributedString.h */,
 				3F54A0AB14C3535D003D5928 /* MNAttributedString.m */,
+				3F54A0C014C357AC003D5928 /* MNParagraphyStyle.h */,
+				3F54A0C114C357AC003D5928 /* MNParagraphyStyle.m */,
+				3F54A0C314C357B8003D5928 /* MNGlyphInfo.h */,
+				3F54A0C414C357B8003D5928 /* MNGlyphInfo.m */,
 			);
 			name = NSAttributedStrings;
 			path = ../MNCoder/IntermediateObjects/NSAttributedStrings;
@@ -232,6 +242,8 @@
 				3F18E46314B7DB5300303392 /* MNColor.m in Sources */,
 				3FE9DD7E14BAF38200261727 /* MNCoder.m in Sources */,
 				3F54A0AC14C3535D003D5928 /* MNAttributedString.m in Sources */,
+				3F54A0C214C357AC003D5928 /* MNParagraphyStyle.m in Sources */,
+				3F54A0C514C357B8003D5928 /* MNGlyphInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
