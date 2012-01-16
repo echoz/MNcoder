@@ -19,9 +19,11 @@
 		3F18E45314B7D8C800303392 /* MNUnarchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F18E45214B7D8C800303392 /* MNUnarchiver.m */; };
 		3F18E46914B7DB5800303392 /* MNFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F18E46614B7DB5800303392 /* MNFont.m */; };
 		3F18E46A14B7DB5800303392 /* MNColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F18E46814B7DB5800303392 /* MNColor.m */; };
-		3FCCF31214BD6F710065A6B4 /* MNAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCCF31114BD6F710065A6B4 /* MNAttributedString.m */; };
-		3FCCF31C14BD70030065A6B4 /* MNParagraphStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCCF31B14BD70030065A6B4 /* MNParagraphStyle.m */; };
-		3FCCF31E14BD72670065A6B4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FCCF31D14BD72670065A6B4 /* CoreText.framework */; };
+		3F54A0B014C35365003D5928 /* MNAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F54A0AF14C35365003D5928 /* MNAttributedString.m */; };
+		3F54A0CA14C35DD9003D5928 /* MNParagraphyStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F54A0C714C35DD9003D5928 /* MNParagraphyStyle.m */; };
+		3F54A0CB14C35DD9003D5928 /* MNGlyphInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F54A0C914C35DD9003D5928 /* MNGlyphInfo.m */; };
+		3F54A0CD14C36251003D5928 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F54A0CC14C36251003D5928 /* CoreText.framework */; };
+		3F54A0DC14C36BD7003D5928 /* MNTabStop.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F54A0DB14C36BD7003D5928 /* MNTabStop.m */; };
 		3FE9DD7814BADBE900261727 /* MNCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9DD7714BADBE900261727 /* MNCoder.m */; };
 /* End PBXBuildFile section */
 
@@ -48,11 +50,15 @@
 		3F18E46714B7DB5800303392 /* MNColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNColor.h; path = ../MNCoder/IntermediateObjects/MNColor.h; sourceTree = "<group>"; };
 		3F18E46814B7DB5800303392 /* MNColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNColor.m; path = ../MNCoder/IntermediateObjects/MNColor.m; sourceTree = "<group>"; };
 		3F2E56DD14B82A4F00B9A12E /* MNCIntermediateObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNCIntermediateObjectProtocol.h; sourceTree = "<group>"; };
-		3FCCF31014BD6F710065A6B4 /* MNAttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNAttributedString.h; path = ../MNCoder/IntermediateObjects/MNAttributedString.h; sourceTree = "<group>"; };
-		3FCCF31114BD6F710065A6B4 /* MNAttributedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNAttributedString.m; path = ../MNCoder/IntermediateObjects/MNAttributedString.m; sourceTree = "<group>"; };
-		3FCCF31A14BD70030065A6B4 /* MNParagraphStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNParagraphStyle.h; path = ../MNCoder/IntermediateObjects/MNParagraphStyle.h; sourceTree = "<group>"; };
-		3FCCF31B14BD70030065A6B4 /* MNParagraphStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNParagraphStyle.m; path = ../MNCoder/IntermediateObjects/MNParagraphStyle.m; sourceTree = "<group>"; };
-		3FCCF31D14BD72670065A6B4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		3F54A0AE14C35365003D5928 /* MNAttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNAttributedString.h; sourceTree = "<group>"; };
+		3F54A0AF14C35365003D5928 /* MNAttributedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNAttributedString.m; sourceTree = "<group>"; };
+		3F54A0C614C35DD9003D5928 /* MNParagraphyStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNParagraphyStyle.h; sourceTree = "<group>"; };
+		3F54A0C714C35DD9003D5928 /* MNParagraphyStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNParagraphyStyle.m; sourceTree = "<group>"; };
+		3F54A0C814C35DD9003D5928 /* MNGlyphInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNGlyphInfo.h; sourceTree = "<group>"; };
+		3F54A0C914C35DD9003D5928 /* MNGlyphInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNGlyphInfo.m; sourceTree = "<group>"; };
+		3F54A0CC14C36251003D5928 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		3F54A0DA14C36BD7003D5928 /* MNTabStop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNTabStop.h; sourceTree = "<group>"; };
+		3F54A0DB14C36BD7003D5928 /* MNTabStop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNTabStop.m; sourceTree = "<group>"; };
 		3FE9DD7614BADBE900261727 /* MNCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNCoder.h; sourceTree = "<group>"; };
 		3FE9DD7714BADBE900261727 /* MNCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNCoder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FCCF31E14BD72670065A6B4 /* CoreText.framework in Frameworks */,
+				3F54A0CD14C36251003D5928 /* CoreText.framework in Frameworks */,
 				3F18E42A14B7D74600303392 /* UIKit.framework in Frameworks */,
 				3F18E42C14B7D74600303392 /* Foundation.framework in Frameworks */,
 				3F18E42E14B7D74600303392 /* CoreGraphics.framework in Frameworks */,
@@ -94,6 +100,7 @@
 		3F18E42814B7D74600303392 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F54A0CC14C36251003D5928 /* CoreText.framework */,
 				3F18E42914B7D74600303392 /* UIKit.framework */,
 				3F18E42B14B7D74600303392 /* Foundation.framework */,
 				3F18E42D14B7D74600303392 /* CoreGraphics.framework */,
@@ -144,10 +151,7 @@
 		3F18E46414B7DB5800303392 /* Intermediate Objects */ = {
 			isa = PBXGroup;
 			children = (
-				3FCCF31A14BD70030065A6B4 /* MNParagraphStyle.h */,
-				3FCCF31B14BD70030065A6B4 /* MNParagraphStyle.m */,
-				3FCCF31014BD6F710065A6B4 /* MNAttributedString.h */,
-				3FCCF31114BD6F710065A6B4 /* MNAttributedString.m */,
+				3F54A0AD14C35365003D5928 /* NSAttributedStrings */,
 				3F18E46514B7DB5800303392 /* MNFont.h */,
 				3F18E46614B7DB5800303392 /* MNFont.m */,
 				3F18E46714B7DB5800303392 /* MNColor.h */,
@@ -155,6 +159,22 @@
 			);
 			name = "Intermediate Objects";
 			path = ../Mac;
+			sourceTree = "<group>";
+		};
+		3F54A0AD14C35365003D5928 /* NSAttributedStrings */ = {
+			isa = PBXGroup;
+			children = (
+				3F54A0AE14C35365003D5928 /* MNAttributedString.h */,
+				3F54A0AF14C35365003D5928 /* MNAttributedString.m */,
+				3F54A0C614C35DD9003D5928 /* MNParagraphyStyle.h */,
+				3F54A0C714C35DD9003D5928 /* MNParagraphyStyle.m */,
+				3F54A0C814C35DD9003D5928 /* MNGlyphInfo.h */,
+				3F54A0C914C35DD9003D5928 /* MNGlyphInfo.m */,
+				3F54A0DA14C36BD7003D5928 /* MNTabStop.h */,
+				3F54A0DB14C36BD7003D5928 /* MNTabStop.m */,
+			);
+			name = NSAttributedStrings;
+			path = ../MNCoder/IntermediateObjects/NSAttributedStrings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,8 +247,10 @@
 				3F18E46914B7DB5800303392 /* MNFont.m in Sources */,
 				3F18E46A14B7DB5800303392 /* MNColor.m in Sources */,
 				3FE9DD7814BADBE900261727 /* MNCoder.m in Sources */,
-				3FCCF31214BD6F710065A6B4 /* MNAttributedString.m in Sources */,
-				3FCCF31C14BD70030065A6B4 /* MNParagraphStyle.m in Sources */,
+				3F54A0B014C35365003D5928 /* MNAttributedString.m in Sources */,
+				3F54A0CA14C35DD9003D5928 /* MNParagraphyStyle.m in Sources */,
+				3F54A0CB14C35DD9003D5928 /* MNGlyphInfo.m in Sources */,
+				3F54A0DC14C36BD7003D5928 /* MNTabStop.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,14 +9,14 @@
 #import "MNFont.h"
 
 @implementation MNFont
-@synthesize fontName, size;
+@synthesize fontName = _fontName, size = _size;
 
 #pragma mark - NSCoding Protocol
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
-		self.fontName = [aDecoder decodeObjectForKey:@"fontName"];
-		self.size = [aDecoder decodeFloatForKey:@"size"];
+		_fontName = [[aDecoder decodeObjectForKey:@"fontName"] copy];
+		_size = [aDecoder decodeFloatForKey:@"size"];
 	}
 	
 	return self;
@@ -27,14 +27,19 @@
 	[aCoder encodeFloat:self.size forKey:@"size"];
 }
 
+-(void)dealloc {
+	[_fontName release], _fontName = nil;
+	[super dealloc];
+}
+
 #pragma mark - Platform specific representation
 
 #if TARGET_OS_IPHONE
 
 -(id)initWithFont:(UIFont *)font {
 	if ((self = [super init])) {
-		self.fontName = font.fontName;
-		self.size = font.pointSize;
+		_fontName = [font.fontName copy] ;
+		_size = font.pointSize;
 	}
 	return self;
 }
@@ -53,8 +58,8 @@
 
 -(id)initWithFont:(NSFont *)font {
 	if ((self = [super init])) {
-		self.fontName = font.fontName;
-		self.size = font.pointSize;
+		_fontName = [font.fontName copy];
+		_size = font.pointSize;
 	}
 	return self;
 }

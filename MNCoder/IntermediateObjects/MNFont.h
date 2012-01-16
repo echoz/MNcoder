@@ -16,8 +16,8 @@
 
 @interface MNFont : NSObject <MNCIntermediateObjectProtocol>
 
-@property (nonatomic, retain) NSString *fontName;
-@property (readwrite) CGFloat size;
+@property (readonly) NSString *fontName;
+@property (readonly) CGFloat size;
 
 #if TARGET_OS_IPHONE
 -(id)initWithFont:(UIFont *)font;
