@@ -11,10 +11,18 @@
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNTabStop : NSObject
+@interface MNTabStop : NSObject <NSCoding>
 
 @property (readonly) NSUInteger alignment;
 @property (readonly) CGFloat location;
 @property (readonly) NSDictionary *options;
+
+#if TARGET_OS_IPHONE
+-(id)initWithTabStop:(CTTextTabRef)tab;
+-(CTTextTabRef)platformRepresentation;
+#else
+-(id)initWithTabStop:(NSTextTab *)tab;
+-(NSTextTab *)platformRepresentation;
+#endif
 
 @end

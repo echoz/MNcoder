@@ -11,4 +11,66 @@
 @implementation MNTabStop
 @synthesize alignment = _alignment, location = _location, options = _options;
 
+#pragma mark - NSCoding Protocol
+
+-(id)initWithCoder:(NSCoder *)aDecoder {
+	if ((self = [super init])) {
+		_alignment = [[aDecoder decodeObjectForKey:@"alignment"] unsignedIntegerValue];
+		_location = [[aDecoder decodeObjectForKey:@"location"] floatValue];
+		_options = [[aDecoder decodeObjectForKey:@"options"] copy];
+	}
+	return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)aCoder {
+	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:self.alignment] forKey:@"alignment"];
+	[aCoder encodeObject:[NSNumber numberWithFloat:self.location] forKey:@"location"];
+	[aCoder encodeObject:self.options forKey:@"options"];
+}
+
+#pragma mark - Object Life Cycle
+
+#if TARGET_OS_IPHONE
+
+-(id)initWithTabStop:(CTTextTabRef)tab {
+	if ((self = [super init])) {
+		_alignment = CTTextTabGetAlignment(tab);
+		_location = CTTextTabGetLocation(tab);
+		_options = [((NSDictionary *)CTTextTabGetOptions(tab)) copy];
+	}
+	return self;
+}
+
+#else
+
+-(id)initWithTabStop:(NSTextTab *)tab {
+	if ((self = [super init])) {
+		_alignment = tab.alignment;
+		_location = tab.location;
+		_options = [tab.options copy];
+	}
+	return self;
+}
+
+#endif
+
+-(void)dealloc {
+	[_options release], _options = nil;
+	[super dealloc];
+}
+
+#if TARGET_OS_IPHONE
+
+-(CTTextTabRef)platformRepresentation {
+	return CTTextTabCreate(self.alignment, self.location, (CFDictionaryRef)self.options);
+}
+
+#else
+
+-(NSTextTab *)platformRepresentation {
+	return [[[NSTextTab alloc] initWithTextAlignment:self.alignment location:self.location options:self.options] autorelease];
+}
+
+#endif
+
 @end
