@@ -16,7 +16,7 @@
 -(id)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
 		_alignment = [[aDecoder decodeObjectForKey:@"alignment"] unsignedIntegerValue];
-		_location = [[aDecoder decodeObjectForKey:@"location"] floatValue];
+		_location = [aDecoder decodeFloatForKey:@"location"];
 		_options = [[aDecoder decodeObjectForKey:@"options"] copy];
 	}
 	return self;
@@ -24,7 +24,7 @@
 
 -(void)encodeWithCoder:(NSCoder *)aCoder {
 	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:self.alignment] forKey:@"alignment"];
-	[aCoder encodeObject:[NSNumber numberWithFloat:self.location] forKey:@"location"];
+	[aCoder encodeFloat:self.location forKey:@"location"];
 	[aCoder encodeObject:self.options forKey:@"options"];
 }
 
