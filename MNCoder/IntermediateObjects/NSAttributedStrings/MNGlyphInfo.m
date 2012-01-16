@@ -34,8 +34,8 @@
 
 -(id)initWithGlyph:(CTGlyphInfoRef)glyph baseString:(NSString *)baseString {
 	if ((self = [super init])) {
-		_characterIdentifier = (NSUInteger)CTGlyphInfoGetCharacterIdentifier(glyphref);
-		_characterCollection = (NSUInteger)CTGlyphInfoGetCharacterCollection(glyphref);
+		_characterIdentifier = (NSUInteger)CTGlyphInfoGetCharacterIdentifier(glyph);
+		_characterCollection = (NSUInteger)CTGlyphInfoGetCharacterCollection(glyph);
 		_baseString = [baseString copy];
 	}
 	return self;
