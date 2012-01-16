@@ -1,5 +1,5 @@
 //
-//  MNTabStop.h
+//  MNTextTab.h
 //  Mac
 //
 //  Created by Jeremy Foo on 1/16/12.
@@ -11,7 +11,7 @@
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNTabStop : NSObject <NSCoding>
+@interface MNTextTab : NSObject <NSCoding>
 
 @property (readonly) NSUInteger alignment;
 @property (readonly) CGFloat location;
