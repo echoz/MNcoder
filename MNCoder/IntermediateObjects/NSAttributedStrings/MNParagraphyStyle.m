@@ -59,7 +59,7 @@
 }
 
 #if TARGET_OS_IPHONE
--(id)initwithParagraphStyle:(CTParagraphStyleRef)paragraphStyle {
+-(id)initWithParagraphStyle:(CTParagraphStyleRef)paragraphStyle {
 	if ((self = [super init])) {
 		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierAlignment, sizeof(CTTextAlignment), &_alignment);
 		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierLineBreakMode, sizeof(NSUInteger), &_lineBreakMode);
