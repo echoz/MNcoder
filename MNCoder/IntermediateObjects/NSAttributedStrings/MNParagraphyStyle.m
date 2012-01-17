@@ -61,7 +61,21 @@
 #if TARGET_OS_IPHONE
 -(id)initwithParagraphStyle:(CTParagraphStyleRef)paragraphStyle {
 	if ((self = [super init])) {
-
+		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierAlignment, sizeof(CTTextAlignment), &_alignment);
+		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierLineBreakMode, sizeof(NSUInteger), &_lineBreakMode);
+		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierBaseWritingDirection, sizeof(NSUInteger), &_baseWritingDirection);
+		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierTabStops, sizeof(CFArrayRef), &_tabStops);
+		
+		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierFirstLineHeadIndent, sizeof(CGFloat), &_firstLineHeadIndent);
+		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierHeadIndent, sizeof(CGFloat), &_headIndent);
+		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierTailIndent, sizeof(CGFloat), &_tailIndent);
+		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierDefaultTabInterval, sizeof(CGFloat), &_defaultTabInterval);
+		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierLineHeightMultiple, sizeof(CGFloat), &_lineHeightMultiple);
+		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierMaximumLineHeight, sizeof(CGFloat), &_maximumLineHeight);
+		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierMinimumLineHeight, sizeof(CGFloat), &_minimumLineHeight);
+		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierLineSpacing, sizeof(CGFloat), &_lineSpacing);
+		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierParagraphSpacing, sizeof(CGFloat), &_paragraphSpacing);
+		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierParagraphSpacingBefore, sizeof(CGFloat), &_paragraphSpacingBefore);
 	}
 	return self;
 }
@@ -74,6 +88,21 @@
 
 -(id)initwithParagraphStyle:(NSParagraphStyle *)paragraphStyle {
 	if ((self = [super init])) {
+		_alignment = paragraphStyle.alignment;
+		_lineBreakMode = paragraphStyle.lineBreakMode;
+		_baseWritingDirection = paragraphStyle.baseWritingDirection;
+		_tabStops = [paragraphStyle.tabStops copy];
+		
+		_firstLineHeadIndent = paragraphStyle.firstLineHeadIndent;
+		_headIndent = paragraphStyle.headIndent;
+		_tailIndent = paragraphStyle.tailIndent;
+		_defaultTabInterval = paragraphStyle.defaultTabInterval;
+		_lineHeightMultiple = paragraphStyle.lineHeightMultiple;
+		_maximumLineHeight = paragraphStyle.maximumLineHeight;
+		_minimumLineHeight = paragraphStyle.minimumLineHeight;
+		_lineSpacing = paragraphStyle.lineSpacing;
+		_paragraphSpacing = paragraphStyle.paragraphSpacing;
+		_paragraphSpacingBefore = paragraphStyle.paragraphSpacingBefore;
 		
 	}
 	
@@ -81,7 +110,25 @@
 }
 
 -(NSParagraphStyle *)platformRepresentation {
-	return nil;
+	NSMutableParagraphStyle *platRep = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	
+	platRep.alignment = self.alignment;
+	platRep.lineBreakMode = self.lineBreakMode;
+	platRep.baseWritingDirection = self.baseWritingDirection;
+	platRep.tabStops = self.tabStops;
+	
+	platRep.firstLineHeadIndent = self.firstLineHeadIndent;
+	platRep.headIndent = self.headIndent;
+	platRep.tailIndent = self.tailIndent;
+	platRep.defaultTabInterval = self.defaultTabInterval;
+	platRep.lineHeightMultiple = self.lineHeightMultiple;
+	platRep.maximumLineHeight = self.maximumLineHeight;
+	platRep.minimumLineHeight = self.minimumLineHeight;
+	platRep.lineSpacing = self.lineSpacing;
+	platRep.paragraphSpacing = self.paragraphSpacing;
+	platRep.paragraphSpacingBefore = self.paragraphSpacingBefore;
+	
+	return [platRep autorelease];
 }
 
 #endif
