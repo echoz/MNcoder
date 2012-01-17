@@ -64,7 +64,7 @@
 +(NSData *)archivedDataWithRootObject:(id)object {
     NSMutableData *resultData = [NSMutableData dataWithCapacity:0];
     
-    MNArchiver *archiver = [[MNArchiver alloc] initForWritingWithMutableData:resultData];
+    MNArchiver *archiver = [[[MNArchiver alloc] initForWritingWithMutableData:resultData] autorelease];
     archiver.outputFormat = NSPropertyListBinaryFormat_v1_0;
     [archiver registerSubstituteClass:[MNFont class]];
     [archiver registerSubstituteClass:[MNColor class]];

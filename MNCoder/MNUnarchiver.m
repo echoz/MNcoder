@@ -47,7 +47,7 @@
 #pragma mark - Static Methods
 
 +(id)unarchiveObjectWithData:(NSData *)data {
-    MNUnarchiver *unarchiver = [[MNUnarchiver alloc] initForReadingWithData:data];
+    MNUnarchiver *unarchiver = [[[MNUnarchiver alloc] initForReadingWithData:data] autorelease];
     [unarchiver registerSubstituteClass:[MNFont class]];
     [unarchiver registerSubstituteClass:[MNColor class]];
     
