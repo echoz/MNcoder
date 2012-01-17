@@ -81,7 +81,26 @@
 }
 
 -(CTParagraphStyleRef)platformRepresentation {
-	return nil;
+	CTParagraphStyleSetting settings[] = {
+		{ kCTParagraphStyleSpecifierAlignment, sizeof(CTTextAlignment), &_alignment },
+		{ kCTParagraphStyleSpecifierLineBreakMode, sizeof(NSUInteger), &_lineBreakMode },
+		{ kCTParagraphStyleSpecifierBaseWritingDirection, sizeof(NSUInteger), &_baseWritingDirection },
+		{ kCTParagraphStyleSpecifierTabStops, sizeof(CFArrayRef), &_tabStops },
+		
+		{ kCTParagraphStyleSpecifierFirstLineHeadIndent, sizeof(CGFloat), &_firstLineHeadIndent },
+		{ kCTParagraphStyleSpecifierHeadIndent, sizeof(CGFloat), &_headIndent },
+		{ kCTParagraphStyleSpecifierTailIndent, sizeof(CGFloat), &_tailIndent },
+		{ kCTParagraphStyleSpecifierDefaultTabInterval, sizeof(CGFloat), &_defaultTabInterval },
+		{ kCTParagraphStyleSpecifierLineHeightMultiple, sizeof(CGFloat), &_lineHeightMultiple },
+		{ kCTParagraphStyleSpecifierMaximumLineHeight, sizeof(CGFloat), &_maximumLineHeight },
+		{ kCTParagraphStyleSpecifierMinimumLineHeight, sizeof(CGFloat), &_minimumLineHeight },
+		{ kCTParagraphStyleSpecifierLineSpacing, sizeof(CGFloat), &_lineSpacing },
+		{ kCTParagraphStyleSpecifierParagraphSpacing, sizeof(CGFloat), &_paragraphSpacing },
+		{ kCTParagraphStyleSpecifierParagraphSpacingBefore, sizeof(CGFloat), &_paragraphSpacingBefore }
+
+	};
+	
+	return CTParagraphStyleCreate(settings, sizeof(settings) / sizeof(CTParagraphStyleSetting));
 }
 
 #else
