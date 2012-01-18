@@ -13,7 +13,7 @@
 @implementation MNAppDelegate
 
 @synthesize window = _window;
-@synthesize colorWell, textField;
+@synthesize textView;
 
 - (void)dealloc
 {
@@ -27,10 +27,13 @@
 }
 
 -(IBAction)archiveTapped:(id)sender {
-    
-    NSDictionary *test = [NSDictionary dictionaryWithObjectsAndKeys:colorWell.color, @"color", textField.font, @"font", nil];
-    
-    [MNArchiver archiveRootObject:test toFile:@"/Users/jeremy/test.plist"];
+	NSAttributedString *astring = (NSMutableAttributedString *)[textView textStorage];
+	[astring enumerateAttributesInRange:NSMakeRange(0, [astring length]) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
+		for (id obj in attrs) {
+			NSLog(@"(%@): %@", [[attrs objectForKey:obj] class], [attrs objectForKey:obj]);
+		}
+		
+	}];
 }
 
 @end

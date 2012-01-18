@@ -15,7 +15,6 @@
 
 @property (assign) IBOutlet NSWindow *window;
 
-@property (assign) IBOutlet NSColorWell *colorWell;
-@property (assign) IBOutlet NSTextField *textField;
+@property (assign) IBOutlet NSTextView *textView;
 - (IBAction)archiveTapped:(id)sender;
 @end
