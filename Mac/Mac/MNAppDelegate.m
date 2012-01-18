@@ -28,12 +28,7 @@
 
 -(IBAction)archiveTapped:(id)sender {
 	NSAttributedString *astring = (NSMutableAttributedString *)[textView textStorage];
-	[astring enumerateAttributesInRange:NSMakeRange(0, [astring length]) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
-		for (id obj in attrs) {
-			NSLog(@"(%@): %@", [[attrs objectForKey:obj] class], [attrs objectForKey:obj]);
-		}
-		
-	}];
+	[MNArchiver archiveRootObject:astring toFile:[NSString stringWithFormat:@"%@MNCoderTest.plist", NSTemporaryDirectory()]];
 }
 
 @end
