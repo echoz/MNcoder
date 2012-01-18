@@ -1,0 +1,3 @@
+[submodule "Vendor/EGOTextView"]
+	path = Vendor/EGOTextView
+	url = https://github.com/enormego/EGOTextView.git
