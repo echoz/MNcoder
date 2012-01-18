@@ -24,6 +24,15 @@
 		3F54A0CB14C35DD9003D5928 /* MNGlyphInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F54A0C914C35DD9003D5928 /* MNGlyphInfo.m */; };
 		3F54A0CD14C36251003D5928 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F54A0CC14C36251003D5928 /* CoreText.framework */; };
 		3F54A0DC14C36BD7003D5928 /* MNTextTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F54A0DB14C36BD7003D5928 /* MNTextTab.m */; };
+		3F95E55914C751E70096CE62 /* EGOTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F95E54F14C751E70096CE62 /* EGOTextView.m */; };
+		3F95E55A14C751E70096CE62 /* drag-dot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95E55114C751E70096CE62 /* drag-dot@2x.png */; };
+		3F95E55B14C751E70096CE62 /* loupe-hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95E55214C751E70096CE62 /* loupe-hi@2x.png */; };
+		3F95E55C14C751E70096CE62 /* loupe-lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95E55314C751E70096CE62 /* loupe-lo@2x.png */; };
+		3F95E55D14C751E70096CE62 /* loupe-mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95E55414C751E70096CE62 /* loupe-mask@2x.png */; };
+		3F95E55E14C751E70096CE62 /* magnifier-ranged-hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95E55514C751E70096CE62 /* magnifier-ranged-hi@2x.png */; };
+		3F95E55F14C751E70096CE62 /* magnifier-ranged-lo-stemless@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95E55614C751E70096CE62 /* magnifier-ranged-lo-stemless@2x.png */; };
+		3F95E56014C751E70096CE62 /* magnifier-ranged-lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95E55714C751E70096CE62 /* magnifier-ranged-lo@2x.png */; };
+		3F95E56114C751E70096CE62 /* magnifier-ranged-mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95E55814C751E70096CE62 /* magnifier-ranged-mask@2x.png */; };
 		3FE9DD7814BADBE900261727 /* MNCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9DD7714BADBE900261727 /* MNCoder.m */; };
 /* End PBXBuildFile section */
 
@@ -57,8 +66,18 @@
 		3F54A0C814C35DD9003D5928 /* MNGlyphInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNGlyphInfo.h; sourceTree = "<group>"; };
 		3F54A0C914C35DD9003D5928 /* MNGlyphInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNGlyphInfo.m; sourceTree = "<group>"; };
 		3F54A0CC14C36251003D5928 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		3F54A0DA14C36BD7003D5928 /* MNTextTab.h */ = {isa = PBXFileReference; fileEncoding = 4; path = MNTextTab.h; sourceTree = "<group>"; };
+		3F54A0DA14C36BD7003D5928 /* MNTextTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNTextTab.h; sourceTree = "<group>"; };
 		3F54A0DB14C36BD7003D5928 /* MNTextTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNTextTab.m; sourceTree = "<group>"; };
+		3F95E54E14C751E70096CE62 /* EGOTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOTextView.h; sourceTree = "<group>"; };
+		3F95E54F14C751E70096CE62 /* EGOTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOTextView.m; sourceTree = "<group>"; };
+		3F95E55114C751E70096CE62 /* drag-dot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drag-dot@2x.png"; sourceTree = "<group>"; };
+		3F95E55214C751E70096CE62 /* loupe-hi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loupe-hi@2x.png"; sourceTree = "<group>"; };
+		3F95E55314C751E70096CE62 /* loupe-lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loupe-lo@2x.png"; sourceTree = "<group>"; };
+		3F95E55414C751E70096CE62 /* loupe-mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loupe-mask@2x.png"; sourceTree = "<group>"; };
+		3F95E55514C751E70096CE62 /* magnifier-ranged-hi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "magnifier-ranged-hi@2x.png"; sourceTree = "<group>"; };
+		3F95E55614C751E70096CE62 /* magnifier-ranged-lo-stemless@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "magnifier-ranged-lo-stemless@2x.png"; sourceTree = "<group>"; };
+		3F95E55714C751E70096CE62 /* magnifier-ranged-lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "magnifier-ranged-lo@2x.png"; sourceTree = "<group>"; };
+		3F95E55814C751E70096CE62 /* magnifier-ranged-mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "magnifier-ranged-mask@2x.png"; sourceTree = "<group>"; };
 		3FE9DD7614BADBE900261727 /* MNCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNCoder.h; sourceTree = "<group>"; };
 		3FE9DD7714BADBE900261727 /* MNCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNCoder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +100,7 @@
 		3F18E41A14B7D74600303392 = {
 			isa = PBXGroup;
 			children = (
+				3F95E54D14C751E70096CE62 /* EGOTextView */,
 				3F18E44A14B7D7A300303392 /* MNCoder */,
 				3F18E42F14B7D74600303392 /* iOS */,
 				3F18E42814B7D74600303392 /* Frameworks */,
@@ -176,6 +196,32 @@
 			path = ../MNCoder/IntermediateObjects/NSAttributedStrings;
 			sourceTree = "<group>";
 		};
+		3F95E54D14C751E70096CE62 /* EGOTextView */ = {
+			isa = PBXGroup;
+			children = (
+				3F95E54E14C751E70096CE62 /* EGOTextView.h */,
+				3F95E54F14C751E70096CE62 /* EGOTextView.m */,
+				3F95E55014C751E70096CE62 /* Resources */,
+			);
+			name = EGOTextView;
+			path = ../Vendor/EGOTextView/EGOTextView;
+			sourceTree = "<group>";
+		};
+		3F95E55014C751E70096CE62 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3F95E55114C751E70096CE62 /* drag-dot@2x.png */,
+				3F95E55214C751E70096CE62 /* loupe-hi@2x.png */,
+				3F95E55314C751E70096CE62 /* loupe-lo@2x.png */,
+				3F95E55414C751E70096CE62 /* loupe-mask@2x.png */,
+				3F95E55514C751E70096CE62 /* magnifier-ranged-hi@2x.png */,
+				3F95E55614C751E70096CE62 /* magnifier-ranged-lo-stemless@2x.png */,
+				3F95E55714C751E70096CE62 /* magnifier-ranged-lo@2x.png */,
+				3F95E55814C751E70096CE62 /* magnifier-ranged-mask@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -228,6 +274,14 @@
 			files = (
 				3F18E43414B7D74600303392 /* InfoPlist.strings in Resources */,
 				3F18E44014B7D74600303392 /* MNViewController.xib in Resources */,
+				3F95E55A14C751E70096CE62 /* drag-dot@2x.png in Resources */,
+				3F95E55B14C751E70096CE62 /* loupe-hi@2x.png in Resources */,
+				3F95E55C14C751E70096CE62 /* loupe-lo@2x.png in Resources */,
+				3F95E55D14C751E70096CE62 /* loupe-mask@2x.png in Resources */,
+				3F95E55E14C751E70096CE62 /* magnifier-ranged-hi@2x.png in Resources */,
+				3F95E55F14C751E70096CE62 /* magnifier-ranged-lo-stemless@2x.png in Resources */,
+				3F95E56014C751E70096CE62 /* magnifier-ranged-lo@2x.png in Resources */,
+				3F95E56114C751E70096CE62 /* magnifier-ranged-mask@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +304,7 @@
 				3F54A0CA14C35DD9003D5928 /* MNParagraphyStyle.m in Sources */,
 				3F54A0CB14C35DD9003D5928 /* MNGlyphInfo.m in Sources */,
 				3F54A0DC14C36BD7003D5928 /* MNTextTab.m in Sources */,
+				3F95E55914C751E70096CE62 /* EGOTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
