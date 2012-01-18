@@ -9,6 +9,7 @@
 #import "MNViewController.h"
 #import "MNUnarchiver.h"
 @implementation MNViewController
+@synthesize textView;
 
 - (void)didReceiveMemoryWarning
 {
@@ -22,13 +23,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    NSLog(@"%@", [MNUnarchiver unarchiveObjectWithFile:@"/Users/jeremy/test.plist"]);
-    
+	[textView becomeFirstResponder];
     
 }
 
 - (void)viewDidUnload
 {
+	[self setTextView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -60,4 +61,16 @@
 	return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (void)dealloc {
+	[textView release];
+	[super dealloc];
+}
+- (IBAction)unarchiveTapped:(id)sender {
+}
+
+- (IBAction)archiveTapped:(id)sender {
+	[textView.attributedString enumerateAttributesInRange:NSMakeRange(0, [textView.attributedString.string length]) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
+		NSLog(@"(%@)-->> %@", [NSValue valueWithRange:range], attrs);
+	}];
+}
 @end

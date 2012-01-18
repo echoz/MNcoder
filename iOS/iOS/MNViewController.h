@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EGOTextView.h"
 
 @interface MNViewController : UIViewController
+@property (retain, nonatomic) IBOutlet EGOTextView *textView;
+- (IBAction)unarchiveTapped:(id)sender;
+- (IBAction)archiveTapped:(id)sender;
 
 @end
