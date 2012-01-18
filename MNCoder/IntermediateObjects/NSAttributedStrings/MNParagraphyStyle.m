@@ -95,11 +95,17 @@
 }
 
 -(CTParagraphStyleRef)platformRepresentation {
+
+	NSMutableArray *tempTabStops = [NSMutableArray arrayWithCapacity:[self.tabStops count]];
+	for (MNTextTab *textTab in self.tabStops) {
+		CFArrayAppendValue((CFMutableArrayRef)tempTabStops, [textTab platformRepresentation]);
+	}
+
 	CTParagraphStyleSetting settings[] = {
 		{ kCTParagraphStyleSpecifierAlignment, sizeof(CTTextAlignment), &_alignment },
 		{ kCTParagraphStyleSpecifierLineBreakMode, sizeof(NSUInteger), &_lineBreakMode },
 		{ kCTParagraphStyleSpecifierBaseWritingDirection, sizeof(NSUInteger), &_baseWritingDirection },
-		{ kCTParagraphStyleSpecifierTabStops, sizeof(CFArrayRef), &_tabStops },
+		{ kCTParagraphStyleSpecifierTabStops, sizeof(CFArrayRef), &tempTabStops },
 		
 		{ kCTParagraphStyleSpecifierFirstLineHeadIndent, sizeof(CGFloat), &_firstLineHeadIndent },
 		{ kCTParagraphStyleSpecifierHeadIndent, sizeof(CGFloat), &_headIndent },
@@ -157,7 +163,13 @@
 	platRep.alignment = self.alignment;
 	platRep.lineBreakMode = self.lineBreakMode;
 	platRep.baseWritingDirection = self.baseWritingDirection;
-	platRep.tabStops = self.tabStops;
+	
+	NSMutableArray *tempTabStops = [NSMutableArray arrayWithCapacity:[self.tabStops count]];
+	for (MNTextTab *textTab in self.tabStops) {
+		[tempTabStops addObject:[textTab platformRepresentation]];
+	}
+	
+	platRep.tabStops = tempTabStops;
 	
 	platRep.firstLineHeadIndent = self.firstLineHeadIndent;
 	platRep.headIndent = self.headIndent;
