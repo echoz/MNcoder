@@ -32,6 +32,10 @@
 
 #if TARGET_OS_IPHONE
 
++(id)textTabWithTabStop:(CTTextTabRef)tab {
+	return [[[self alloc] initWithTabStop:tab] autorelease];
+}
+
 -(id)initWithTabStop:(CTTextTabRef)tab {
 	if ((self = [super init])) {
 		_alignment = CTTextTabGetAlignment(tab);
@@ -42,6 +46,10 @@
 }
 
 #else
+
++(id)textTabWithTabStop:(NSTextTab *)tab {
+	return [[[self alloc] initWithTabStop:tab] autorelease];
+}
 
 -(id)initWithTabStop:(NSTextTab *)tab {
 	if ((self = [super init])) {

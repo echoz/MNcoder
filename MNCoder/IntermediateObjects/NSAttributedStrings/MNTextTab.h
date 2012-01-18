@@ -18,9 +18,11 @@
 @property (readonly) NSDictionary *options;
 
 #if TARGET_OS_IPHONE
++(id)textTabWithTabStop:(CTTextTabRef)tab;
 -(id)initWithTabStop:(CTTextTabRef)tab;
 -(CTTextTabRef)platformRepresentation;
 #else
++(id)textTabWithTabStop:(NSTextTab *)tab;
 -(id)initWithTabStop:(NSTextTab *)tab;
 -(NSTextTab *)platformRepresentation;
 #endif

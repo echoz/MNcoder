@@ -7,6 +7,7 @@
 //
 
 #import "MNParagraphyStyle.h"
+#import "MNTextTab.h"
 
 @implementation MNParagraphyStyle
 @synthesize alignment = _alignment, firstLineHeadIndent = _firstLineHeadIndent, headIndent = _headIndent;
@@ -59,12 +60,25 @@
 }
 
 #if TARGET_OS_IPHONE
++(id)paragraphStyleWithStyle:(CTParagraphStyleRef)paragraphStyle {
+	return [[[self alloc] initWithParagraphStyle:paragraphStyle] autorelease];
+}
+
 -(id)initWithParagraphStyle:(CTParagraphStyleRef)paragraphStyle {
 	if ((self = [super init])) {
 		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierAlignment, sizeof(CTTextAlignment), &_alignment);
 		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierLineBreakMode, sizeof(NSUInteger), &_lineBreakMode);
 		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierBaseWritingDirection, sizeof(NSUInteger), &_baseWritingDirection);
-		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierTabStops, sizeof(CFArrayRef), &_tabStops);
+		
+		NSArray *tempTabStops;
+		
+		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierTabStops, sizeof(CFArrayRef), &tempTabStops);
+		
+		NSMutableArray *mntexttabs = [NSMutableArray arrayWithCapacity:[tempTabStops count]];
+		for (id tabStop in tempTabStops) {
+			[mntexttabs addObject:[MNTextTab textTabWithTabStop:(CTTextTabRef)tabStop]];
+		}
+		_tabStops = [mntexttabs copy];		
 		
 		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierFirstLineHeadIndent, sizeof(CGFloat), &_firstLineHeadIndent);
 		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierHeadIndent, sizeof(CGFloat), &_headIndent);
@@ -105,12 +119,21 @@
 
 #else
 
++(id)paragraphStyleWithStyle:(NSParagraphStyle *)paragraphStyle {
+	return [[self alloc] initwithParagraphStyle:paragraphStyle];
+}
+
 -(id)initwithParagraphStyle:(NSParagraphStyle *)paragraphStyle {
 	if ((self = [super init])) {
 		_alignment = paragraphStyle.alignment;
 		_lineBreakMode = paragraphStyle.lineBreakMode;
 		_baseWritingDirection = paragraphStyle.baseWritingDirection;
-		_tabStops = [paragraphStyle.tabStops copy];
+
+		NSMutableArray *mntexttabs = [NSMutableArray arrayWithCapacity:[paragraphStyle.tabStops count]];
+		for (NSTextTab *tabStop in paragraphStyle.tabStops) {
+			[mntexttabs addObject:[MNTextTab textTabWithTabStop:tabStop]];
+		}
+		_tabStops = [mntexttabs copy];		
 		
 		_firstLineHeadIndent = paragraphStyle.firstLineHeadIndent;
 		_headIndent = paragraphStyle.headIndent;

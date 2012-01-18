@@ -36,9 +36,11 @@
 @property (readonly) NSInteger baseWritingDirection;
 
 #if TARGET_OS_IPHONE
++(id)paragraphStyleWithStyle:(CTParagraphStyleRef)paragraphStyle;
 -(id)initWithParagraphStyle:(CTParagraphStyleRef)paragraphStyle;
 -(CTParagraphStyleRef)platformRepresentation;
 #else
++(id)paragraphStyleWithStyle:(NSParagraphStyle *)paragraphStyle;
 -(id)initwithParagraphStyle:(NSParagraphStyle *)paragraphStyle;
 -(NSParagraphStyle *)platformRepresentation;
 #endif
