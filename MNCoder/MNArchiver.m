@@ -11,6 +11,7 @@
 
 #import "MNFont.h"
 #import "MNColor.h"
+#import "MNAttributedString.h"
 
 @implementation MNArchiver
 @synthesize outputFormat = _outputFormat;
@@ -53,6 +54,7 @@
 -(void)encodeRootObject:(id)object {
     if (!encoded) {
         NSDictionary *rootDict = [NSDictionary dictionaryWithObject:object forKey:MNCoderRootObjectName];
+		NSLog(@"%@", rootDict);
         [__archiver encodeObject:rootDict forKey:MNCoderRootObjectName];
         [__archiver finishEncoding];
         encoded = YES;        
@@ -68,6 +70,7 @@
     archiver.outputFormat = NSPropertyListBinaryFormat_v1_0;
     [archiver registerSubstituteClass:[MNFont class]];
     [archiver registerSubstituteClass:[MNColor class]];
+	[archiver registerSubstituteClass:[MNAttributedString class]];
     
     [archiver encodeRootObject:object];
     
@@ -90,7 +93,7 @@
 #pragma mark - NSKeyedArchiver Delegate Methods
 
 -(id)archiver:(NSKeyedArchiver *)archiver willEncodeObject:(id)object {
-    NSLog(@"Object(%@): %@", NSStringFromClass([object class]), object);
+	//    NSLog(@"Object(%@): %@", NSStringFromClass([object class]), object);
     
     for (Class cls in __subsituteClasses) {
         for (NSString *classString in [cls subsituteClasses]) {
@@ -99,7 +102,7 @@
             
             if (realClass) {
                 if ([object isKindOfClass:realClass]) {
-                    NSLog(@"Match Classes! ->>> %@ = %@", NSStringFromClass([object class]), classString);
+					//                    NSLog(@"Match Classes! ->>> %@ = %@", NSStringFromClass([object class]), classString);
                     
                     return [[[cls alloc] initWithSubsituteObject:object] autorelease];
                 }
