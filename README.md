@@ -19,3 +19,7 @@ It is fairly easy to implement the intermediate objects that will handle the tra
 `-(id)platformRepresentation;` returns the object that is to be represented for the current platform that the serialzied version is decoded for.
 
 In addition to these methods, the intermediate object protocol also requires that the NSCoding protocol be implemented such that these intermediate objects can be serialized by the Archiver.
+
+#### Cavets
+- Doesn't do TextLists and TextBlocks
+- Doesn't do certain portions of the Mac's Attributed String (ie. hypenation factor, etc)
