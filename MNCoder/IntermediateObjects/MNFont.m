@@ -86,8 +86,12 @@
 	return [self initWithFont:object];
 }
 
-+(NSArray *)subsituteClasses {
-	return [NSArray arrayWithObjects:@"NSFont", @"UIFont", nil];
++(BOOL)isSubstituteForObject:(id)object {
+#if TARGET_OS_IPHONE 
+	return [object isKindOfClass:[UIFont class]];
+#else
+	return [object isKindOfClass:[NSFont class]];
+#endif
 }
 
 -(id)platformRepresentation {

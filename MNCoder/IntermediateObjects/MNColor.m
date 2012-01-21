@@ -72,10 +72,13 @@
 	return [self initWithColor:object];
 }
 
-+(NSArray *)subsituteClasses {
-	return [NSArray arrayWithObjects:@"NSColor", @"UIColor", nil];
++(BOOL)isSubstituteForObject:(id)object {
+#if TARGET_OS_IPHONE 
+	return [object isKindOfClass:[UIColor class]];
+#else
+	return [object isKindOfClass:[NSColor class]];
+#endif
 }
-
 
 -(id)platformRepresentation {
 	return [self color];

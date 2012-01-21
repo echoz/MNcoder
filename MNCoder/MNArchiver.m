@@ -96,19 +96,10 @@
 	//    NSLog(@"Object(%@): %@", NSStringFromClass([object class]), object);
     
     for (Class cls in __subsituteClasses) {
-        for (NSString *classString in [cls subsituteClasses]) {
-
-            Class realClass = NSClassFromString(classString);
-            
-            if (realClass) {
-                if ([object isKindOfClass:realClass]) {
-					//                    NSLog(@"Match Classes! ->>> %@ = %@", NSStringFromClass([object class]), classString);
-                    
-                    return [[[cls alloc] initWithSubsituteObject:object] autorelease];
-                }
-            }
-
-        }
+		
+		if ([cls isSubstituteForObject:object]) {
+			return [[[cls alloc] initWithSubsituteObject:object] autorelease];
+		}
     }
     
 	return object;

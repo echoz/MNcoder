@@ -9,7 +9,7 @@
 
 @protocol MNCIntermediateObjectProtocol <NSObject, NSCoding>
 @required
-+(NSArray *)subsituteClasses;
++(BOOL)isSubstituteForObject:(id)object;
 -(id)initWithSubsituteObject:(id)object;
 -(id)platformRepresentation;
 @end
