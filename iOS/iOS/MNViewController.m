@@ -70,7 +70,11 @@
 
 - (IBAction)archiveTapped:(id)sender {
 	[textView.attributedString enumerateAttributesInRange:NSMakeRange(0, [textView.attributedString.string length]) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
-		NSLog(@"(%@)-->> %@", [NSValue valueWithRange:range], attrs);
+		NSLog(@"(%@)-->>", [NSValue valueWithRange:range]);
+		
+		for (NSString *key in attrs) {
+			NSLog(@"%@ = (%@) %@", key, [[attrs objectForKey:key] class], [attrs objectForKey:key]);
+		}
 	}];
 }
 @end
