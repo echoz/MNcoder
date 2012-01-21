@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MNCIntermediateObjectProtocol.h"
 
-@protocol MNAttributedStringAttributeProtocol <NSObject>
+@protocol MNAttributedStringAttributeProtocol <NSObject, NSCoding>
 @required
 -(NSDictionary *)platformRepresentation;
 +(BOOL)isSubstituteForObject:(void *)object;
