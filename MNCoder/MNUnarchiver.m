@@ -18,52 +18,72 @@
 
 #pragma mark - Object Life Cycle
 
-#pragma mark - Object Life Cycle
+-(id)init {
+	NSAssert(YES, @"Use initForReadingWithData: instead of init", nil);
+	return nil;
+}
 
 -(id)initForReadingWithData:(NSData *)data {
-	if ((self = [super initForReadingWithData:data])) {
-		__subsituteClasses = [[NSMutableSet setWithCapacity:3] retain];
-		[self registerSubstituteClass:[MNFont class]];
-		[self registerSubstituteClass:[MNColor class]];
-		[self registerSubstituteClass:[MNAttributedString class]];
-		
+	if ((self = [super init])) {
+		__unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+		__unarchiver.delegate = self;
 	}
 	return self;
 }
 
 -(void)dealloc {
-    [__subsituteClasses release], __subsituteClasses = nil;
-    [super dealloc];
+	__unarchiver.delegate = nil;
+	[__unarchiver release], __unarchiver = nil;
+	[super dealloc];
 }
 
 #pragma mark - Instance Methods
--(void)registerSubstituteClass:(Class)cls {	
-    if ([cls conformsToProtocol:@protocol(MNCIntermediateObjectProtocol)])
-        [__subsituteClasses addObject:cls];
+-(id)decodedRootObject {
+    NSDictionary *rootDict = [__unarchiver decodeObjectForKey:MNCoderRootObjectName];
+    [__unarchiver finishDecoding];
+    
+    return [rootDict objectForKey:MNCoderRootObjectName];
 }
 
--(void)unregisterSubtituteClass:(Class)cls {
-    if ([cls conformsToProtocol:@protocol(MNCIntermediateObjectProtocol)])
-        [__subsituteClasses removeObject:cls];
+#pragma mark - Static Methods
+
++(id)unarchiveObjectWithData:(NSData *)data {
+    MNUnarchiver *unarchiver = [[[MNUnarchiver alloc] initForReadingWithData:data] autorelease];
+    [unarchiver registerSubstituteClass:[MNFont class]];
+    [unarchiver registerSubstituteClass:[MNColor class]];
+	[unarchiver registerSubstituteClass:[MNAttributedString class]];
+    
+    return [unarchiver decodedRootObject];
 }
 
-#pragma mark - Override
++(id)unarchiveObjectWithFile:(NSString *)path {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if (![fileManager fileExistsAtPath:path])
+        return nil;
+    
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    
+    return [MNUnarchiver unarchiveObjectWithData:data];
+}
 
--(id)decodeObjectForKey:(NSString *)key {
-	id object = [super decodeObjectForKey:key];
-	
-	if (object) {
-		for (Class cls in __subsituteClasses) {
-			
-			if ([object isKindOfClass:cls]) {
-				return [object platformRepresentation];
-			}
-		}
-		
-		return object;		
-	} else {
-		return nil;		
-	}
+#pragma mark - NSKeyedUnarchiver Delegate Methods
+
+-(Class)unarchiver:(NSKeyedUnarchiver *)unarchiver cannotDecodeObjectOfClassName:(NSString *)name originalClasses:(NSArray *)classNames {
+    NSLog(@"Class %@ does not exist for this platform -> %@", name, classNames);
+    return nil;
+}
+
+-(id)unarchiver:(NSKeyedUnarchiver *)unarchiver didDecodeObject:(id)object {
+    
+    for (Class cls in __subsituteClasses) {
+        
+        if ([object isKindOfClass:cls]) {
+            return [object platformRepresentation];
+        }
+    }
+    
+	return object;
 }
 
 @end

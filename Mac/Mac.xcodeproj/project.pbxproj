@@ -22,6 +22,7 @@
 		3F54A0C514C357B8003D5928 /* MNGlyphInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F54A0C414C357B8003D5928 /* MNGlyphInfo.m */; };
 		3F54A0D814C36BD2003D5928 /* MNTextTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F54A0D714C36BD2003D5928 /* MNTextTab.m */; };
 		3F8561BE14CAB97800B7FE8D /* MNCharacterShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8561BD14CAB97800B7FE8D /* MNCharacterShape.m */; };
+		3F8561C614CAC67C00B7FE8D /* MNCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8561C514CAC67C00B7FE8D /* MNCoder.m */; };
 		3FE9DD7B14BAF36D00261727 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F18E40214B7D6EE00303392 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,8 @@
 		3F54A0D714C36BD2003D5928 /* MNTextTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNTextTab.m; sourceTree = "<group>"; };
 		3F8561BC14CAB97800B7FE8D /* MNCharacterShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNCharacterShape.h; sourceTree = "<group>"; };
 		3F8561BD14CAB97800B7FE8D /* MNCharacterShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNCharacterShape.m; sourceTree = "<group>"; };
+		3F8561C414CAC67C00B7FE8D /* MNCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNCoder.h; path = ../MNCoder/MNCoder.h; sourceTree = "<group>"; };
+		3F8561C514CAC67C00B7FE8D /* MNCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNCoder.m; path = ../MNCoder/MNCoder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +145,8 @@
 				3F18E44814B7D79700303392 /* MNArchiver.m */,
 				3F18E44E14B7D8B900303392 /* MNUnarchiver.h */,
 				3F18E44F14B7D8B900303392 /* MNUnarchiver.m */,
+				3F8561C414CAC67C00B7FE8D /* MNCoder.h */,
+				3F8561C514CAC67C00B7FE8D /* MNCoder.m */,
 			);
 			name = MNCoder;
 			sourceTree = "<group>";
@@ -250,6 +255,7 @@
 				3F54A0C514C357B8003D5928 /* MNGlyphInfo.m in Sources */,
 				3F54A0D814C36BD2003D5928 /* MNTextTab.m in Sources */,
 				3F8561BE14CAB97800B7FE8D /* MNCharacterShape.m in Sources */,
+				3F8561C614CAC67C00B7FE8D /* MNCoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

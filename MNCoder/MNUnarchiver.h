@@ -7,11 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MNCoder.h"
 
-@interface MNUnarchiver : NSKeyedUnarchiver {
-	NSMutableSet *__subsituteClasses;
+@interface MNUnarchiver : MNCoder <NSKeyedUnarchiverDelegate> {
+@private
+	NSKeyedUnarchiver *__unarchiver;
 }
--(void)registerSubstituteClass:(Class)cls;
--(void)unregisterSubtituteClass:(Class)cls;
++(id)unarchiveObjectWithData:(NSData *)data;
++(id)unarchiveObjectWithFile:(NSString *)path;
 
+-(id)initForReadingWithData:(NSData *)data;
+-(id)decodedRootObject;
 @end
