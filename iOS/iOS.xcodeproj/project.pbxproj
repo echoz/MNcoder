@@ -61,16 +61,16 @@
 		3F18E46714B7DB5800303392 /* MNColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNColor.h; path = ../MNCoder/IntermediateObjects/MNColor.h; sourceTree = "<group>"; };
 		3F18E46814B7DB5800303392 /* MNColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNColor.m; path = ../MNCoder/IntermediateObjects/MNColor.m; sourceTree = "<group>"; };
 		3F2E56DD14B82A4F00B9A12E /* MNCIntermediateObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNCIntermediateObjectProtocol.h; sourceTree = "<group>"; };
-		3F54A0AE14C35365003D5928 /* MNAttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNAttributedString.h; sourceTree = "<group>"; };
-		3F54A0AF14C35365003D5928 /* MNAttributedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNAttributedString.m; sourceTree = "<group>"; };
-		3F54A0C614C35DD9003D5928 /* MNASParagraphyStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; path = MNASParagraphyStyle.h; sourceTree = "<group>"; };
+		3F54A0AE14C35365003D5928 /* MNAttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNAttributedString.h; path = ../MNCoder/IntermediateObjects/MNAttributedString.h; sourceTree = "<group>"; };
+		3F54A0AF14C35365003D5928 /* MNAttributedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNAttributedString.m; path = ../MNCoder/IntermediateObjects/MNAttributedString.m; sourceTree = "<group>"; };
+		3F54A0C614C35DD9003D5928 /* MNASParagraphyStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASParagraphyStyle.h; sourceTree = "<group>"; };
 		3F54A0C714C35DD9003D5928 /* MNASParagraphyStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASParagraphyStyle.m; sourceTree = "<group>"; };
-		3F54A0C814C35DD9003D5928 /* MNASGlyphInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; path = MNASGlyphInfo.h; sourceTree = "<group>"; };
+		3F54A0C814C35DD9003D5928 /* MNASGlyphInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASGlyphInfo.h; sourceTree = "<group>"; };
 		3F54A0C914C35DD9003D5928 /* MNASGlyphInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASGlyphInfo.m; sourceTree = "<group>"; };
 		3F54A0CC14C36251003D5928 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		3F54A0DA14C36BD7003D5928 /* MNASTextTab.h */ = {isa = PBXFileReference; fileEncoding = 4; path = MNASTextTab.h; sourceTree = "<group>"; };
+		3F54A0DA14C36BD7003D5928 /* MNASTextTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASTextTab.h; sourceTree = "<group>"; };
 		3F54A0DB14C36BD7003D5928 /* MNASTextTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASTextTab.m; sourceTree = "<group>"; };
-		3F8561C114CAC06100B7FE8D /* MNASCharacterShape.h */ = {isa = PBXFileReference; fileEncoding = 4; path = MNASCharacterShape.h; sourceTree = "<group>"; };
+		3F8561C114CAC06100B7FE8D /* MNASCharacterShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASCharacterShape.h; sourceTree = "<group>"; };
 		3F8561C214CAC06100B7FE8D /* MNASCharacterShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASCharacterShape.m; sourceTree = "<group>"; };
 		3F8561C714CAC6AB00B7FE8D /* MNCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNCoder.h; sourceTree = "<group>"; };
 		3F8561C814CAC6AB00B7FE8D /* MNCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNCoder.m; sourceTree = "<group>"; };
@@ -177,6 +177,8 @@
 		3F18E46414B7DB5800303392 /* Intermediate Objects */ = {
 			isa = PBXGroup;
 			children = (
+				3F54A0AE14C35365003D5928 /* MNAttributedString.h */,
+				3F54A0AF14C35365003D5928 /* MNAttributedString.m */,
 				3F54A0AD14C35365003D5928 /* NSAttributedStrings */,
 				3F18E46514B7DB5800303392 /* MNFont.h */,
 				3F18E46614B7DB5800303392 /* MNFont.m */,
@@ -192,8 +194,6 @@
 			children = (
 				3F8561C114CAC06100B7FE8D /* MNASCharacterShape.h */,
 				3F8561C214CAC06100B7FE8D /* MNASCharacterShape.m */,
-				3F54A0AE14C35365003D5928 /* MNAttributedString.h */,
-				3F54A0AF14C35365003D5928 /* MNAttributedString.m */,
 				3F54A0C614C35DD9003D5928 /* MNASParagraphyStyle.h */,
 				3F54A0C714C35DD9003D5928 /* MNASParagraphyStyle.m */,
 				3F54A0C814C35DD9003D5928 /* MNASGlyphInfo.h */,
