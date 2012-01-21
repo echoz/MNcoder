@@ -73,4 +73,27 @@
 
 #endif
 
+#pragma mark - MNCIntermediateObject Protocl
+
++(BOOL)isSubstituteForObject:(void *)object {
+#if TARGET_OS_IPHONE
+	return [(id)object isEqualToString:(NSString *)kCTGlyphInfoAttributeName];
+#else
+	return [(id)object isEqualToString:NSGlyphInfoAttributeName];
+#endif
+}
+
+-(id)initWithSubsituteObject:(void *)object {
+#if TARGET_OS_IPHONE
+	CFDictionaryRef userinfo = object;
+	CTGlyphInfoRef glyph = CFDictionaryGetValue(userinfo, (CFStringRef)@"glyph");
+	NSString *baseString = (NSString *)CFDictionaryGetValue(userinfo, (CFStringRef)@"baseString");
+	
+	return [self initWithGlyph:glyph baseString:baseString];
+#else
+	NSDictionary *userinfo = (id)object;
+	return [self initWithGlyph:[userinfo objectForKey:@"glyph"] baseString:[userinfo objectForKey:@"baseString"]];	
+#endif
+}
+
 @end

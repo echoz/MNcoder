@@ -6,12 +6,13 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import "MNCIntermediateObjectProtocol.h"
 #import <Foundation/Foundation.h>
 #if TARGET_OS_IPHONE
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNParagraphyStyle : NSObject <NSCoding>
+@interface MNParagraphyStyle : NSObject <MNCIntermediateObjectProtocol>
 
 @property (readonly) NSUInteger alignment;
 @property (readonly) CGFloat firstLineHeadIndent;
@@ -41,7 +42,7 @@
 -(CTParagraphStyleRef)platformRepresentation;
 #else
 +(id)paragraphStyleWithStyle:(NSParagraphStyle *)paragraphStyle;
--(id)initwithParagraphStyle:(NSParagraphStyle *)paragraphStyle;
+-(id)initWithParagraphStyle:(NSParagraphStyle *)paragraphStyle;
 -(NSParagraphStyle *)platformRepresentation;
 #endif
 

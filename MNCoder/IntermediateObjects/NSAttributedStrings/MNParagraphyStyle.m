@@ -126,10 +126,10 @@
 #else
 
 +(id)paragraphStyleWithStyle:(NSParagraphStyle *)paragraphStyle {
-	return [[self alloc] initwithParagraphStyle:paragraphStyle];
+	return [[self alloc] initWithParagraphStyle:paragraphStyle];
 }
 
--(id)initwithParagraphStyle:(NSParagraphStyle *)paragraphStyle {
+-(id)initWithParagraphStyle:(NSParagraphStyle *)paragraphStyle {
 	if ((self = [super init])) {
 		_alignment = paragraphStyle.alignment;
 		_lineBreakMode = paragraphStyle.lineBreakMode;
@@ -190,6 +190,24 @@
 -(void)dealloc {
 	[_tabStops release], _tabStops = nil;
 	[super dealloc];
+}
+
+#pragma mark - MNCIntermediateObject Protocl
+
++(BOOL)isSubstituteForObject:(void *)object {
+#if TARGET_OS_IPHONE
+	return [(id)object isEqualToString:(NSString *)kCTParagraphStyleAttributeName];
+#else
+	return [(id)object isEqualToString:NSParagraphStyleAttributeName];
+#endif
+}
+
+-(id)initWithSubsituteObject:(void *)object {
+#if TARGET_OS_IPHONE
+	return [self initWithParagraphStyle:(CTParagraphStyleRef)object];
+#else
+	return [self initWithParagraphStyle:(id)object];
+#endif
 }
 
 @end
