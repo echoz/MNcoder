@@ -102,12 +102,12 @@
 
 #pragma mark - MNCIntermediateObject Protocol
 
--(id)initWithSubsituteObject:(id)object {
-	return [self initWithAttributedString:object];
+-(id)initWithSubsituteObject:(void *)object {
+	return [self initWithAttributedString:(id)object];
 }
 
-+(NSArray *)subsituteClasses {
-	return [NSArray arrayWithObjects:@"NSAttributedString", nil];
++(BOOL)isSubstituteForObject:(void *)object {
+	return [(id)object isKindOfClass:[NSAttributedString class]];	
 }
 
 
