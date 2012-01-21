@@ -9,6 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "MNCIntermediateObjectProtocol.h"
 
+@protocol MNAttributedStringAttributeProtocol <NSObject>
+@required
+-(NSDictionary *)platformRepresentation;
++(BOOL)isSubstituteForObject:(void *)object;
+-(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string;
+@end
+
 @interface MNAttributedString : NSObject <MNCIntermediateObjectProtocol>
 
 @property (readonly) NSString *string;

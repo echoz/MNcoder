@@ -6,14 +6,14 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MNCIntermediateObjectProtocol.h"
+#import "MNAttributedString.h"
 
 #import <Foundation/Foundation.h>
 #if TARGET_OS_IPHONE
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNGlyphInfo : NSObject <MNCIntermediateObjectProtocol>
+@interface MNGlyphInfo : NSObject <MNAttributedStringAttributeProtocol>
 
 @property (readonly) NSUInteger characterCollection;
 @property (readonly) NSUInteger characterIdentifier;

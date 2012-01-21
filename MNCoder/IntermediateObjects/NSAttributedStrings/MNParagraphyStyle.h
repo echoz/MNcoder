@@ -6,13 +6,14 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MNCIntermediateObjectProtocol.h"
 #import <Foundation/Foundation.h>
 #if TARGET_OS_IPHONE
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNParagraphyStyle : NSObject <MNCIntermediateObjectProtocol>
+#import "MNAttributedString.h"
+
+@interface MNParagraphyStyle : NSObject <MNAttributedStringAttributeProtocol>
 
 @property (readonly) NSUInteger alignment;
 @property (readonly) CGFloat firstLineHeadIndent;

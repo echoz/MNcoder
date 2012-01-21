@@ -83,16 +83,12 @@
 #endif
 }
 
--(id)initWithSubsituteObject:(void *)object {
+-(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 #if TARGET_OS_IPHONE
-	CFDictionaryRef userinfo = object;
-	CTGlyphInfoRef glyph = CFDictionaryGetValue(userinfo, (CFStringRef)@"glyph");
-	NSString *baseString = (NSString *)CFDictionaryGetValue(userinfo, (CFStringRef)@"baseString");
 	
-	return [self initWithGlyph:glyph baseString:baseString];
+	return [self initWithGlyph:(CTGlyphInfoRef)object baseString:[string.string substringWithRange:range]];
 #else
-	NSDictionary *userinfo = (id)object;
-	return [self initWithGlyph:[userinfo objectForKey:@"glyph"] baseString:[userinfo objectForKey:@"baseString"]];	
+	return [self initWithGlyph:object baseString:[userinfo objectForKey:[string.string substringWithRange:range]];	
 #endif
 }
 

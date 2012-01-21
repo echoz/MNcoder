@@ -202,7 +202,7 @@
 #endif
 }
 
--(id)initWithSubsituteObject:(void *)object {
+-(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 #if TARGET_OS_IPHONE
 	return [self initWithParagraphStyle:(CTParagraphStyleRef)object];
 #else

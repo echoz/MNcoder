@@ -8,6 +8,7 @@
 
 #import "MNAttributedString.h"
 #import "MNParagraphyStyle.h"
+#import "MNGlyphInfo.h"
 
 @interface MNAttributedString (/* Private Methods */)
 -(void)_buildIntermediateRepresentationFromString:(NSAttributedString *)string;
