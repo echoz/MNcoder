@@ -94,7 +94,7 @@
 	return self;
 }
 
--(CTParagraphStyleRef)platformRepresentation {
+-(NSDictionary *)platformRepresentation {
 
 	NSMutableArray *tempTabStops = [NSMutableArray arrayWithCapacity:[self.tabStops count]];
 	for (MNTextTab *textTab in self.tabStops) {
@@ -120,7 +120,10 @@
 
 	};
 	
-	return CTParagraphStyleCreate(settings, sizeof(settings) / sizeof(CTParagraphStyleSetting));
+	CFStringRef keys[] = { kCTParagraphStyleAttributeName };
+	CFTypeRef values[] = { CTParagraphStyleCreate(settings, sizeof(settings) / sizeof(CTParagraphStyleSetting)) };
+	
+	return [(NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, sizeof(keys) / sizeof(keys[0]), &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks) autorelease];	
 }
 
 #else
@@ -157,8 +160,8 @@
 	return self;
 }
 
--(NSParagraphStyle *)platformRepresentation {
-	NSMutableParagraphStyle *platRep = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+-(NSDictionary *)platformRepresentation {
+	NSMutableParagraphStyle *platRep = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 	
 	platRep.alignment = self.alignment;
 	platRep.lineBreakMode = self.lineBreakMode;
@@ -182,7 +185,7 @@
 	platRep.paragraphSpacing = self.paragraphSpacing;
 	platRep.paragraphSpacingBefore = self.paragraphSpacingBefore;
 	
-	return [platRep autorelease];
+	return [NSDictionary dictionaryWithObject:platRep forKey:NSParagraphStyleAttributeName];
 }
 
 #endif

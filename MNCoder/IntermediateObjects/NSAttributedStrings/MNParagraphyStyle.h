@@ -40,11 +40,9 @@
 #if TARGET_OS_IPHONE
 +(id)paragraphStyleWithStyle:(CTParagraphStyleRef)paragraphStyle;
 -(id)initWithParagraphStyle:(CTParagraphStyleRef)paragraphStyle;
--(CTParagraphStyleRef)platformRepresentation;
 #else
 +(id)paragraphStyleWithStyle:(NSParagraphStyle *)paragraphStyle;
 -(id)initWithParagraphStyle:(NSParagraphStyle *)paragraphStyle;
--(NSParagraphStyle *)platformRepresentation;
 #endif
 
 @end

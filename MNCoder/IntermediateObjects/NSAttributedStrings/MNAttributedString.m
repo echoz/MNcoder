@@ -9,6 +9,7 @@
 #import "MNAttributedString.h"
 #import "MNParagraphyStyle.h"
 #import "MNGlyphInfo.h"
+#import "MNCharacterShape.h"
 
 @interface MNAttributedString (/* Private Methods */)
 -(void)_buildIntermediateRepresentationFromString:(NSAttributedString *)string;
@@ -25,6 +26,7 @@
 	if ((self = [super init])) {
 		_string = [[aDecoder decodeObjectForKey:@"string"] copy];
 		_attributes = [[aDecoder decodeObjectForKey:@"attributes"] copy];
+		__substituteClasses = [[NSMutableSet setWithCapacity:0] retain];
 	}
 	return self;
 }
@@ -38,6 +40,12 @@
 
 -(id)initWithAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
+		__substituteClasses = [[NSMutableSet setWithCapacity:0] retain];
+		
+		[self registerSubstituteClass:[MNParagraphyStyle class]];
+		[self registerSubstituteClass:[MNGlyphInfo class]];
+		[self registerSubstituteClass:[MNCharacterShape class]];
+
 		[self _buildIntermediateRepresentationFromString:string];
 	}
 	
@@ -88,6 +96,7 @@
 }
 
 -(void)dealloc {
+	[__substituteClasses release], __substituteClasses = nil;
 	[_string release], _string = nil;
 	[_attributes release], _string = nil;
 	[super dealloc];
@@ -99,6 +108,17 @@
 	[dict setObject:attrs forKey:@"attrs"];
 	
 	return dict;
+}
+
+#pragma mark - Substitute Class Methods
+-(void)registerSubstituteClass:(Class)cls {
+    if ([cls conformsToProtocol:@protocol(MNCIntermediateObjectProtocol)])
+        [__substituteClasses addObject:cls];
+}
+
+-(void)unregisterSubtituteClass:(Class)cls {
+    if ([cls conformsToProtocol:@protocol(MNCIntermediateObjectProtocol)])
+        [__substituteClasses removeObject:cls];
 }
 
 #pragma mark - MNCIntermediateObject Protocol
