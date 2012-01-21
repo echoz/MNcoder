@@ -82,15 +82,15 @@
 
 #pragma mark - MNCIntermediateObject Protocol
 
--(id)initWithSubsituteObject:(id)object {
-	return [self initWithFont:object];
+-(id)initWithSubsituteObject:(void *)object {
+	return [self initWithFont:(id)object];
 }
 
-+(BOOL)isSubstituteForObject:(id)object {
++(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE 
-	return [object isKindOfClass:[UIFont class]];
+	return [(id)object isKindOfClass:[UIFont class]];
 #else
-	return [object isKindOfClass:[NSFont class]];
+	return [(id)object isKindOfClass:[NSFont class]];
 #endif
 }
 

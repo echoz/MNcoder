@@ -68,15 +68,15 @@
 
 #pragma mark - MNCIntermediateObject Protocol
 
--(id)initWithSubsituteObject:(id)object {
+-(id)initWithSubsituteObject:(void *)object {
 	return [self initWithColor:object];
 }
 
-+(BOOL)isSubstituteForObject:(id)object {
++(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE 
-	return [object isKindOfClass:[UIColor class]];
+	return [(id)object isKindOfClass:[UIColor class]];
 #else
-	return [object isKindOfClass:[NSColor class]];
+	return [(id)object isKindOfClass:[NSColor class]];
 #endif
 }
 
