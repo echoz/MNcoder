@@ -24,6 +24,7 @@
 		3F54A0CB14C35DD9003D5928 /* MNGlyphInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F54A0C914C35DD9003D5928 /* MNGlyphInfo.m */; };
 		3F54A0CD14C36251003D5928 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F54A0CC14C36251003D5928 /* CoreText.framework */; };
 		3F54A0DC14C36BD7003D5928 /* MNTextTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F54A0DB14C36BD7003D5928 /* MNTextTab.m */; };
+		3F8561C314CAC06100B7FE8D /* MNCharacterShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8561C214CAC06100B7FE8D /* MNCharacterShape.m */; };
 		3F95E55914C751E70096CE62 /* EGOTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F95E54F14C751E70096CE62 /* EGOTextView.m */; };
 		3F95E55A14C751E70096CE62 /* drag-dot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95E55114C751E70096CE62 /* drag-dot@2x.png */; };
 		3F95E55B14C751E70096CE62 /* loupe-hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95E55214C751E70096CE62 /* loupe-hi@2x.png */; };
@@ -34,7 +35,6 @@
 		3F95E56014C751E70096CE62 /* magnifier-ranged-lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95E55714C751E70096CE62 /* magnifier-ranged-lo@2x.png */; };
 		3F95E56114C751E70096CE62 /* magnifier-ranged-mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95E55814C751E70096CE62 /* magnifier-ranged-mask@2x.png */; };
 		3F95E56814C753410096CE62 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F95E56714C753410096CE62 /* QuartzCore.framework */; };
-		3FE9DD7814BADBE900261727 /* MNCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9DD7714BADBE900261727 /* MNCoder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +69,8 @@
 		3F54A0CC14C36251003D5928 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		3F54A0DA14C36BD7003D5928 /* MNTextTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNTextTab.h; sourceTree = "<group>"; };
 		3F54A0DB14C36BD7003D5928 /* MNTextTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNTextTab.m; sourceTree = "<group>"; };
+		3F8561C114CAC06100B7FE8D /* MNCharacterShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNCharacterShape.h; sourceTree = "<group>"; };
+		3F8561C214CAC06100B7FE8D /* MNCharacterShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNCharacterShape.m; sourceTree = "<group>"; };
 		3F95E54E14C751E70096CE62 /* EGOTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOTextView.h; sourceTree = "<group>"; };
 		3F95E54F14C751E70096CE62 /* EGOTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOTextView.m; sourceTree = "<group>"; };
 		3F95E55114C751E70096CE62 /* drag-dot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drag-dot@2x.png"; sourceTree = "<group>"; };
@@ -80,8 +82,6 @@
 		3F95E55714C751E70096CE62 /* magnifier-ranged-lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "magnifier-ranged-lo@2x.png"; sourceTree = "<group>"; };
 		3F95E55814C751E70096CE62 /* magnifier-ranged-mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "magnifier-ranged-mask@2x.png"; sourceTree = "<group>"; };
 		3F95E56714C753410096CE62 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		3FE9DD7614BADBE900261727 /* MNCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNCoder.h; sourceTree = "<group>"; };
-		3FE9DD7714BADBE900261727 /* MNCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNCoder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,8 +164,6 @@
 				3F18E45214B7D8C800303392 /* MNUnarchiver.m */,
 				3F18E44B14B7D7A300303392 /* MNArchiver.h */,
 				3F18E44C14B7D7A300303392 /* MNArchiver.m */,
-				3FE9DD7614BADBE900261727 /* MNCoder.h */,
-				3FE9DD7714BADBE900261727 /* MNCoder.m */,
 			);
 			name = MNCoder;
 			path = ../MNCoder;
@@ -187,6 +185,8 @@
 		3F54A0AD14C35365003D5928 /* NSAttributedStrings */ = {
 			isa = PBXGroup;
 			children = (
+				3F8561C114CAC06100B7FE8D /* MNCharacterShape.h */,
+				3F8561C214CAC06100B7FE8D /* MNCharacterShape.m */,
 				3F54A0AE14C35365003D5928 /* MNAttributedString.h */,
 				3F54A0AF14C35365003D5928 /* MNAttributedString.m */,
 				3F54A0C614C35DD9003D5928 /* MNParagraphyStyle.h */,
@@ -303,12 +303,12 @@
 				3F18E45314B7D8C800303392 /* MNUnarchiver.m in Sources */,
 				3F18E46914B7DB5800303392 /* MNFont.m in Sources */,
 				3F18E46A14B7DB5800303392 /* MNColor.m in Sources */,
-				3FE9DD7814BADBE900261727 /* MNCoder.m in Sources */,
 				3F54A0B014C35365003D5928 /* MNAttributedString.m in Sources */,
 				3F54A0CA14C35DD9003D5928 /* MNParagraphyStyle.m in Sources */,
 				3F54A0CB14C35DD9003D5928 /* MNGlyphInfo.m in Sources */,
 				3F54A0DC14C36BD7003D5928 /* MNTextTab.m in Sources */,
 				3F95E55914C751E70096CE62 /* EGOTextView.m in Sources */,
+				3F8561C314CAC06100B7FE8D /* MNCharacterShape.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

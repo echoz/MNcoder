@@ -7,18 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MNCoder.h"
 
-@interface MNArchiver : MNCoder <NSKeyedArchiverDelegate> {
-@private
-	NSKeyedArchiver *__archiver;
-    BOOL encoded;
+@interface MNArchiver : NSKeyedArchiver {
+	NSMutableSet *__subsituteClasses;
 }
-@property (nonatomic, readwrite) NSPropertyListFormat outputFormat;
+-(void)registerSubstituteClass:(Class)cls;
+-(void)unregisterSubtituteClass:(Class)cls;
 
-+(NSData *)archivedDataWithRootObject:(id)object;
-+(BOOL)archiveRootObject:(id)object toFile:(NSString *)path;
-
--(id)initForWritingWithMutableData:(NSMutableData *)data;
--(void)encodeRootObject:(id)object;
 @end
