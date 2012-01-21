@@ -88,7 +88,7 @@
 	
 	return [self initWithGlyph:(CTGlyphInfoRef)object baseString:[string.string substringWithRange:range]];
 #else
-	return [self initWithGlyph:object baseString:[userinfo objectForKey:[string.string substringWithRange:range]];	
+	return [self initWithGlyph:object baseString:[string.string substringWithRange:range]];	
 #endif
 }
 
