@@ -1,5 +1,5 @@
 //
-//  MNParagraphyStyle.h
+//  MNASParagraphyStyle.h
 //  Mac
 //
 //  Created by Jeremy Foo on 1/16/12.
@@ -13,7 +13,7 @@
 
 #import "MNAttributedString.h"
 
-@interface MNParagraphyStyle : NSObject <MNAttributedStringAttributeProtocol>
+@interface MNASParagraphyStyle : NSObject <MNAttributedStringAttributeProtocol>
 
 @property (readonly) NSUInteger alignment;
 @property (readonly) CGFloat firstLineHeadIndent;

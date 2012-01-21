@@ -7,9 +7,9 @@
 //
 
 #import "MNAttributedString.h"
-#import "MNParagraphyStyle.h"
-#import "MNGlyphInfo.h"
-#import "MNCharacterShape.h"
+#import "MNASParagraphyStyle.h"
+#import "MNASGlyphInfo.h"
+#import "MNASCharacterShape.h"
 
 @interface MNAttributedString (/* Private Methods */)
 -(void)_buildIntermediateRepresentationFromString:(NSAttributedString *)string;
@@ -42,9 +42,9 @@
 	if ((self = [super init])) {
 		__substituteClasses = [[NSMutableSet setWithCapacity:0] retain];
 		
-		[self registerSubstituteClass:[MNParagraphyStyle class]];
-		[self registerSubstituteClass:[MNGlyphInfo class]];
-		[self registerSubstituteClass:[MNCharacterShape class]];
+		[self registerSubstituteClass:[MNASParagraphyStyle class]];
+		[self registerSubstituteClass:[MNASGlyphInfo class]];
+		[self registerSubstituteClass:[MNASCharacterShape class]];
 
 		[self _buildIntermediateRepresentationFromString:string];
 	}
@@ -81,7 +81,7 @@
 		
 		for (NSString *key in attrs) {
 			if ([[attrs objectForKey:key] isKindOfClass:[NSParagraphStyle class]]) {
-				[finalAttributes setObject:[MNParagraphyStyle paragraphStyleWithStyle:[attrs objectForKey:key]] forKey:@"MNParagraphStyle"];
+				[finalAttributes setObject:[MNASParagraphyStyle paragraphStyleWithStyle:[attrs objectForKey:key]] forKey:@"MNParagraphStyle"];
 			} else {
 				[finalAttributes setObject:[attrs objectForKey:key] forKey:key];
 			}

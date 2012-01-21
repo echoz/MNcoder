@@ -1,15 +1,15 @@
 //
-//  MNParagraphyStyle.m
+//  MNASParagraphyStyle.m
 //  Mac
 //
 //  Created by Jeremy Foo on 1/16/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MNParagraphyStyle.h"
-#import "MNTextTab.h"
+#import "MNASParagraphyStyle.h"
+#import "MNASTextTab.h"
 
-@implementation MNParagraphyStyle
+@implementation MNASParagraphyStyle
 @synthesize alignment = _alignment, firstLineHeadIndent = _firstLineHeadIndent, headIndent = _headIndent;
 @synthesize tailIndent = _tailIndent, tabStops = _tabStops, defaultTabInterval = _defaultTabInterval, lineHeightMultiple = _lineHeightMultiple;
 @synthesize maximumLineHeight = _maximumLineHeight, minimumLineHeight = _minimumLineHeight, lineSpacing = _lineSpacing;
@@ -76,7 +76,7 @@
 		
 		NSMutableArray *mntexttabs = [NSMutableArray arrayWithCapacity:[tempTabStops count]];
 		for (id tabStop in tempTabStops) {
-			[mntexttabs addObject:[MNTextTab textTabWithTabStop:(CTTextTabRef)tabStop]];
+			[mntexttabs addObject:[MNASTextTab textTabWithTabStop:(CTTextTabRef)tabStop]];
 		}
 		_tabStops = [mntexttabs copy];		
 		
@@ -97,7 +97,7 @@
 -(NSDictionary *)platformRepresentation {
 
 	NSMutableArray *tempTabStops = [NSMutableArray arrayWithCapacity:[self.tabStops count]];
-	for (MNTextTab *textTab in self.tabStops) {
+	for (MNASTextTab *textTab in self.tabStops) {
 		CFArrayAppendValue((CFMutableArrayRef)tempTabStops, [textTab platformRepresentation]);
 	}
 
@@ -140,7 +140,7 @@
 
 		NSMutableArray *mntexttabs = [NSMutableArray arrayWithCapacity:[paragraphStyle.tabStops count]];
 		for (NSTextTab *tabStop in paragraphStyle.tabStops) {
-			[mntexttabs addObject:[MNTextTab textTabWithTabStop:tabStop]];
+			[mntexttabs addObject:[MNASTextTab textTabWithTabStop:tabStop]];
 		}
 		_tabStops = [mntexttabs copy];		
 		
@@ -168,7 +168,7 @@
 	platRep.baseWritingDirection = self.baseWritingDirection;
 	
 	NSMutableArray *tempTabStops = [NSMutableArray arrayWithCapacity:[self.tabStops count]];
-	for (MNTextTab *textTab in self.tabStops) {
+	for (MNASTextTab *textTab in self.tabStops) {
 		[tempTabStops addObject:[textTab platformRepresentation]];
 	}
 	

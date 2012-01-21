@@ -1,14 +1,14 @@
 //
-//  MNCharacterShape.m
+//  MNASCharacterShape.m
 //  Mac
 //
 //  Created by Jeremy Foo on 1/21/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MNCharacterShape.h"
+#import "MNASCharacterShape.h"
 
-@implementation MNCharacterShape
+@implementation MNASCharacterShape
 @synthesize shapeType = _shapeType;
 
 #pragma mark - NSCoding Protocol

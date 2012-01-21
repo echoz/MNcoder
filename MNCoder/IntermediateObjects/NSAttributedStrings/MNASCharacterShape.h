@@ -1,5 +1,5 @@
 //
-//  MNCharacterShape.h
+//  MNASCharacterShape.h
 //  Mac
 //
 //  Created by Jeremy Foo on 1/21/12.
@@ -13,7 +13,7 @@
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNCharacterShape : NSObject <MNAttributedStringAttributeProtocol>
+@interface MNASCharacterShape : NSObject <MNAttributedStringAttributeProtocol>
 
 @property (readonly) NSNumber *shapeType;
 

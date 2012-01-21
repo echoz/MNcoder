@@ -1,14 +1,14 @@
 //
-//  MNGlyphInfo.m
+//  MNASGlyphInfo.m
 //  Mac
 //
 //  Created by Jeremy Foo on 1/16/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MNGlyphInfo.h"
+#import "MNASGlyphInfo.h"
 
-@implementation MNGlyphInfo
+@implementation MNASGlyphInfo
 @synthesize characterCollection = _characterCollection, characterIdentifier = _characterIdentifier, baseString = _baseString;
 
 #pragma mark - NSCoding Protocol
@@ -61,14 +61,17 @@
 
 #if TARGET_OS_IPHONE
 
--(CTGlyphInfoRef)platformRepresentation {
-	return CTGlyphInfoCreateWithCharacterIdentifier(self.characterIdentifier, self.characterCollection, (CFStringRef)self.baseString);
+-(NSDictionary *)platformRepresentation {
+	CFStringRef keys[] = { kCTGlyphInfoAttributeName };
+	CFTypeRef values[] = { CTGlyphInfoCreateWithCharacterIdentifier(self.characterIdentifier, self.characterCollection, (CFStringRef)self.baseString) };
+	
+	return [(NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, sizeof(keys) / sizeof(keys[0]), &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks) autorelease];	
 }
 
 #else
 
--(NSGlyphInfo *)platformRepresentation {
-	return [NSGlyphInfo glyphInfoWithCharacterIdentifier:self.characterIdentifier collection:self.characterCollection baseString:self.baseString];
+-(NSDictionary *)platformRepresentation {
+	return [NSDictionary dictionaryWithObject:[NSGlyphInfo glyphInfoWithCharacterIdentifier:self.characterIdentifier collection:self.characterCollection baseString:self.baseString] forKey:NSGlyphInfoAttributeName];
 }
 
 #endif
