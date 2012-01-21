@@ -23,6 +23,9 @@
 		3F54A0D814C36BD2003D5928 /* MNASTextTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F54A0D714C36BD2003D5928 /* MNASTextTab.m */; };
 		3F8561BE14CAB97800B7FE8D /* MNASCharacterShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8561BD14CAB97800B7FE8D /* MNASCharacterShape.m */; };
 		3F8561C614CAC67C00B7FE8D /* MNCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8561C514CAC67C00B7FE8D /* MNCoder.m */; };
+		3F8561DE14CB705100B7FE8D /* MNASKern.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8561DD14CB705100B7FE8D /* MNASKern.m */; };
+		3F8561E414CB708500B7FE8D /* MNASLigature.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8561E314CB708500B7FE8D /* MNASLigature.m */; };
+		3F8561E714CB711300B7FE8D /* MNASStrokeWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8561E614CB711300B7FE8D /* MNASStrokeWidth.m */; };
 		3FE9DD7B14BAF36D00261727 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F18E40214B7D6EE00303392 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +64,12 @@
 		3F8561BD14CAB97800B7FE8D /* MNASCharacterShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASCharacterShape.m; sourceTree = "<group>"; };
 		3F8561C414CAC67C00B7FE8D /* MNCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MNCoder.h; path = ../MNCoder/MNCoder.h; sourceTree = "<group>"; };
 		3F8561C514CAC67C00B7FE8D /* MNCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MNCoder.m; path = ../MNCoder/MNCoder.m; sourceTree = "<group>"; };
+		3F8561DC14CB705100B7FE8D /* MNASKern.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASKern.h; sourceTree = "<group>"; };
+		3F8561DD14CB705100B7FE8D /* MNASKern.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASKern.m; sourceTree = "<group>"; };
+		3F8561E214CB708500B7FE8D /* MNASLigature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASLigature.h; sourceTree = "<group>"; };
+		3F8561E314CB708500B7FE8D /* MNASLigature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASLigature.m; sourceTree = "<group>"; };
+		3F8561E514CB711300B7FE8D /* MNASStrokeWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASStrokeWidth.h; sourceTree = "<group>"; };
+		3F8561E614CB711300B7FE8D /* MNASStrokeWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASStrokeWidth.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +185,12 @@
 				3F54A0D714C36BD2003D5928 /* MNASTextTab.m */,
 				3F8561BC14CAB97800B7FE8D /* MNASCharacterShape.h */,
 				3F8561BD14CAB97800B7FE8D /* MNASCharacterShape.m */,
+				3F8561DC14CB705100B7FE8D /* MNASKern.h */,
+				3F8561DD14CB705100B7FE8D /* MNASKern.m */,
+				3F8561E214CB708500B7FE8D /* MNASLigature.h */,
+				3F8561E314CB708500B7FE8D /* MNASLigature.m */,
+				3F8561E514CB711300B7FE8D /* MNASStrokeWidth.h */,
+				3F8561E614CB711300B7FE8D /* MNASStrokeWidth.m */,
 			);
 			name = NSAttributedStrings;
 			path = ../MNCoder/IntermediateObjects/NSAttributedStrings;
@@ -256,6 +271,9 @@
 				3F54A0D814C36BD2003D5928 /* MNASTextTab.m in Sources */,
 				3F8561BE14CAB97800B7FE8D /* MNASCharacterShape.m in Sources */,
 				3F8561C614CAC67C00B7FE8D /* MNCoder.m in Sources */,
+				3F8561DE14CB705100B7FE8D /* MNASKern.m in Sources */,
+				3F8561E414CB708500B7FE8D /* MNASLigature.m in Sources */,
+				3F8561E714CB711300B7FE8D /* MNASStrokeWidth.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

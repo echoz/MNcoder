@@ -7,9 +7,13 @@
 //
 
 #import "MNAttributedString.h"
+
 #import "MNASParagraphyStyle.h"
 #import "MNASGlyphInfo.h"
 #import "MNASCharacterShape.h"
+#import "MNASKern.h"
+#import "MNASStrokeWidth.h"
+#import "MNASLigature.h"
 
 @interface MNAttributedString (/* Private Methods */)
 -(void)_buildIntermediateRepresentationFromString:(NSAttributedString *)string;
@@ -45,6 +49,9 @@
 		[self registerSubstituteClass:[MNASParagraphyStyle class]];
 		[self registerSubstituteClass:[MNASGlyphInfo class]];
 		[self registerSubstituteClass:[MNASCharacterShape class]];
+		[self registerSubstituteClass:[MNASKern class]];
+		[self registerSubstituteClass:[MNASLigature class]];
+		[self registerSubstituteClass:[MNASStrokeWidth class]];
 
 		[self _buildIntermediateRepresentationFromString:string];
 	}
