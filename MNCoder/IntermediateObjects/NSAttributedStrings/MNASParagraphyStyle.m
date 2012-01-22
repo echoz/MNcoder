@@ -97,8 +97,13 @@
 -(NSDictionary *)platformRepresentation {
 
 	NSMutableArray *tempTabStops = [NSMutableArray arrayWithCapacity:[self.tabStops count]];
+	CTTextTabRef cttexttab;
+	
 	for (MNASTextTab *textTab in self.tabStops) {
-		CFArrayAppendValue((CFMutableArrayRef)tempTabStops, [textTab platformRepresentation]);
+		cttexttab = [textTab platformRepresentation];
+		
+		CFArrayAppendValue((CFMutableArrayRef)tempTabStops, cttexttab);
+		CFRelease(cttexttab);
 	}
 
 	CTParagraphStyleSetting settings[] = {
@@ -106,7 +111,6 @@
 		{ kCTParagraphStyleSpecifierLineBreakMode, sizeof(NSUInteger), &_lineBreakMode },
 		{ kCTParagraphStyleSpecifierBaseWritingDirection, sizeof(NSUInteger), &_baseWritingDirection },
 		{ kCTParagraphStyleSpecifierTabStops, sizeof(CFArrayRef), &tempTabStops },
-		
 		{ kCTParagraphStyleSpecifierFirstLineHeadIndent, sizeof(CGFloat), &_firstLineHeadIndent },
 		{ kCTParagraphStyleSpecifierHeadIndent, sizeof(CGFloat), &_headIndent },
 		{ kCTParagraphStyleSpecifierTailIndent, sizeof(CGFloat), &_tailIndent },
@@ -120,10 +124,15 @@
 
 	};
 	
-	CFStringRef keys[] = { kCTParagraphStyleAttributeName };
-	CFTypeRef values[] = { CTParagraphStyleCreate(settings, sizeof(settings) / sizeof(CTParagraphStyleSetting)) };
+	CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings, sizeof(settings) / sizeof(CTParagraphStyleSetting));
 	
-	return [(NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks) autorelease];	
+	CFStringRef keys[] = { kCTParagraphStyleAttributeName };
+	CFTypeRef values[] = { paragraphStyle };
+	
+	CFDictionaryRef dict = CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+	CFRelease(paragraphStyle);
+	
+	return [(NSDictionary *)dict autorelease];	
 }
 
 #else

@@ -62,10 +62,15 @@
 #if TARGET_OS_IPHONE
 
 -(NSDictionary *)platformRepresentation {
-	CFStringRef keys[] = { kCTGlyphInfoAttributeName };
-	CFTypeRef values[] = { CTGlyphInfoCreateWithCharacterIdentifier(self.characterIdentifier, self.characterCollection, (CFStringRef)self.baseString) };
+	CTGlyphInfoRef glyphinfo = CTGlyphInfoCreateWithCharacterIdentifier(self.characterIdentifier, self.characterCollection, (CFStringRef)self.baseString);
 	
-	return [(NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks) autorelease];	
+	CFStringRef keys[] = { kCTGlyphInfoAttributeName };
+	CFTypeRef values[] = { glyphinfo };
+	
+	CFDictionaryRef dict = CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+	CFRelease(glyphinfo);
+	
+	return [(NSDictionary *)dict autorelease];	
 }
 
 #else
