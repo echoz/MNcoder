@@ -138,7 +138,7 @@
 #else
 
 +(id)paragraphStyleWithStyle:(NSParagraphStyle *)paragraphStyle {
-	return [[self alloc] initWithParagraphStyle:paragraphStyle];
+	return [[[self alloc] initWithParagraphStyle:paragraphStyle] autorelease];
 }
 
 -(id)initWithParagraphStyle:(NSParagraphStyle *)paragraphStyle {
