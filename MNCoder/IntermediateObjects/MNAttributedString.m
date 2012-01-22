@@ -97,6 +97,7 @@
 -(void)_buildIntermediateRepresentationFromString:(NSAttributedString *)string {
 	_string = [string.string copy];
 	NSMutableArray *attributes = [NSMutableArray arrayWithCapacity:0];
+	[attributes addObject:[NSNull null]];
 
 	[string enumerateAttributesInRange:NSMakeRange(0, [_string length]) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
 		
@@ -115,7 +116,7 @@
 		}
 	}];
 
-	
+	[attributes removeObjectAtIndex:0];
 	_attributes = [attributes copy];
 }
 
@@ -136,12 +137,12 @@
 
 #pragma mark - Substitute Class Methods
 -(void)registerSubstituteClass:(Class)cls {
-    if ([cls conformsToProtocol:@protocol(MNCIntermediateObjectProtocol)])
+    if ([cls conformsToProtocol:@protocol(MNAttributedStringAttributeProtocol)])
         [__substituteClasses addObject:cls];
 }
 
 -(void)unregisterSubtituteClass:(Class)cls {
-    if ([cls conformsToProtocol:@protocol(MNCIntermediateObjectProtocol)])
+    if ([cls conformsToProtocol:@protocol(MNAttributedStringAttributeProtocol)])
         [__substituteClasses removeObject:cls];
 }
 
