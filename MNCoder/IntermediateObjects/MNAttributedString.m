@@ -20,6 +20,7 @@
 #import "MNASStrokeColor.h"
 #import "MNASUnderlineColor.h"
 #import "MNASVerticalForms.h"
+#import "MNASFont.h"
 
 @interface MNAttributedString (/* Private Methods */)
 -(void)_buildIntermediateRepresentationFromString:(NSAttributedString *)string;
@@ -64,6 +65,7 @@
 		[self registerSubstituteClass:[MNASStrokeColor class]];
 		[self registerSubstituteClass:[MNASUnderlineColor class]];
 		[self registerSubstituteClass:[MNASVerticalForms class]];
+		[self registerSubstituteClass:[MNASFont class]];
 
 		[self _buildIntermediateRepresentationFromString:string];
 	}

@@ -45,6 +45,7 @@
 		3FD4557314CC776A00D2AABF /* MNASStrokeColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD4557014CC776A00D2AABF /* MNASStrokeColor.m */; };
 		3FD4557414CC776A00D2AABF /* MNASUnderlineColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD4557214CC776A00D2AABF /* MNASUnderlineColor.m */; };
 		3FD4557A14CC7C1B00D2AABF /* MNASVerticalForms.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD4557914CC7C1B00D2AABF /* MNASVerticalForms.m */; };
+		3FD4558014CC9BAB00D2AABF /* MNASFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD4557F14CC9BAB00D2AABF /* MNASFont.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +113,8 @@
 		3FD4557214CC776A00D2AABF /* MNASUnderlineColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASUnderlineColor.m; sourceTree = "<group>"; };
 		3FD4557814CC7C1B00D2AABF /* MNASVerticalForms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASVerticalForms.h; sourceTree = "<group>"; };
 		3FD4557914CC7C1B00D2AABF /* MNASVerticalForms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASVerticalForms.m; sourceTree = "<group>"; };
+		3FD4557E14CC9BAB00D2AABF /* MNASFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASFont.h; sourceTree = "<group>"; };
+		3FD4557F14CC9BAB00D2AABF /* MNASFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASFont.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +222,8 @@
 		3F54A0AD14C35365003D5928 /* NSAttributedStrings */ = {
 			isa = PBXGroup;
 			children = (
+				3FD4557E14CC9BAB00D2AABF /* MNASFont.h */,
+				3FD4557F14CC9BAB00D2AABF /* MNASFont.m */,
 				3F8561C114CAC06100B7FE8D /* MNASCharacterShape.h */,
 				3F8561C214CAC06100B7FE8D /* MNASCharacterShape.m */,
 				3F54A0C614C35DD9003D5928 /* MNASParagraphyStyle.h */,
@@ -369,6 +374,7 @@
 				3FD4557314CC776A00D2AABF /* MNASStrokeColor.m in Sources */,
 				3FD4557414CC776A00D2AABF /* MNASUnderlineColor.m in Sources */,
 				3FD4557A14CC7C1B00D2AABF /* MNASVerticalForms.m in Sources */,
+				3FD4558014CC9BAB00D2AABF /* MNASFont.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
