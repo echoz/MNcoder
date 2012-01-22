@@ -44,6 +44,7 @@
 		3FD4556814CC708A00D2AABF /* MNASForegroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD4556714CC708A00D2AABF /* MNASForegroundColor.m */; };
 		3FD4557314CC776A00D2AABF /* MNASStrokeColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD4557014CC776A00D2AABF /* MNASStrokeColor.m */; };
 		3FD4557414CC776A00D2AABF /* MNASUnderlineColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD4557214CC776A00D2AABF /* MNASUnderlineColor.m */; };
+		3FD4557A14CC7C1B00D2AABF /* MNASVerticalForms.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD4557914CC7C1B00D2AABF /* MNASVerticalForms.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +110,8 @@
 		3FD4557014CC776A00D2AABF /* MNASStrokeColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASStrokeColor.m; sourceTree = "<group>"; };
 		3FD4557114CC776A00D2AABF /* MNASUnderlineColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASUnderlineColor.h; sourceTree = "<group>"; };
 		3FD4557214CC776A00D2AABF /* MNASUnderlineColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASUnderlineColor.m; sourceTree = "<group>"; };
+		3FD4557814CC7C1B00D2AABF /* MNASVerticalForms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASVerticalForms.h; sourceTree = "<group>"; };
+		3FD4557914CC7C1B00D2AABF /* MNASVerticalForms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASVerticalForms.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +243,8 @@
 				3FD4557014CC776A00D2AABF /* MNASStrokeColor.m */,
 				3FD4557114CC776A00D2AABF /* MNASUnderlineColor.h */,
 				3FD4557214CC776A00D2AABF /* MNASUnderlineColor.m */,
+				3FD4557814CC7C1B00D2AABF /* MNASVerticalForms.h */,
+				3FD4557914CC7C1B00D2AABF /* MNASVerticalForms.m */,
 			);
 			name = NSAttributedStrings;
 			path = ../MNCoder/IntermediateObjects/NSAttributedStrings;
@@ -363,6 +368,7 @@
 				3FD4556814CC708A00D2AABF /* MNASForegroundColor.m in Sources */,
 				3FD4557314CC776A00D2AABF /* MNASStrokeColor.m in Sources */,
 				3FD4557414CC776A00D2AABF /* MNASUnderlineColor.m in Sources */,
+				3FD4557A14CC7C1B00D2AABF /* MNASVerticalForms.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
