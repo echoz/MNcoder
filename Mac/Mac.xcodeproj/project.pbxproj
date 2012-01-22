@@ -26,6 +26,9 @@
 		3F8561DE14CB705100B7FE8D /* MNASKern.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8561DD14CB705100B7FE8D /* MNASKern.m */; };
 		3F8561E414CB708500B7FE8D /* MNASLigature.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8561E314CB708500B7FE8D /* MNASLigature.m */; };
 		3F8561E714CB711300B7FE8D /* MNASStrokeWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8561E614CB711300B7FE8D /* MNASStrokeWidth.m */; };
+		3FD4555714CC6D8700D2AABF /* MNASSuperScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD4555614CC6D8700D2AABF /* MNASSuperScript.m */; };
+		3FD4555F14CC6E5700D2AABF /* MNASUnderlineStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD4555E14CC6E5700D2AABF /* MNASUnderlineStyle.m */; };
+		3FD4556514CC6F7300D2AABF /* MNASForegroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD4556414CC6F7300D2AABF /* MNASForegroundColor.m */; };
 		3FE9DD7B14BAF36D00261727 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F18E40214B7D6EE00303392 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +73,12 @@
 		3F8561E314CB708500B7FE8D /* MNASLigature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASLigature.m; sourceTree = "<group>"; };
 		3F8561E514CB711300B7FE8D /* MNASStrokeWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASStrokeWidth.h; sourceTree = "<group>"; };
 		3F8561E614CB711300B7FE8D /* MNASStrokeWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASStrokeWidth.m; sourceTree = "<group>"; };
+		3FD4555514CC6D8700D2AABF /* MNASSuperScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASSuperScript.h; sourceTree = "<group>"; };
+		3FD4555614CC6D8700D2AABF /* MNASSuperScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASSuperScript.m; sourceTree = "<group>"; };
+		3FD4555D14CC6E5700D2AABF /* MNASUnderlineStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASUnderlineStyle.h; sourceTree = "<group>"; };
+		3FD4555E14CC6E5700D2AABF /* MNASUnderlineStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASUnderlineStyle.m; sourceTree = "<group>"; };
+		3FD4556314CC6F7300D2AABF /* MNASForegroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASForegroundColor.h; sourceTree = "<group>"; };
+		3FD4556414CC6F7300D2AABF /* MNASForegroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASForegroundColor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +200,12 @@
 				3F8561E314CB708500B7FE8D /* MNASLigature.m */,
 				3F8561E514CB711300B7FE8D /* MNASStrokeWidth.h */,
 				3F8561E614CB711300B7FE8D /* MNASStrokeWidth.m */,
+				3FD4555514CC6D8700D2AABF /* MNASSuperScript.h */,
+				3FD4555614CC6D8700D2AABF /* MNASSuperScript.m */,
+				3FD4555D14CC6E5700D2AABF /* MNASUnderlineStyle.h */,
+				3FD4555E14CC6E5700D2AABF /* MNASUnderlineStyle.m */,
+				3FD4556314CC6F7300D2AABF /* MNASForegroundColor.h */,
+				3FD4556414CC6F7300D2AABF /* MNASForegroundColor.m */,
 			);
 			name = NSAttributedStrings;
 			path = ../MNCoder/IntermediateObjects/NSAttributedStrings;
@@ -274,6 +289,9 @@
 				3F8561DE14CB705100B7FE8D /* MNASKern.m in Sources */,
 				3F8561E414CB708500B7FE8D /* MNASLigature.m in Sources */,
 				3F8561E714CB711300B7FE8D /* MNASStrokeWidth.m in Sources */,
+				3FD4555714CC6D8700D2AABF /* MNASSuperScript.m in Sources */,
+				3FD4555F14CC6E5700D2AABF /* MNASUnderlineStyle.m in Sources */,
+				3FD4556514CC6F7300D2AABF /* MNASForegroundColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

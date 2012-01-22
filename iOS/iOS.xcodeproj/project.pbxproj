@@ -39,6 +39,9 @@
 		3F95E56014C751E70096CE62 /* magnifier-ranged-lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95E55714C751E70096CE62 /* magnifier-ranged-lo@2x.png */; };
 		3F95E56114C751E70096CE62 /* magnifier-ranged-mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95E55814C751E70096CE62 /* magnifier-ranged-mask@2x.png */; };
 		3F95E56814C753410096CE62 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F95E56714C753410096CE62 /* QuartzCore.framework */; };
+		3FD4555B14CC6DFE00D2AABF /* MNASSuperScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD4555A14CC6DFE00D2AABF /* MNASSuperScript.m */; };
+		3FD4556214CC6EDF00D2AABF /* MNASUnderlineStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD4556114CC6EDF00D2AABF /* MNASUnderlineStyle.m */; };
+		3FD4556814CC708A00D2AABF /* MNASForegroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD4556714CC708A00D2AABF /* MNASForegroundColor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +97,12 @@
 		3F95E55714C751E70096CE62 /* magnifier-ranged-lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "magnifier-ranged-lo@2x.png"; sourceTree = "<group>"; };
 		3F95E55814C751E70096CE62 /* magnifier-ranged-mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "magnifier-ranged-mask@2x.png"; sourceTree = "<group>"; };
 		3F95E56714C753410096CE62 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		3FD4555914CC6DFE00D2AABF /* MNASSuperScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASSuperScript.h; sourceTree = "<group>"; };
+		3FD4555A14CC6DFE00D2AABF /* MNASSuperScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASSuperScript.m; sourceTree = "<group>"; };
+		3FD4556014CC6EDF00D2AABF /* MNASUnderlineStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASUnderlineStyle.h; sourceTree = "<group>"; };
+		3FD4556114CC6EDF00D2AABF /* MNASUnderlineStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASUnderlineStyle.m; sourceTree = "<group>"; };
+		3FD4556614CC708A00D2AABF /* MNASForegroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASForegroundColor.h; sourceTree = "<group>"; };
+		3FD4556714CC708A00D2AABF /* MNASForegroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASForegroundColor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +224,12 @@
 				3F8561E914CB722300B7FE8D /* MNASLigature.m */,
 				3F8561EA14CB722300B7FE8D /* MNASStrokeWidth.h */,
 				3F8561EB14CB722300B7FE8D /* MNASStrokeWidth.m */,
+				3FD4555914CC6DFE00D2AABF /* MNASSuperScript.h */,
+				3FD4555A14CC6DFE00D2AABF /* MNASSuperScript.m */,
+				3FD4556014CC6EDF00D2AABF /* MNASUnderlineStyle.h */,
+				3FD4556114CC6EDF00D2AABF /* MNASUnderlineStyle.m */,
+				3FD4556614CC708A00D2AABF /* MNASForegroundColor.h */,
+				3FD4556714CC708A00D2AABF /* MNASForegroundColor.m */,
 			);
 			name = NSAttributedStrings;
 			path = ../MNCoder/IntermediateObjects/NSAttributedStrings;
@@ -333,6 +348,9 @@
 				3F8561E114CB705700B7FE8D /* MNASKern.m in Sources */,
 				3F8561EC14CB722300B7FE8D /* MNASLigature.m in Sources */,
 				3F8561ED14CB722300B7FE8D /* MNASStrokeWidth.m in Sources */,
+				3FD4555B14CC6DFE00D2AABF /* MNASSuperScript.m in Sources */,
+				3FD4556214CC6EDF00D2AABF /* MNASUnderlineStyle.m in Sources */,
+				3FD4556814CC708A00D2AABF /* MNASForegroundColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

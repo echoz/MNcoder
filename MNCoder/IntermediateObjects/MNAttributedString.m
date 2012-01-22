@@ -14,6 +14,9 @@
 #import "MNASKern.h"
 #import "MNASStrokeWidth.h"
 #import "MNASLigature.h"
+#import "MNASSuperScript.h"
+#import "MNASUnderlineStyle.h"
+#import "MNASForegroundColor.h"
 
 @interface MNAttributedString (/* Private Methods */)
 -(void)_buildIntermediateRepresentationFromString:(NSAttributedString *)string;
@@ -52,6 +55,9 @@
 		[self registerSubstituteClass:[MNASKern class]];
 		[self registerSubstituteClass:[MNASLigature class]];
 		[self registerSubstituteClass:[MNASStrokeWidth class]];
+		[self registerSubstituteClass:[MNASSuperScript class]];
+		[self registerSubstituteClass:[MNASUnderlineStyle class]];
+		[self registerSubstituteClass:[MNASForegroundColor class]];
 
 		[self _buildIntermediateRepresentationFromString:string];
 	}
@@ -71,33 +77,34 @@
 	return nil;
 }
 
+-(Class)_substituteClassForObject:(void *)object {
+	for (Class cls in __substituteClasses) {
+		if ([cls isSubstituteForObject:object]) {
+			return cls;
+		}
+	 }
+	return nil;	
+}
+
 -(void)_buildIntermediateRepresentationFromString:(NSAttributedString *)string {
 	_string = [string.string copy];
 	NSMutableArray *attributes = [NSMutableArray arrayWithCapacity:0];
 
-#if TARGET_OS_IPHONE
 	[string enumerateAttributesInRange:NSMakeRange(0, [_string length]) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
 		
-		
-		
-		[attributes insertObject:[self _dictionaryForAttributes:attrs range:range] atIndex:([attributes count]-1)];
-	}];
-#else
-	[string enumerateAttributesInRange:NSMakeRange(0, [_string length]) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
-		NSMutableDictionary *finalAttributes = [NSMutableDictionary dictionaryWithCapacity:[attrs count]];
+		Class subsituteClass = nil;
+		id subsituteObject = nil;
 		
 		for (NSString *key in attrs) {
-			if ([[attrs objectForKey:key] isKindOfClass:[NSParagraphStyle class]]) {
-				[finalAttributes setObject:[MNASParagraphyStyle paragraphStyleWithStyle:[attrs objectForKey:key]] forKey:@"MNParagraphStyle"];
-			} else {
-				[finalAttributes setObject:[attrs objectForKey:key] forKey:key];
+			subsituteClass = [self _substituteClassForObject:key];
+			if (subsituteClass) {
+				subsituteObject = [[subsituteClass alloc] initWithObject:[attrs objectForKey:key] range:range forAttributedString:string];
+				[attributes insertObject:subsituteObject atIndex:([attributes count]-1)];
+				[subsituteObject release], subsituteObject = nil;
 			}
 		}
-		
-		[attributes insertObject:[self _dictionaryForAttributes:finalAttributes range:range] atIndex:(([attributes count] > 0)?([attributes count] - 1):0)];
 	}];
-	
-#endif
+
 	
 	_attributes = [attributes copy];
 }
