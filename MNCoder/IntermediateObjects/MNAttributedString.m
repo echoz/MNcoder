@@ -81,6 +81,14 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 
 #if TARGET_OS_IPHONE
 	// translate for iOS
+	NSRange range;
+	
+	for (NSDictionary *dict in self.attributes) {
+		range = [[dict objectForKey:kMNAttributedStringAttributeRangeKey] rangeValue];
+		
+		CFAttributedStringSetAttributes((CFMutableAttributedStringRef)aString, CFRangeMake(range.location, range.length) , (CFDictionaryRef)[[dict objectForKey:kMNAttributedStringAttributeAttributKey] platformRepresentation], false);
+	}
+	
 #else
 	// translate for Mac
 
