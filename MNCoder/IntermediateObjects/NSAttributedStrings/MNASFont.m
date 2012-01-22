@@ -90,13 +90,13 @@
 		// set default values if they are not filled in
 		
 		if (!_baseLineAdjustment)
-			_baseLineAdjustment = [NSNumber numberWithFloat:0.0];
+			_baseLineAdjustment = [[NSNumber numberWithFloat:0.0] retain];
 
 		if (!_obliqueness)
-			_obliqueness = [NSNumber numberWithFloat:0.0];
+			_obliqueness = [[NSNumber numberWithFloat:0.0] retain];
 
 		if (!_expansion)
-			_expansion = [NSNumber numberWithFloat:0.0];		
+			_expansion = [[NSNumber numberWithFloat:0.0] retain];
 		
 #endif
 		
