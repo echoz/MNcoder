@@ -31,4 +31,9 @@
 	[MNArchiver archiveRootObject:astring toFile:[NSString stringWithFormat:@"%@MNCoderTest.plist", NSTemporaryDirectory()]];
 }
 
+-(IBAction)unarchiveTapped:(id)sender {
+	id test = [MNUnarchiver unarchiveObjectWithFile:[NSString stringWithFormat:@"%@MNCoderTest.plist", NSTemporaryDirectory()]];
+	NSLog(@"%@", test);
+}
+
 @end
