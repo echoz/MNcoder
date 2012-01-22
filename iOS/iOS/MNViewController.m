@@ -66,6 +66,9 @@
 	[super dealloc];
 }
 - (IBAction)unarchiveTapped:(id)sender {
+	id test = [MNUnarchiver unarchiveObjectWithFile:[NSString stringWithFormat:@"%@MNCoderTest.plist", NSTemporaryDirectory()]];
+	NSLog(@"%@", test);
+	
 }
 
 - (IBAction)archiveTapped:(id)sender {
