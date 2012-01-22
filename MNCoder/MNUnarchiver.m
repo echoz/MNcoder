@@ -15,6 +15,7 @@
 #import "MNAttributedString.h"
 
 @implementation MNUnarchiver
+@synthesize decodedObject = _decodedObject;
 
 #pragma mark - Object Life Cycle
 
@@ -27,11 +28,13 @@
 	if ((self = [super init])) {
 		__unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
 		__unarchiver.delegate = self;
+		_decodedObject = nil;
 	}
 	return self;
 }
 
 -(void)dealloc {
+	[_decodedObject release], _decodedObject = nil;
 	__unarchiver.delegate = nil;
 	[__unarchiver release], __unarchiver = nil;
 	[super dealloc];
@@ -39,21 +42,29 @@
 
 #pragma mark - Instance Methods
 -(id)decodedRootObject {
-    NSDictionary *rootDict = [__unarchiver decodeObjectForKey:MNCoderRootObjectName];
-    [__unarchiver finishDecoding];
+	if (!_decodedObject) {
+		NSDictionary *rootDict = [__unarchiver decodeObjectForKey:MNCoderRootObjectName];
+		[__unarchiver finishDecoding];
+		
+		_decodedObject = [[rootDict objectForKey:MNCoderRootObjectName] retain];
+		
+	}
     
-    return [rootDict objectForKey:MNCoderRootObjectName];
+    return _decodedObject;
 }
 
 #pragma mark - Static Methods
 
 +(id)unarchiveObjectWithData:(NSData *)data {
-    MNUnarchiver *unarchiver = [[[MNUnarchiver alloc] initForReadingWithData:data] autorelease];
+    MNUnarchiver *unarchiver = [[MNUnarchiver alloc] initForReadingWithData:data];
     [unarchiver registerSubstituteClass:[MNFont class]];
     [unarchiver registerSubstituteClass:[MNColor class]];
 	[unarchiver registerSubstituteClass:[MNAttributedString class]];
     
-    return [unarchiver decodedRootObject];
+	id decodedObject = [unarchiver decodedRootObject];
+	[unarchiver release];
+	
+    return decodedObject;
 }
 
 +(id)unarchiveObjectWithFile:(NSString *)path {

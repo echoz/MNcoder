@@ -13,6 +13,8 @@
 @private
 	NSKeyedUnarchiver *__unarchiver;
 }
+@property (readonly) id decodedObject;
+
 +(id)unarchiveObjectWithData:(NSData *)data;
 +(id)unarchiveObjectWithFile:(NSString *)path;
 
