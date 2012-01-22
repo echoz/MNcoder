@@ -63,7 +63,7 @@
 	CFStringRef keys[] = { kCTVerticalFormsAttributeName };
 	CFTypeRef values[] = { verticalFormsEnabled };
 	
-	return [(NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, sizeof(keys) / sizeof(keys[0]), &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks) autorelease];	
+	return [(NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks) autorelease];	
 #else
 	return [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:self.enabled] forKey:NSVerticalGlyphFormAttributeName];
 #endif

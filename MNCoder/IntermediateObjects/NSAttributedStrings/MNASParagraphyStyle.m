@@ -123,7 +123,7 @@
 	CFStringRef keys[] = { kCTParagraphStyleAttributeName };
 	CFTypeRef values[] = { CTParagraphStyleCreate(settings, sizeof(settings) / sizeof(CTParagraphStyleSetting)) };
 	
-	return [(NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, sizeof(keys) / sizeof(keys[0]), &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks) autorelease];	
+	return [(NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks) autorelease];	
 }
 
 #else
