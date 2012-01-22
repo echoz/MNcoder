@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "MNCIntermediateObjectProtocol.h"
 
+extern NSString *const kMNAttributedStringAttributeAttributKey;
+extern NSString *const kMNAttributedStringAttributeRangeKey;
+
 @protocol MNAttributedStringAttributeProtocol <NSObject, NSCoding>
 @required
 -(NSDictionary *)platformRepresentation;

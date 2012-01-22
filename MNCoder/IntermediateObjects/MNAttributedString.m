@@ -22,6 +22,9 @@
 #import "MNASVerticalForms.h"
 #import "MNASFont.h"
 
+NSString *const kMNAttributedStringAttributeAttributKey = @"kMNAttributedStringAttributeAttributKey";
+NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttributeRangeKey";
+
 @interface MNAttributedString (/* Private Methods */)
 -(void)_buildIntermediateRepresentationFromString:(NSAttributedString *)string;
 -(NSDictionary *)_dictionaryForAttributes:(NSDictionary *)attrs range:(NSRange)aRange;
@@ -74,15 +77,20 @@
 }
 
 -(NSAttributedString *)attributedString {
+	NSMutableAttributedString *aString = [[NSMutableAttributedString alloc] initWithString:self.string];
 
 #if TARGET_OS_IPHONE
 	// translate for iOS
 #else
 	// translate for Mac
+
+	for (NSDictionary *dict in self.attributes) {
+		[aString addAttributes:[[dict objectForKey:kMNAttributedStringAttributeAttributKey] platformRepresentation] range:[[dict objectForKey:kMNAttributedStringAttributeRangeKey] rangeValue]];
+	}
 	
 #endif
 
-	return nil;
+	return [aString autorelease];
 }
 
 -(Class)_substituteClassForObject:(void *)object {
@@ -108,7 +116,7 @@
 			subsituteClass = [self _substituteClassForObject:key];
 			if (subsituteClass) {
 				subsituteObject = [[subsituteClass alloc] initWithObject:[attrs objectForKey:key] range:range forAttributedString:string];
-				[attributes insertObject:subsituteObject atIndex:([attributes count]-1)];
+				[attributes insertObject:[self _dictionaryForAttributes:subsituteObject range:range] atIndex:([attributes count]-1)];
 				[subsituteObject release], subsituteObject = nil;
 			} else {
 				NSLog(@"Attribute not translated ->> (%@): %@", key, [attrs objectForKey:key]);
@@ -116,7 +124,7 @@
 		}
 	}];
 
-	[attributes removeObjectAtIndex:0];
+	[attributes removeLastObject];
 	_attributes = [attributes copy];
 }
 
@@ -129,8 +137,8 @@
 
 -(NSDictionary *)_dictionaryForAttributes:(NSDictionary *)attrs range:(NSRange)aRange {
 	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
-	[dict setObject:[NSValue valueWithRange:aRange] forKey:@"range"];
-	[dict setObject:attrs forKey:@"attrs"];
+	[dict setObject:[NSValue valueWithRange:aRange] forKey:kMNAttributedStringAttributeRangeKey];
+	[dict setObject:attrs forKey:kMNAttributedStringAttributeAttributKey];
 	
 	return dict;
 }
