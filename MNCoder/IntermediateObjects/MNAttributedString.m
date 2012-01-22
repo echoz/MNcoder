@@ -17,6 +17,8 @@
 #import "MNASSuperScript.h"
 #import "MNASUnderlineStyle.h"
 #import "MNASForegroundColor.h"
+#import "MNASStrokeColor.h"
+#import "MNASUnderlineColor.h"
 
 @interface MNAttributedString (/* Private Methods */)
 -(void)_buildIntermediateRepresentationFromString:(NSAttributedString *)string;
@@ -58,6 +60,8 @@
 		[self registerSubstituteClass:[MNASSuperScript class]];
 		[self registerSubstituteClass:[MNASUnderlineStyle class]];
 		[self registerSubstituteClass:[MNASForegroundColor class]];
+		[self registerSubstituteClass:[MNASStrokeColor class]];
+		[self registerSubstituteClass:[MNASUnderlineColor class]];
 
 		[self _buildIntermediateRepresentationFromString:string];
 	}
@@ -101,6 +105,8 @@
 				subsituteObject = [[subsituteClass alloc] initWithObject:[attrs objectForKey:key] range:range forAttributedString:string];
 				[attributes insertObject:subsituteObject atIndex:([attributes count]-1)];
 				[subsituteObject release], subsituteObject = nil;
+			} else {
+				NSLog(@"Attribute not translated ->> (%@): %@", key, [attrs objectForKey:key]);
 			}
 		}
 	}];

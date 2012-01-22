@@ -42,6 +42,8 @@
 		3FD4555B14CC6DFE00D2AABF /* MNASSuperScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD4555A14CC6DFE00D2AABF /* MNASSuperScript.m */; };
 		3FD4556214CC6EDF00D2AABF /* MNASUnderlineStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD4556114CC6EDF00D2AABF /* MNASUnderlineStyle.m */; };
 		3FD4556814CC708A00D2AABF /* MNASForegroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD4556714CC708A00D2AABF /* MNASForegroundColor.m */; };
+		3FD4557314CC776A00D2AABF /* MNASStrokeColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD4557014CC776A00D2AABF /* MNASStrokeColor.m */; };
+		3FD4557414CC776A00D2AABF /* MNASUnderlineColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD4557214CC776A00D2AABF /* MNASUnderlineColor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +105,10 @@
 		3FD4556114CC6EDF00D2AABF /* MNASUnderlineStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASUnderlineStyle.m; sourceTree = "<group>"; };
 		3FD4556614CC708A00D2AABF /* MNASForegroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASForegroundColor.h; sourceTree = "<group>"; };
 		3FD4556714CC708A00D2AABF /* MNASForegroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASForegroundColor.m; sourceTree = "<group>"; };
+		3FD4556F14CC776A00D2AABF /* MNASStrokeColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASStrokeColor.h; sourceTree = "<group>"; };
+		3FD4557014CC776A00D2AABF /* MNASStrokeColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASStrokeColor.m; sourceTree = "<group>"; };
+		3FD4557114CC776A00D2AABF /* MNASUnderlineColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNASUnderlineColor.h; sourceTree = "<group>"; };
+		3FD4557214CC776A00D2AABF /* MNASUnderlineColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNASUnderlineColor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +236,10 @@
 				3FD4556114CC6EDF00D2AABF /* MNASUnderlineStyle.m */,
 				3FD4556614CC708A00D2AABF /* MNASForegroundColor.h */,
 				3FD4556714CC708A00D2AABF /* MNASForegroundColor.m */,
+				3FD4556F14CC776A00D2AABF /* MNASStrokeColor.h */,
+				3FD4557014CC776A00D2AABF /* MNASStrokeColor.m */,
+				3FD4557114CC776A00D2AABF /* MNASUnderlineColor.h */,
+				3FD4557214CC776A00D2AABF /* MNASUnderlineColor.m */,
 			);
 			name = NSAttributedStrings;
 			path = ../MNCoder/IntermediateObjects/NSAttributedStrings;
@@ -351,6 +361,8 @@
 				3FD4555B14CC6DFE00D2AABF /* MNASSuperScript.m in Sources */,
 				3FD4556214CC6EDF00D2AABF /* MNASUnderlineStyle.m in Sources */,
 				3FD4556814CC708A00D2AABF /* MNASForegroundColor.m in Sources */,
+				3FD4557314CC776A00D2AABF /* MNASStrokeColor.m in Sources */,
+				3FD4557414CC776A00D2AABF /* MNASUnderlineColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

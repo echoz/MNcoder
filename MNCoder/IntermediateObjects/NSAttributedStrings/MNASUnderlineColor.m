@@ -1,14 +1,14 @@
 //
-//  MNASForegroundColor.m
+//  MNASUnderlineColor.m
 //  Mac
 //
 //  Created by Jeremy Foo on 1/23/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MNASForegroundColor.h"
+#import "MNASUnderlineColor.h"
 
-@implementation MNASForegroundColor
+@implementation MNASUnderlineColor
 @synthesize color = _color;
 
 #pragma mark - NSCoding Protocol
@@ -29,9 +29,9 @@
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(id)object isEqualToString:(NSString *)kCTForegroundColorAttributeName];
+	return [(id)object isEqualToString:(NSString *)kCTUnderlineColorAttributeName];
 #else
-	return [(id)object isEqualToString:NSForegroundColorAttributeName];
+	return [(id)object isEqualToString:NSUnderlineColorAttributeName];
 #endif
 }
 
@@ -44,12 +44,12 @@
 
 -(NSDictionary *)platformRepresentation {
 #if TARGET_OS_IPHONE
-	CFStringRef keys[] = { kCTForegroundColorAttributeName };
+	CFStringRef keys[] = { kCTUnderlineColorAttributeName };
 	CFTypeRef values[] = { [[self.color platformRepresentation] CGColor] };
 	
 	return [(NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, sizeof(keys) / sizeof(keys[0]), &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks) autorelease];	
 #else
-	return [NSDictionary dictionaryWithObject:[self.color platformRepresentation] forKey:NSForegroundColorAttributeName];
+	return [NSDictionary dictionaryWithObject:[self.color platformRepresentation] forKey:NSUnderlineColorAttributeName];
 #endif
 }
 
