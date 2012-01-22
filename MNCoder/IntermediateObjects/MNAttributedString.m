@@ -98,7 +98,7 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 	
 #endif
 
-	return [aString autorelease];
+	return aString;
 }
 
 -(Class)_substituteClassForObject:(void *)object {
