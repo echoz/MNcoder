@@ -28,3 +28,6 @@ Attributed strings have their own internal intermediate objects to handle the va
 - Doesn't do certain portions of the iOS's Attributed String (ie. background color, etc.)
 - Links
 - Text attachments
+
+#### Sample Project
+The same project provided opens as a workspace, MNcoder.xcworkspace and contain 2 projects, one for iOS and one for Mac OS X for testing. All archivng and unarchiving does so in the NSTemporaryDirectory() under the file name MNCoderTest.plist or whatever is set in the #define in the MNCoder.h file.
