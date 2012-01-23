@@ -20,6 +20,11 @@ It is fairly easy to implement the intermediate objects that will handle the tra
 
 In addition to these methods, the intermediate object protocol also requires that the NSCoding protocol be implemented such that these intermediate objects can be serialized by the Archiver.
 
+Attributed strings have their own internal intermediate objects to handle the various features that iOS/Mac supports and will reduce the current working set to the lowest common denominator by rejecting attributes it doesn't understand (sadly NSLinkAttributeName for links on Mac OS X). Further work can be made to enhnace this system that will provide a way to revive attachments and links.
+
 #### Cavets
 - Doesn't do TextLists and TextBlocks
-- Doesn't do certain portions of the Mac's Attributed String (ie. hypenation factor, etc)
+- Doesn't do certain portions of the Mac's Attributed String (ie. hypenation factor, etc.)
+- Doesn't do certain portions of the iOS's Attributed String (ie. background color, etc.)
+- Links
+- Text attachments
