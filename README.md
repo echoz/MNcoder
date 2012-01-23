@@ -31,3 +31,7 @@ Attributed strings have their own internal intermediate objects to handle the va
 
 #### Sample Project
 The same project provided opens as a workspace, MNcoder.xcworkspace and contain 2 projects, one for iOS and one for Mac OS X for testing. All archivng and unarchiving does so in the NSTemporaryDirectory() under the file name MNCoderTest.plist or whatever is set in the #define in the MNCoder.h file.
+
+This project makes use of git submodules for EGOTextView.
+
+Remember to do `git submodules init` and `git submodules update` after cloning the project.
