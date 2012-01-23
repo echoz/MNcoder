@@ -8,8 +8,11 @@
 
 #import "MNViewController.h"
 #import "MNUnarchiver.h"
+#import "MNArchiver.h"
 @implementation MNViewController
 @synthesize textView;
+@synthesize segmentedButtons;
+@synthesize actionButton;
 
 - (void)didReceiveMemoryWarning
 {
@@ -24,12 +27,18 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 	[textView becomeFirstResponder];
-    
+	self.navigationController.navigationBarHidden = NO;
+	
+	self.navigationItem.titleView = self.segmentedButtons;
+	self.navigationItem.rightBarButtonItem = self.actionButton;
+
 }
 
 - (void)viewDidUnload
 {
 	[self setTextView:nil];
+	[self setSegmentedButtons:nil];
+	[self setActionButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -63,21 +72,33 @@
 
 - (void)dealloc {
 	[textView release];
+	[segmentedButtons release];
+	[actionButton release];
 	[super dealloc];
 }
-- (IBAction)unarchiveTapped:(id)sender {
-	id test = [MNUnarchiver unarchiveObjectWithFile:[NSString stringWithFormat:@"%@MNCoderTest.plist", NSTemporaryDirectory()]];
-	NSLog(@"%@", test);
+
+- (IBAction)actionButtonTapped:(id)sender {
+	if (self.segmentedButtons.selectedSegmentIndex == 0) {
+		// do archive
+		NSAttributedString *astring = self.textView.attributedString;
+		[MNArchiver archiveRootObject:astring toFile:[NSString stringWithFormat:@"%@MNCoderTest.plist", NSTemporaryDirectory()]];
+	} else {
+		// do unarchive
+		NSAttributedString *test = [MNUnarchiver unarchiveObjectWithFile:[NSString stringWithFormat:@"%@MNCoderTest.plist", NSTemporaryDirectory()]];
+		[self.textView setAttributedString:test];
+	}
 	
 }
 
-- (IBAction)archiveTapped:(id)sender {
-	[textView.attributedString enumerateAttributesInRange:NSMakeRange(0, [textView.attributedString.string length]) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
-		NSLog(@"(%@)-->>", [NSValue valueWithRange:range]);
-		
-		for (NSString *key in attrs) {
-			NSLog(@"%@ = (%@) %@", key, [[attrs objectForKey:key] class], [attrs objectForKey:key]);
-		}
-	}];
+- (IBAction)segmentedValueChanged:(id)sender {
+	if (self.segmentedButtons.selectedSegmentIndex == 0) {
+		self.actionButton.title = @"Archive";
+		self.textView.editable = YES;
+		[self.textView setText:@""];
+	} else {
+		self.actionButton.title = @"Unarchive";		
+		self.textView.editable = NO;
+		[self.textView setText:@""];
+	}
 }
 @end

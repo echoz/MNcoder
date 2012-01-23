@@ -11,7 +11,8 @@
 
 @interface MNViewController : UIViewController
 @property (retain, nonatomic) IBOutlet EGOTextView *textView;
-- (IBAction)unarchiveTapped:(id)sender;
-- (IBAction)archiveTapped:(id)sender;
-
+@property (retain, nonatomic) IBOutlet UISegmentedControl *segmentedButtons;
+@property (retain, nonatomic) IBOutlet UIBarButtonItem *actionButton;
+- (IBAction)actionButtonTapped:(id)sender;
+- (IBAction)segmentedValueChanged:(id)sender;
 @end
