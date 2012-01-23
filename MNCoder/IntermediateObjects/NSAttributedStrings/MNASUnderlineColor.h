@@ -37,6 +37,10 @@
 
 @interface MNASUnderlineColor : NSObject <MNAttributedStringAttributeProtocol>
 
-@property (readonly) MNColor *color;
+#if TARGET_OS_IPHONE
+@property (readonly) UIColor *color;
+#else
+@property (readonly) NSColor *color;
+#endif
 
 @end

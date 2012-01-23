@@ -59,9 +59,9 @@
 -(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
 #if TARGET_OS_IPHONE
-		_color = [[MNColor alloc] initWithSubsituteObject:[UIColor colorWithCGColor:object]];
+		_color = [[UIColor colorWithCGColor:object] retain];
 #else
-		_color = [[MNColor alloc] initWithSubsituteObject:object];
+		_color = [object retain];
 #endif
 	}	
 	return self;
