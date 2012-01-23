@@ -1,4 +1,4 @@
-Serializer subclass of NSKeyedArchvier/NSKeyedUnarchiver that primarily deals with creating portable seralized plists of objects for use on both the Mac and iOS.
+Serializer composition of NSKeyedArchvier/NSKeyedUnarchiver that primarily deals with creating portable seralized plists of objects for use on both the Mac and iOS.
 
 The current version only deals with portability of NSAttributedString and its components that are perhaps not present on iOS. This includes the following but may ahve more,
 
