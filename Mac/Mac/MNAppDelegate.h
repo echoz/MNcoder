@@ -16,6 +16,7 @@
 @property (assign) IBOutlet NSWindow *window;
 
 @property (assign) IBOutlet NSTextView *textView;
+@property (assign) IBOutlet NSTextView *unarchiveTextView;
 - (IBAction)archiveTapped:(id)sender;
 - (IBAction)unarchiveTapped:(id)sender;
 @end

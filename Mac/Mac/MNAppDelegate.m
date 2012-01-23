@@ -14,6 +14,7 @@
 
 @synthesize window = _window;
 @synthesize textView;
+@synthesize unarchiveTextView;
 
 - (void)dealloc
 {
@@ -32,8 +33,8 @@
 }
 
 -(IBAction)unarchiveTapped:(id)sender {
-	id test = [MNUnarchiver unarchiveObjectWithFile:[NSString stringWithFormat:@"%@MNCoderTest.plist", NSTemporaryDirectory()]];
-	NSLog(@"%@", test);
+	NSAttributedString *test = [MNUnarchiver unarchiveObjectWithFile:[NSString stringWithFormat:@"%@MNCoderTest.plist", NSTemporaryDirectory()]];
+	[[unarchiveTextView textStorage] setAttributedString:test];
 }
 
 @end
