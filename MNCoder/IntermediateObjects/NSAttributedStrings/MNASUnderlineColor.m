@@ -37,7 +37,12 @@
 
 -(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
+#if TARGET_OS_IPHONE
+		_color = [[MNColor alloc] initWithSubsituteObject:[UIColor colorWithCGColor:object]];
+#else
 		_color = [[MNColor alloc] initWithSubsituteObject:object];
+#endif
+
 	}	
 	return self;
 }
@@ -45,11 +50,11 @@
 -(NSDictionary *)platformRepresentation {
 #if TARGET_OS_IPHONE
 	CFStringRef keys[] = { kCTUnderlineColorAttributeName };
-	CFTypeRef values[] = { [[self.color platformRepresentation] CGColor] };
+	CFTypeRef values[] = { [self.color CGColor] };
 	
 	return [(NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks) autorelease];	
 #else
-	return [NSDictionary dictionaryWithObject:[self.color platformRepresentation] forKey:NSUnderlineColorAttributeName];
+	return [NSDictionary dictionaryWithObject:self.color forKey:NSUnderlineColorAttributeName];
 #endif
 }
 
