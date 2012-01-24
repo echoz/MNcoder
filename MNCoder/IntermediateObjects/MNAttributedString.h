@@ -54,4 +54,7 @@ extern NSString *const kMNAttributedStringAttributeRangeKey;
 -(void)registerSubstituteClass:(Class)cls;
 -(void)unregisterSubtituteClass:(Class)cls;
 
++(BOOL)lossless;
++(void)setLossless:(BOOL)lossless;
+
 @end

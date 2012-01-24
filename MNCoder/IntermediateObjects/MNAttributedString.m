@@ -149,6 +149,10 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 				[subsituteObject release], subsituteObject = nil;
 			} else {
 				NSLog(@"Attribute not translated ->> (%@): %@", key, [attrs objectForKey:key]);
+				
+				if ([MNAttributedString lossless]) {
+					[attributes insertObject:[NSDictionary dictionaryWithObject:[attrs objectForKey:key] forKey:key] atIndex:([attributes count]-1)];
+				}
 			}
 		}
 	}];
@@ -181,6 +185,17 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 -(void)unregisterSubtituteClass:(Class)cls {
     if ([cls conformsToProtocol:@protocol(MNAttributedStringAttributeProtocol)])
         [__substituteClasses removeObject:cls];
+}
+
+#pragma mark - Lossy switch
+static BOOL _MNAttributedStringLossless = YES;
+
++(BOOL)lossless {	
+	return _MNAttributedStringLossless;
+}
+
++(void)setLossless:(BOOL)lossless {
+	_MNAttributedStringLossless = lossless;
 }
 
 #pragma mark - MNCIntermediateObject Protocol
