@@ -61,7 +61,7 @@
 #if TARGET_OS_IPHONE
 		_color = [[UIColor colorWithCGColor:object] retain];
 #else
-		_color = [object retain];
+		_color = [(id)object retain];
 #endif
 
 	}	
