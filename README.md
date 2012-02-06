@@ -34,4 +34,4 @@ The same project provided opens as a workspace, MNcoder.xcworkspace and contain 
 
 This project makes use of git submodules for EGOTextView.
 
-Remember to do `git submodules init` and `git submodules update` after cloning the project.
+Remember to do `git submodule init` and `git submodule update` after cloning the project.
