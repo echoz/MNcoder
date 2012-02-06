@@ -43,7 +43,7 @@
 #import "MNASVerticalForms.h"
 #import "MNASFont.h"
 
-NSString *const kMNAttributedStringAttributeAttributKey = @"kMNAttributedStringAttributeAttributKey";
+NSString *const kMNAttributedStringAttributeAttributKey = @"kMNAttributedStringAttributeAttributeKey";
 NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttributeRangeKey";
 
 @interface MNAttributedString (/* Private Methods */)
@@ -99,25 +99,30 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 
 -(NSAttributedString *)attributedString {
 	NSMutableAttributedString *aString = [[NSMutableAttributedString alloc] initWithString:self.string];
+    id attributeObj = nil;
+    id attributeToInsert = nil;
+	NSRange range;
+
+	for (NSDictionary *dict in self.attributes) {
+		range = [[dict objectForKey:kMNAttributedStringAttributeRangeKey] rangeValue];
+
+        attributeObj = [dict objectForKey:kMNAttributedStringAttributeAttributKey];
+        
+        if ([attributeObj conformsToProtocol:@protocol(MNAttributedStringAttributeProtocol)]) {
+            attributeToInsert = [attributeObj platformRepresentation];
+        } else {
+            attributeToInsert = attributeObj;
+        }
 
 #if TARGET_OS_IPHONE
 	// translate for iOS
-	NSRange range;
-	
-	for (NSDictionary *dict in self.attributes) {
-		range = [[dict objectForKey:kMNAttributedStringAttributeRangeKey] rangeValue];
-		
-		CFAttributedStringSetAttributes((CFMutableAttributedStringRef)aString, CFRangeMake(range.location, range.length) , (CFDictionaryRef)[[dict objectForKey:kMNAttributedStringAttributeAttributKey] platformRepresentation], false);
-	}
+		CFAttributedStringSetAttributes((CFMutableAttributedStringRef)aString, CFRangeMake(range.location, range.length) , (CFDictionaryRef)attributeToInsert, false);
 	
 #else
 	// translate for Mac
-
-	for (NSDictionary *dict in self.attributes) {
-		[aString addAttributes:[[dict objectForKey:kMNAttributedStringAttributeAttributKey] platformRepresentation] range:[[dict objectForKey:kMNAttributedStringAttributeRangeKey] rangeValue]];
-	}
-	
+		[aString addAttributes:attributeToInsert range:[[dict objectForKey:kMNAttributedStringAttributeRangeKey] rangeValue]];
 #endif
+	}
 
 	return aString;
 }
@@ -151,7 +156,7 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 				NSLog(@"Attribute not translated ->> (%@): %@", key, [attrs objectForKey:key]);
 				
 				if ([MNAttributedString lossless]) {
-					[attributes insertObject:[NSDictionary dictionaryWithObject:[attrs objectForKey:key] forKey:key] atIndex:([attributes count]-1)];
+					[attributes insertObject:[self _dictionaryForAttributes:[NSDictionary dictionaryWithObject:[attrs objectForKey:key] forKey:key] range:range] atIndex:([attributes count]-1)];
 				}
 			}
 		}
