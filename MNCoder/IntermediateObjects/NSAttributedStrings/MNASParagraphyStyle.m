@@ -191,7 +191,7 @@
 }
 
 -(NSDictionary *)platformRepresentation {
-	NSMutableParagraphStyle *platRep = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
+	NSMutableParagraphStyle *platRep = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	
 	platRep.alignment = self.alignment;
 	platRep.lineBreakMode = self.lineBreakMode;
@@ -215,7 +215,10 @@
 	platRep.paragraphSpacing = self.paragraphSpacing;
 	platRep.paragraphSpacingBefore = self.paragraphSpacingBefore;
 	
-	return [NSDictionary dictionaryWithObject:platRep forKey:NSParagraphStyleAttributeName];
+    NSDictionary *platformDict = [NSDictionary dictionaryWithObject:platRep forKey:NSParagraphStyleAttributeName];
+    [platRep release];
+    
+	return platformDict;
 }
 
 #endif
