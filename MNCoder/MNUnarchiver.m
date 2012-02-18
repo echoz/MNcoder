@@ -56,36 +56,30 @@
 
 -(void)dealloc {
 	[_decodedObject release], _decodedObject = nil;
-	__unarchiver.delegate = nil;
-	[__unarchiver release], __unarchiver = nil;
+    [__unarchiver release], __unarchiver = nil;
 	[super dealloc];
 }
 
 #pragma mark - Instance Methods
 -(id)decodedRootObject {
 	if (!_decodedObject) {
-		NSDictionary *rootDict = [__unarchiver decodeObjectForKey:MNCoderRootObjectName];
+		_decodedObject = [[__unarchiver decodeObjectForKey:MNCoderRootObjectName] retain];
 		[__unarchiver finishDecoding];
-		
-		_decodedObject = [[rootDict objectForKey:MNCoderRootObjectName] retain];
-		
+        NSLog(@"%@", _decodedObject);
 	}
     
-    return _decodedObject;
+    return [[_decodedObject retain] autorelease];
 }
 
 #pragma mark - Static Methods
 
 +(id)unarchiveObjectWithData:(NSData *)data {
-    MNUnarchiver *unarchiver = [[MNUnarchiver alloc] initForReadingWithData:data];
+    MNUnarchiver *unarchiver = [[[MNUnarchiver alloc] initForReadingWithData:data] autorelease];
     [unarchiver registerSubstituteClass:[MNFont class]];
     [unarchiver registerSubstituteClass:[MNColor class]];
 	[unarchiver registerSubstituteClass:[MNAttributedString class]];
     
-	id decodedObject = [unarchiver decodedRootObject];
-	[unarchiver release];
-	
-    return decodedObject;
+    return [[[unarchiver decodedRootObject] retain] autorelease];
 }
 
 +(id)unarchiveObjectWithFile:(NSString *)path {
@@ -96,7 +90,9 @@
     
     NSData *data = [NSData dataWithContentsOfFile:path];
     
-    return [MNUnarchiver unarchiveObjectWithData:data];
+    id unarchivedObj = [MNUnarchiver unarchiveObjectWithData:data];
+    
+    return [[unarchivedObj retain] autorelease];
 }
 
 #pragma mark - NSKeyedUnarchiver Delegate Methods
