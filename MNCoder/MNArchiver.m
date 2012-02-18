@@ -74,9 +74,7 @@
 
 -(void)encodeRootObject:(id)object {
     if (!encoded) {
-        NSDictionary *rootDict = [NSDictionary dictionaryWithObject:object forKey:MNCoderRootObjectName];
-		NSLog(@"%@", rootDict);
-        [__archiver encodeObject:rootDict forKey:MNCoderRootObjectName];
+        [__archiver encodeObject:object forKey:MNCoderRootObjectName];
         [__archiver finishEncoding];
         encoded = YES;        
     }
