@@ -164,10 +164,11 @@
 	CFRelease(descDict);
 
 	CTFontRef font = CTFontCreateWithFontDescriptor(descriptor, self.size, NULL);
-	CFRetain(descriptor);
+	CFRelease(descriptor);
 	
 	[dict setObject:(NSFont *)font forKey:NSFontAttributeName];
-	
+	CFRelease(font);
+    
 	return dict;
 
 #endif
