@@ -43,7 +43,7 @@
 #import "MNASVerticalForms.h"
 #import "MNASFont.h"
 
-NSString *const kMNAttributedStringAttributeAttributKey = @"kMNAttributedStringAttributeAttributeKey";
+NSString *const kMNAttributedStringAttributeAttributeKey = @"kMNAttributedStringAttributeAttributeKey";
 NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttributeRangeKey";
 
 @interface MNAttributedString (/* Private Methods */)
@@ -122,7 +122,7 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 
 	for (NSDictionary *dict in self.attributes) {
 
-        attributeObj = [dict objectForKey:kMNAttributedStringAttributeAttributKey];
+        attributeObj = [dict objectForKey:kMNAttributedStringAttributeAttributeKey];
         
         if ([attributeObj conformsToProtocol:@protocol(MNAttributedStringAttributeProtocol)]) {
             attributeToInsert = [attributeObj platformRepresentation];
@@ -195,7 +195,7 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 -(NSDictionary *)_dictionaryForAttributes:(NSDictionary *)attrs range:(NSRange)aRange {
 	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
 	[dict setObject:[NSValue valueWithRange:aRange] forKey:kMNAttributedStringAttributeRangeKey];
-	[dict setObject:attrs forKey:kMNAttributedStringAttributeAttributKey];
+	[dict setObject:attrs forKey:kMNAttributedStringAttributeAttributeKey];
 	
 	return dict;
 }
