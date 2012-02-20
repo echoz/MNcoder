@@ -36,7 +36,7 @@
 #import "MNAttributedString.h"
 
 @implementation MNUnarchiver
-@synthesize decodedObject = _decodedObject;
+@synthesize decodedRootObject;
 
 #pragma mark - Object Life Cycle
 
@@ -49,30 +49,26 @@
 	if ((self = [super init])) {
 		__unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
 		__unarchiver.delegate = self;
-		_decodedObject = nil;
+		_decodedRootObject = nil;
 	}
 	return self;
 }
 
 -(void)dealloc {
-	[_decodedObject release], _decodedObject = nil;
+	[_decodedRootObject release], _decodedRootObject = nil;
     [__unarchiver release], __unarchiver = nil;
 	[super dealloc];
 }
 
 #pragma mark - Instance Methods
 -(id)decodedRootObject {
-	if (!_decodedObject) {
-		_decodedObject = [[__unarchiver decodeObjectForKey:MNCoderRootObjectName] retain];
+	if (!_decodedRootObject) {
+		_decodedRootObject = [[__unarchiver decodeObjectForKey:MNCoderRootObjectName] retain];
 		[__unarchiver finishDecoding];
         [__unarchiver release], __unarchiver = nil;
-        
-        NSLog(@"%lu", [_decodedObject retainCount]);
-	}
+    }
     
-    id test = [[_decodedObject retain] autorelease];
-    
-    NSLog(@"%lu", [test retainCount]);
+    id test = [[_decodedRootObject retain] autorelease];
     
     return test;
 }
