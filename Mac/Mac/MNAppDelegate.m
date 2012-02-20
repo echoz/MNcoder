@@ -31,6 +31,12 @@
 #import "MNArchiver.h"
 #import "MNUnarchiver.h"
 
+/*
+#import "MNFont.h"
+#import "MNColor.h"
+#import "MNAttributedString.h"
+*/
+
 @implementation MNAppDelegate
 
 @synthesize window = _window;
@@ -54,6 +60,29 @@
 }
 
 -(IBAction)unarchiveTapped:(id)sender {
+    
+    /*
+    NSData *data = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@MNCoderTest.plist", NSTemporaryDirectory()]];
+    
+    MNUnarchiver *unarchiver = [[MNUnarchiver alloc] initForReadingWithData:data];
+    [unarchiver registerSubstituteClass:[MNFont class]];
+    [unarchiver registerSubstituteClass:[MNColor class]];
+	[unarchiver registerSubstituteClass:[MNAttributedString class]];
+    
+    id test = [unarchiver decodedRootObject];
+    NSLog(@"test: %lu", [test retainCount]);
+    
+    id test2 = [unarchiver decodedRootObject];
+    NSLog(@"test2: %lu", [test2 retainCount]);
+    NSLog(@"test: %lu", [test retainCount]);
+
+    [unarchiver release];
+    NSLog(@"test2: %lu", [test2 retainCount]);
+    NSLog(@"test: %lu", [test retainCount]);
+    
+	[[unarchiveTextView textStorage] setAttributedString:test];
+     */
+    
 	NSAttributedString *test = [MNUnarchiver unarchiveObjectWithFile:[NSString stringWithFormat:@"%@MNCoderTest.plist", NSTemporaryDirectory()]];
 	[[unarchiveTextView textStorage] setAttributedString:test];
 }
