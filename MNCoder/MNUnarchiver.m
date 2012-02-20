@@ -104,7 +104,15 @@
 #pragma mark - NSKeyedUnarchiver Delegate Methods
 
 -(Class)unarchiver:(NSKeyedUnarchiver *)unarchiver cannotDecodeObjectOfClassName:(NSString *)name originalClasses:(NSArray *)classNames {
-    NSLog(@"Class %@ does not exist for this platform -> %@", name, classNames);
+    NSString *platformName;
+    
+#if TARGET_OS_IPHONE
+    platformName = @"TARGET_OS_IPHONE";
+#else
+    platformName = @"TARGET_OS_MAC";
+#endif
+    
+    NSLog(@"Class %@ does not exist for this platform (%@) -> %@", name, platformName, classNames);
     return nil;
 }
 
