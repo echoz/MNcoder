@@ -113,7 +113,10 @@
     for (Class cls in __subsituteClasses) {
         
         if ([object isKindOfClass:cls]) {
-            return [object platformRepresentation];
+            id platformRepresentation = [[object platformRepresentation] retain];
+            [object release];
+            
+            return [platformRepresentation autorelease];
         }
     }
     
