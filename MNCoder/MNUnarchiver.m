@@ -130,7 +130,7 @@
             // "autorelease" prior to returning will show you a nice backtrace in Instruments that will allow
             // inference that this is not retained upon the return.
             //
-            // Will be filing a radar for this issue.
+            // Will be filing a radar for this issue. (http://openradar.appspot.com/radar?id=1517414)
             return platformRepresentation;
         }
     }
