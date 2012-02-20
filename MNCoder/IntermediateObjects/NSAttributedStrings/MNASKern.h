@@ -34,7 +34,10 @@
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNASKern : NSObject <MNAttributedStringAttributeProtocol>
+@interface MNASKern : NSObject <MNAttributedStringAttributeProtocol> {
+@private
+    NSNumber *_kern;
+}
 
 @property (readonly) NSNumber *kern;
 

@@ -65,10 +65,16 @@
 	if (!_decodedObject) {
 		_decodedObject = [[__unarchiver decodeObjectForKey:MNCoderRootObjectName] retain];
 		[__unarchiver finishDecoding];
-        NSLog(@"%@", _decodedObject);
+        [__unarchiver release], __unarchiver = nil;
+        
+        NSLog(@"%lu", [_decodedObject retainCount]);
 	}
     
-    return [[_decodedObject retain] autorelease];
+    id test = [[_decodedObject retain] autorelease];
+    
+    NSLog(@"%lu", [test retainCount]);
+    
+    return test;
 }
 
 #pragma mark - Static Methods

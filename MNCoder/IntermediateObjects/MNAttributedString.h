@@ -43,6 +43,9 @@ extern NSString *const kMNAttributedStringAttributeRangeKey;
 @interface MNAttributedString : NSObject <MNCIntermediateObjectProtocol> {
 @private
 	NSMutableSet *__substituteClasses;
+    
+    NSString *_string;
+    NSArray *_attributes;
 }
 
 @property (readonly) NSString *string;

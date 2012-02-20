@@ -33,6 +33,7 @@
 @interface MNUnarchiver : MNCoder <NSKeyedUnarchiverDelegate> {
 @private
 	NSKeyedUnarchiver *__unarchiver;
+    id _decodedObject;
 }
 @property (readonly) id decodedObject;
 

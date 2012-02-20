@@ -32,7 +32,12 @@
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNASTextTab : NSObject <NSCoding>
+@interface MNASTextTab : NSObject <NSCoding> {
+@private
+    NSUInteger _alignment;
+    CGFloat _location;
+    NSDictionary *_options;
+}
 
 @property (readonly) NSUInteger alignment;
 @property (readonly) CGFloat location;

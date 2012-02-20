@@ -34,7 +34,25 @@
 
 #import "MNAttributedString.h"
 
-@interface MNASParagraphyStyle : NSObject <MNAttributedStringAttributeProtocol>
+@interface MNASParagraphyStyle : NSObject <MNAttributedStringAttributeProtocol> {
+@private
+    NSUInteger _alignment;
+    CGFloat _firstLineHeadIndent;
+    CGFloat _headIndent;
+    CGFloat _tailIndent;
+    NSArray *_tabStops;
+    CGFloat _defaultTabInterval;
+    CGFloat _lineHeightMultiple;
+    CGFloat _maximumLineHeight;
+    CGFloat _minimumLineHeight;
+    CGFloat _lineSpacing;
+    CGFloat _paragraphSpacing;
+    CGFloat _paragraphSpacingBefore;
+    
+    NSUInteger _lineBreakMode;
+    NSInteger _baseWritingDirection;
+
+}
 
 @property (readonly) NSUInteger alignment;
 @property (readonly) CGFloat firstLineHeadIndent;

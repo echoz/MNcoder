@@ -35,8 +35,14 @@
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNASStrokeColor : NSObject <MNAttributedStringAttributeProtocol>
-
+@interface MNASStrokeColor : NSObject <MNAttributedStringAttributeProtocol> {
+@private
+#if TARGET_OS_IPHONE
+    UIColor *_color;
+#else
+    NSColor *_color;
+#endif
+}
 #if TARGET_OS_IPHONE
 @property (readonly) UIColor *color;
 #else
