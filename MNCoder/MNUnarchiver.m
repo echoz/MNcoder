@@ -64,6 +64,9 @@
 -(id)decodedRootObject {
 	if (!_decodedRootObject) {
 		_decodedRootObject = [[__unarchiver decodeObjectForKey:MNCoderRootObjectName] retain];
+
+        // after finishing the decode, the unarchiver can't be used anymore,
+        // lets proactively release it to reclaim memory.
 		[__unarchiver finishDecoding];
         [__unarchiver release], __unarchiver = nil;
     }
@@ -120,7 +123,15 @@
             id platformRepresentation = [[object platformRepresentation] retain];
             [object release];
             
-            return [platformRepresentation autorelease];
+            // NSKeyedUnarchiver does not retain the replacement object thus a temp workaround with analyzer warning
+            // is not to autorelease it.
+            //
+            // Checking Instruments using the leaks profiler shows that this does not leak at all. Adding the 
+            // "autorelease" prior to returning will show you a nice backtrace in Instruments that will allow
+            // inference that this is not retained upon the return.
+            //
+            // Will be filing a radar for this issue.
+            return platformRepresentation;
         }
     }
     
