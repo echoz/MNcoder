@@ -22,6 +22,8 @@ In addition to these methods, the intermediate object protocol also requires tha
 
 Attributed strings have their own internal intermediate objects to handle the various features that iOS/Mac supports and will reduce the current working set to the lowest common denominator by rejecting attributes it doesn't understand (sadly NSLinkAttributeName for links on Mac OS X). Further work can be made to enhnace this system that will provide a way to revive attachments and links.
 
+Specifically for Attributed strings, you can set whether it will be a lossless translation (by preserving attributes that can't be translated) or one that is not by setting the lossless BOOL via a static method `[MNAttributedString setLossless:(BOOL)]`.
+
 #### Cavets
 - Doesn't do TextLists and TextBlocks
 - Doesn't do certain portions of the Mac's Attributed String (ie. hypenation factor, etc.)
