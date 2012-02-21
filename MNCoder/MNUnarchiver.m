@@ -36,7 +36,7 @@
 #import "MNAttributedString.h"
 
 @implementation MNUnarchiver
-@synthesize decodedObject = _decodedObject;
+@synthesize decodedRootObject;
 
 #pragma mark - Object Life Cycle
 
@@ -49,43 +49,42 @@
 	if ((self = [super init])) {
 		__unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
 		__unarchiver.delegate = self;
-		_decodedObject = nil;
+		_decodedRootObject = nil;
 	}
 	return self;
 }
 
 -(void)dealloc {
-	[_decodedObject release], _decodedObject = nil;
-	__unarchiver.delegate = nil;
-	[__unarchiver release], __unarchiver = nil;
+	[_decodedRootObject release], _decodedRootObject = nil;
+    [__unarchiver release], __unarchiver = nil;
 	[super dealloc];
 }
 
 #pragma mark - Instance Methods
 -(id)decodedRootObject {
-	if (!_decodedObject) {
-		NSDictionary *rootDict = [__unarchiver decodeObjectForKey:MNCoderRootObjectName];
+	if (!_decodedRootObject) {
+		_decodedRootObject = [[__unarchiver decodeObjectForKey:MNCoderRootObjectName] retain];
+
+        // after finishing the decode, the unarchiver can't be used anymore,
+        // lets proactively release it to reclaim memory.
 		[__unarchiver finishDecoding];
-		
-		_decodedObject = [[rootDict objectForKey:MNCoderRootObjectName] retain];
-		
-	}
+        [__unarchiver release], __unarchiver = nil;
+    }
     
-    return _decodedObject;
+    id test = [[_decodedRootObject retain] autorelease];
+    
+    return test;
 }
 
 #pragma mark - Static Methods
 
 +(id)unarchiveObjectWithData:(NSData *)data {
-    MNUnarchiver *unarchiver = [[MNUnarchiver alloc] initForReadingWithData:data];
+    MNUnarchiver *unarchiver = [[[MNUnarchiver alloc] initForReadingWithData:data] autorelease];
     [unarchiver registerSubstituteClass:[MNFont class]];
     [unarchiver registerSubstituteClass:[MNColor class]];
 	[unarchiver registerSubstituteClass:[MNAttributedString class]];
     
-	id decodedObject = [unarchiver decodedRootObject];
-	[unarchiver release];
-	
-    return decodedObject;
+    return [[[unarchiver decodedRootObject] retain] autorelease];
 }
 
 +(id)unarchiveObjectWithFile:(NSString *)path {
@@ -96,13 +95,23 @@
     
     NSData *data = [NSData dataWithContentsOfFile:path];
     
-    return [MNUnarchiver unarchiveObjectWithData:data];
+    id unarchivedObj = [MNUnarchiver unarchiveObjectWithData:data];
+    
+    return [[unarchivedObj retain] autorelease];
 }
 
 #pragma mark - NSKeyedUnarchiver Delegate Methods
 
 -(Class)unarchiver:(NSKeyedUnarchiver *)unarchiver cannotDecodeObjectOfClassName:(NSString *)name originalClasses:(NSArray *)classNames {
-    NSLog(@"Class %@ does not exist for this platform -> %@", name, classNames);
+    NSString *platformName;
+    
+#if TARGET_OS_IPHONE
+    platformName = @"TARGET_OS_IPHONE";
+#else
+    platformName = @"TARGET_OS_MAC";
+#endif
+    
+    NSLog(@"Class %@ does not exist for this platform (%@) -> %@", name, platformName, classNames);
     return nil;
 }
 
@@ -111,7 +120,18 @@
     for (Class cls in __subsituteClasses) {
         
         if ([object isKindOfClass:cls]) {
-            return [object platformRepresentation];
+            id platformRepresentation = [[object platformRepresentation] retain];
+            [object release];
+            
+            // NSKeyedUnarchiver does not retain the replacement object thus a temp workaround with analyzer warning
+            // is not to autorelease it.
+            //
+            // Checking Instruments using the leaks profiler shows that this does not leak at all. Adding the 
+            // "autorelease" prior to returning will show you a nice backtrace in Instruments that will allow
+            // inference that this is not retained upon the return.
+            //
+            // Will be filing a radar for this issue. (http://openradar.appspot.com/radar?id=1517414)
+            return platformRepresentation;
         }
     }
     

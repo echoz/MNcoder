@@ -34,7 +34,10 @@
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNASVerticalForms : NSObject <MNAttributedStringAttributeProtocol>
+@interface MNASVerticalForms : NSObject <MNAttributedStringAttributeProtocol> {
+@private
+    BOOL _enabled;
+}
 
 @property (readonly) BOOL enabled;
 

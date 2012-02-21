@@ -30,7 +30,7 @@
 #import <Foundation/Foundation.h>
 #import "MNCIntermediateObjectProtocol.h"
 
-extern NSString *const kMNAttributedStringAttributeAttributKey;
+extern NSString *const kMNAttributedStringAttributeAttributeKey;
 extern NSString *const kMNAttributedStringAttributeRangeKey;
 
 @protocol MNAttributedStringAttributeProtocol <NSObject, NSCoding>
@@ -43,6 +43,9 @@ extern NSString *const kMNAttributedStringAttributeRangeKey;
 @interface MNAttributedString : NSObject <MNCIntermediateObjectProtocol> {
 @private
 	NSMutableSet *__substituteClasses;
+    
+    NSString *_string;
+    NSArray *_attributes;
 }
 
 @property (readonly) NSString *string;

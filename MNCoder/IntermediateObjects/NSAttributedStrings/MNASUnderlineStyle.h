@@ -34,7 +34,11 @@
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNASUnderlineStyle : NSObject <MNAttributedStringAttributeProtocol>
+@interface MNASUnderlineStyle : NSObject <MNAttributedStringAttributeProtocol> {
+@private
+    NSNumber *_styleMask;
+
+}
 
 @property (readonly) NSNumber *styleMask;
 

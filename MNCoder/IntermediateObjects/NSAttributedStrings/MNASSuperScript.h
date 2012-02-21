@@ -34,7 +34,11 @@
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNASSuperScript : NSObject <MNAttributedStringAttributeProtocol>
+@interface MNASSuperScript : NSObject <MNAttributedStringAttributeProtocol> {
+@private
+    NSNumber *_textPosition;
+
+}
 
 @property (readonly) NSNumber *textPosition;
 

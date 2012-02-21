@@ -34,7 +34,14 @@
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNASFont : NSObject <MNAttributedStringAttributeProtocol>
+@interface MNASFont : NSObject <MNAttributedStringAttributeProtocol> {
+@private;
+    NSString *_fontName;
+    CGFloat _size;
+    NSNumber *_baseLineAdjustment;
+    NSNumber *_obliqueness;
+    NSNumber *_expansion;
+}
 
 @property (readonly) NSString *fontName;
 @property (readonly) CGFloat size;

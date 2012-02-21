@@ -35,7 +35,7 @@
 #import "MNAttributedString.h"
 
 @implementation MNArchiver
-@synthesize outputFormat = _outputFormat;
+@synthesize outputFormat;
 
 #pragma mark - Object Life Cycle
 
@@ -62,8 +62,8 @@
 
 #pragma mark - Override Accessors
 
--(void)setOutputFormat:(NSPropertyListFormat)outputFormat {
-    [__archiver setOutputFormat:outputFormat];
+-(void)setOutputFormat:(NSPropertyListFormat)_outputFormat {
+    [__archiver setOutputFormat:_outputFormat];
 }
 
 -(NSPropertyListFormat)outputFormat {
@@ -74,9 +74,7 @@
 
 -(void)encodeRootObject:(id)object {
     if (!encoded) {
-        NSDictionary *rootDict = [NSDictionary dictionaryWithObject:object forKey:MNCoderRootObjectName];
-//		NSLog(@"%@", rootDict);
-        [__archiver encodeObject:rootDict forKey:MNCoderRootObjectName];
+        [__archiver encodeObject:object forKey:MNCoderRootObjectName];
         [__archiver finishEncoding];
         encoded = YES;        
     }

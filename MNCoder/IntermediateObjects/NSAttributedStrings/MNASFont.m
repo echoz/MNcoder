@@ -143,10 +143,16 @@
 	CFRelease(traitsDict);
 	CFRelease(descDict);
 	
+    CTFontRef font = CTFontCreateWithFontDescriptor(descriptor, self.size, NULL);
+    
 	CFStringRef keys[] = { kCTFontAttributeName };
-	CFTypeRef values[] = { CTFontCreateWithFontDescriptor(descriptor, self.size, NULL) };
+	CFTypeRef values[] = { font };
+    
+    NSDictionary *platformRepresentation = (NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+    CFRelease(descriptor);
+    CFRelease(font);
 	
-	return [(NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks) autorelease];	
+	return [platformRepresentation autorelease];	
 #else
 	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:4];
 	if (self.baseLineAdjustment)
@@ -164,10 +170,11 @@
 	CFRelease(descDict);
 
 	CTFontRef font = CTFontCreateWithFontDescriptor(descriptor, self.size, NULL);
-	CFRetain(descriptor);
+	CFRelease(descriptor);
 	
 	[dict setObject:(NSFont *)font forKey:NSFontAttributeName];
-	
+	CFRelease(font);
+    
 	return dict;
 
 #endif

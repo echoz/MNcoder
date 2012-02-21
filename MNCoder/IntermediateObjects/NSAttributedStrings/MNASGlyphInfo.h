@@ -34,7 +34,12 @@
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNASGlyphInfo : NSObject <MNAttributedStringAttributeProtocol>
+@interface MNASGlyphInfo : NSObject <MNAttributedStringAttributeProtocol> {
+@private
+    NSUInteger _characterCollection;
+    NSUInteger _characterIdentifier;
+    NSString *_baseString;
+}
 
 @property (readonly) NSUInteger characterCollection;
 @property (readonly) NSUInteger characterIdentifier;

@@ -34,7 +34,11 @@
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNASLigature : NSObject <MNAttributedStringAttributeProtocol>
+@interface MNASLigature : NSObject <MNAttributedStringAttributeProtocol> {
+@private
+    NSNumber *_type;
+
+}
 
 @property (readonly) NSNumber *type;
 

@@ -34,7 +34,11 @@
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNASStrokeWidth : NSObject <MNAttributedStringAttributeProtocol>
+@interface MNASStrokeWidth : NSObject <MNAttributedStringAttributeProtocol> {
+@private
+    NSNumber *_width;
+
+}
 
 @property (readonly) NSNumber *width;
 

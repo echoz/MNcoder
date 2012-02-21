@@ -33,12 +33,12 @@
 @interface MNUnarchiver : MNCoder <NSKeyedUnarchiverDelegate> {
 @private
 	NSKeyedUnarchiver *__unarchiver;
+    id _decodedRootObject;
 }
-@property (readonly) id decodedObject;
+@property (readonly) id decodedRootObject;
 
 +(id)unarchiveObjectWithData:(NSData *)data;
 +(id)unarchiveObjectWithFile:(NSString *)path;
 
 -(id)initForReadingWithData:(NSData *)data;
--(id)decodedRootObject;
 @end

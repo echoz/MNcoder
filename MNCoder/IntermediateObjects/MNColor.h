@@ -35,7 +35,13 @@
 
 #import "MNCIntermediateObjectProtocol.h"
 
-@interface MNColor : NSObject <MNCIntermediateObjectProtocol>
+@interface MNColor : NSObject <MNCIntermediateObjectProtocol> {
+@private
+    CGFloat _red;
+    CGFloat _green;
+    CGFloat _blue;
+    CGFloat _alpha;
+}
 
 @property (readonly) CGFloat red;
 @property (readonly) CGFloat green;

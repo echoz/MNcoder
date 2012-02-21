@@ -34,7 +34,10 @@
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNASCharacterShape : NSObject <MNAttributedStringAttributeProtocol>
+@interface MNASCharacterShape : NSObject <MNAttributedStringAttributeProtocol> {
+@private
+    NSNumber *_shapeType;
+}
 
 @property (readonly) NSNumber *shapeType;
 
