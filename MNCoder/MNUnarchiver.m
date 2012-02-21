@@ -27,6 +27,10 @@
 
 //
 
+#ifndef __has_feature
+#define __has_feature(x) 0 // Compatibility with non-clang compilers.
+#endif
+
 #import "MNUnarchiver.h"
 #import "MNCIntermediateObjectProtocol.h"
 
@@ -115,7 +119,7 @@
     return nil;
 }
 
--(id)unarchiver:(NSKeyedUnarchiver *)unarchiver didDecodeObject:(id)object {
+-(id)unarchiver:(NSKeyedUnarchiver *)unarchiver didDecodeObject:(id)object NS_RETURNS_RETAINED {
     
     for (Class cls in __subsituteClasses) {
         
