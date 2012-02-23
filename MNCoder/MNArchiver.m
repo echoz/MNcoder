@@ -35,7 +35,6 @@
 #import "MNAttributedString.h"
 
 @implementation MNArchiver
-@synthesize outputFormat;
 
 #pragma mark - Object Life Cycle
 

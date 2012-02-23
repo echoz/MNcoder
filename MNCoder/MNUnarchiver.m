@@ -48,7 +48,7 @@
 #import "MNAttributedString.h"
 
 @implementation MNUnarchiver
-@synthesize decodedRootObject;
+@synthesize decodedRootObject=_decodedRootObject;
 
 #pragma mark - Object Life Cycle
 
