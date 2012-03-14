@@ -49,45 +49,59 @@
 #pragma mark - MNAttributedStringAttribute Protocol
 
 +(BOOL)isSubstituteForObject:(void *)object {
-#if TARGET_OS_IPHONE
-	return [(id)object isEqualToString:(NSString *)kCTVerticalFormsAttributeName];
-#else
-	return [(id)object isEqualToString:NSVerticalGlyphFormAttributeName];
+    
+#if !TARGET_OS_IPHONE
+    if (&NSVerticalGlyphFormAttributeName != nil) {
+        return [(id)object isEqualToString:NSVerticalGlyphFormAttributeName];        
+    } else {
 #endif
+        return [(id)object isEqualToString:(NSString *)kCTVerticalFormsAttributeName];
+#if !TARGET_OS_IPHONE        
+    }
+#endif    
 }
 
 -(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
-		
-#if TARGET_OS_IPHONE
-		if ((CFBooleanRef)object == kCFBooleanTrue) {
-			_enabled = YES;
-		} else {
-			_enabled = NO;			
-		}
-#else
-		_enabled = [(NSNumber *)object boolValue];
+
+#if !TARGET_OS_IPHONE		
+        if (&NSVerticalGlyphFormAttributeName != nil) {
+            _enabled = [(NSNumber *)object boolValue];
+        } else {
 #endif
+            if ((CFBooleanRef)object == kCFBooleanTrue) {
+                _enabled = YES;
+            } else {
+                _enabled = NO;			
+            }            
+#if !TARGET_OS_IPHONE            
+        }
+#endif        
 	}	
 	return self;
 }
 
 -(NSDictionary *)platformRepresentation {
-#if TARGET_OS_IPHONE
-	CFBooleanRef verticalFormsEnabled;
-	if (_enabled) {
-		verticalFormsEnabled = kCFBooleanTrue;
-	} else {
-		verticalFormsEnabled = kCFBooleanFalse;
-	}
-	
-	CFStringRef keys[] = { kCTVerticalFormsAttributeName };
-	CFTypeRef values[] = { verticalFormsEnabled };
-	
-	return [(NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks) autorelease];	
-#else
-	return [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:self.enabled] forKey:NSVerticalGlyphFormAttributeName];
-#endif
+#if !TARGET_OS_IPHONE
+    if (&NSVerticalGlyphFormAttributeName != nil) {
+        return [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:self.enabled] forKey:NSVerticalGlyphFormAttributeName];
+        
+    } else {        
+#endif        
+        CFBooleanRef verticalFormsEnabled;
+        if (_enabled) {
+            verticalFormsEnabled = kCFBooleanTrue;
+        } else {
+            verticalFormsEnabled = kCFBooleanFalse;
+        }
+        
+        CFStringRef keys[] = { kCTVerticalFormsAttributeName };
+        CFTypeRef values[] = { verticalFormsEnabled };
+        
+        return [(NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks) autorelease];	
+#if !TARGET_OS_IPHONE        
+    }
+#endif    
 }
 
 
