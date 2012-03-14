@@ -49,9 +49,6 @@
 #pragma mark - MNAttributedStringAttribute Protocol
 
 +(BOOL)isSubstituteForObject:(void *)object {
-    if (![(id)object isKindOfClass:[NSString class]]) 
-        return NO;
-
 #if TARGET_OS_IPHONE
 	return [(id)object isEqualToString:(NSString *)kCTSuperscriptAttributeName];
 #else
