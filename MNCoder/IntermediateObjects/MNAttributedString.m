@@ -49,7 +49,8 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 @interface MNAttributedString (/* Private Methods */)
 -(void)_buildIntermediateRepresentationFromString:(NSAttributedString *)string;
 -(NSDictionary *)_dictionaryForAttributes:(NSDictionary *)attrs range:(NSRange)aRange;
-
++(NSRange)_rangeFromRangeDictionaryItem:(id)rangeItem;
++(NSString *)_rangeStringFromRange:(NSRange)range;
 @end
 
 @implementation MNAttributedString
@@ -132,12 +133,12 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 
 #if TARGET_OS_IPHONE
 	// translate for iOS
-        range = [[dict objectForKey:kMNAttributedStringAttributeRangeKey] rangeValue];
+        range = [[self class] _rangeFromRangeDictionaryItem:[dict objectForKey:kMNAttributedStringAttributeRangeKey]];
 		CFAttributedStringSetAttributes((CFMutableAttributedStringRef)aString, CFRangeMake(range.location, range.length) , (CFDictionaryRef)attributeToInsert, false);
 	
 #else
 	// translate for Mac
-		[aString addAttributes:attributeToInsert range:[[dict objectForKey:kMNAttributedStringAttributeRangeKey] rangeValue]];
+		[aString addAttributes:attributeToInsert range:[[self class] _rangeFromRangeDictionaryItem:[dict objectForKey:kMNAttributedStringAttributeRangeKey]]];
 #endif
 	}
 
@@ -194,10 +195,27 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 
 -(NSDictionary *)_dictionaryForAttributes:(NSDictionary *)attrs range:(NSRange)aRange {
 	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
-	[dict setObject:[NSValue valueWithRange:aRange] forKey:kMNAttributedStringAttributeRangeKey];
+    [dict setObject:[[self class] _rangeStringFromRange:aRange]
+             forKey:kMNAttributedStringAttributeRangeKey];    
 	[dict setObject:attrs forKey:kMNAttributedStringAttributeAttributeKey];
 	
 	return dict;
+}
+
+#pragma mark - Deal with NSRange
+
++(NSRange)_rangeFromRangeDictionaryItem:(id)rangeItem {
+    if ([rangeItem isKindOfClass:[NSString class]]) {
+        return NSRangeFromString(rangeItem);
+    } else if ([rangeItem isKindOfClass:[NSValue class]]) {
+        return [rangeItem rangeValue];
+    } else {
+        return NSMakeRange(0, 0);
+    }
+}
+
++(NSString *)_rangeStringFromRange:(NSRange)range {
+    return NSStringFromRange(range);
 }
 
 #pragma mark - Substitute Class Methods
