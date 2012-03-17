@@ -74,13 +74,10 @@
         
 		NSColor *calibratedColor = [color colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]];
         
-        CGFloat colors[4];
-		[calibratedColor getComponents:colors];
-        
-        _red = colors[0];
-        _green = colors[1];
-        _blue = colors[2];
-        _alpha = colors[3];
+        _red = [calibratedColor redComponent];
+        _green = [calibratedColor greenComponent];
+        _blue = [calibratedColor blueComponent];
+        _alpha = [calibratedColor alphaComponent];
 	}
 	return self;
 }
