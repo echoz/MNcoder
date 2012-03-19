@@ -72,7 +72,7 @@
 -(id)initWithColor:(NSColor *)color {
 	if ((self = [super init])) {
         
-		NSColor *calibratedColor = [color colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]];
+		NSColor *calibratedColor = [color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
         
         _red = [calibratedColor redComponent];
         _green = [calibratedColor greenComponent];
