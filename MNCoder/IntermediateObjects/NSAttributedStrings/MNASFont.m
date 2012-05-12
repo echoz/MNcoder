@@ -36,11 +36,11 @@
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
-		_fontName = [[aDecoder decodeObjectForKey:@"fontName"] retain];
+		_fontName = [aDecoder decodeObjectForKey:@"fontName"];
 		_size = [[aDecoder decodeObjectForKey:@"size"] floatValue];
-		_baseLineAdjustment = [[aDecoder decodeObjectForKey:@"baselineAdjustment"] retain];
-		_obliqueness = [[aDecoder decodeObjectForKey:@"obliqueness"] retain];
-		_expansion = [[aDecoder decodeObjectForKey:@"expansion"] retain];
+		_baseLineAdjustment = [aDecoder decodeObjectForKey:@"baselineAdjustment"];
+		_obliqueness = [aDecoder decodeObjectForKey:@"obliqueness"];
+		_expansion = [aDecoder decodeObjectForKey:@"expansion"];
 
 	}
 	
@@ -59,9 +59,9 @@
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(id)object isEqualToString:(NSString *)kCTFontAttributeName];
+	return [(__bridge id)object isEqualToString:(NSString *)kCTFontAttributeName];
 #else
-	return [(id)object isEqualToString:NSFontAttributeName];
+	return [(__bridge id)object isEqualToString:NSFontAttributeName];
 #endif
 }
 
@@ -83,29 +83,26 @@
 #if TARGET_OS_IPHONE
 		CTFontDescriptorRef fontDesc = CTFontCopyFontDescriptor(object);
 		
-		_fontName = CTFontDescriptorCopyAttribute(fontDesc, kCTFontNameAttribute);
+		_fontName = (__bridge NSString *)CTFontDescriptorCopyAttribute(fontDesc, kCTFontNameAttribute);
 		
-		_baseLineAdjustment = CTFontDescriptorCopyAttribute(fontDesc, kCTFontBaselineAdjustAttribute);
+		_baseLineAdjustment = (__bridge NSNumber *)CTFontDescriptorCopyAttribute(fontDesc, kCTFontBaselineAdjustAttribute);
 		
 		CFNumberRef pointSize = CTFontDescriptorCopyAttribute(fontDesc, kCTFontSizeAttribute);
-		_size = [(NSNumber *)pointSize floatValue];
+		_size = [(__bridge NSNumber *)pointSize floatValue];
 		CFRelease(pointSize);
 		
 		CFDictionaryRef traits = CTFontDescriptorCopyAttribute(fontDesc, kCTFontTraitsAttribute);
-		_obliqueness = CFDictionaryGetValue(traits, kCTFontSlantTrait);
-		_expansion = CFDictionaryGetValue(traits, kCTFontWidthTrait);
-		
-		CFRetain(_obliqueness);
-		CFRetain(_expansion);
-		
+		_obliqueness = (__bridge NSNumber *)CFDictionaryGetValue(traits, kCTFontSlantTrait);
+		_expansion = (__bridge NSNumber *)CFDictionaryGetValue(traits, kCTFontWidthTrait);
+				
 		CFRelease(traits);		
 		CFRelease(fontDesc);
 		
 #else
 		
-		_fontName = (NSString *)CTFontCopyPostScriptName(object);
+		_fontName = (__bridge NSString *)CTFontCopyPostScriptName(object);
 
-		_size = ((NSFont *)object).pointSize;
+		_size = ((__bridge NSFont *)object).pointSize;
 		
 		_baseLineAdjustment = [[self _valueForAttribute:NSBaselineOffsetAttributeName atRange:range forAttributedString:string] copy];
 		_obliqueness = [[self _valueForAttribute:NSObliquenessAttributeName atRange:range forAttributedString:string] copy];
@@ -115,13 +112,13 @@
 		// set default values if they are not filled in
 		
 		if (!_baseLineAdjustment)
-			_baseLineAdjustment = [[NSNumber numberWithFloat:0.0] retain];
+			_baseLineAdjustment = [NSNumber numberWithFloat:0.0];
 		
 		if (!_obliqueness)
-			_obliqueness = [[NSNumber numberWithFloat:0.0] retain];
+			_obliqueness = [NSNumber numberWithFloat:0.0];
 		
 		if (!_expansion)
-			_expansion = [[NSNumber numberWithFloat:0.0] retain];
+			_expansion = [NSNumber numberWithFloat:0.0];
 		
 	}	
 	return self;
@@ -131,12 +128,12 @@
 #if TARGET_OS_IPHONE
 
 	CFStringRef traitskeys[] = { kCTFontSlantTrait, kCTFontWidthTrait };
-	CFTypeRef traitsvalues[] = { (CFNumberRef)self.obliqueness, (CFNumberRef)self.expansion };
+	CFTypeRef traitsvalues[] = { (__bridge CFNumberRef)self.obliqueness, (__bridge CFNumberRef)self.expansion };
 
 	CFDictionaryRef traitsDict = CFDictionaryCreate(kCFAllocatorDefault, (const void **)&traitskeys , (const void **)&traitsvalues, 2, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 	
 	CFStringRef desckeys[] = { kCTFontNameAttribute, kCTFontBaselineAdjustAttribute, kCTFontTraitsAttribute };
-	CFTypeRef descvalues[] = { (CFStringRef)self.fontName, (CFNumberRef)self.baseLineAdjustment, traitsDict };
+	CFTypeRef descvalues[] = { (__bridge CFStringRef)self.fontName, (__bridge CFNumberRef)self.baseLineAdjustment, traitsDict };
 	
 	CFDictionaryRef descDict = CFDictionaryCreate(kCFAllocatorDefault, (const void **)&desckeys , (const void **)&descvalues, 3, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 	CTFontDescriptorRef descriptor = CTFontDescriptorCreateWithAttributes(descDict);
@@ -148,11 +145,11 @@
 	CFStringRef keys[] = { kCTFontAttributeName };
 	CFTypeRef values[] = { font };
     
-    NSDictionary *platformRepresentation = (NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+    NSDictionary *platformRepresentation = (__bridge_transfer NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
     CFRelease(descriptor);
     CFRelease(font);
 	
-	return [platformRepresentation autorelease];	
+	return platformRepresentation;	
 #else
 	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:4];
 	if (self.baseLineAdjustment)
@@ -163,7 +160,7 @@
 		[dict setObject:self.expansion forKey:NSExpansionAttributeName];
 	
 	CFStringRef desckeys[] = { kCTFontNameAttribute  };
-	CFTypeRef descvalues[] = { (CFStringRef)self.fontName };
+	CFTypeRef descvalues[] = { (__bridge CFStringRef)self.fontName };
 	
 	CFDictionaryRef descDict = CFDictionaryCreate(kCFAllocatorDefault, (const void **)&desckeys , (const void **)&descvalues, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 	CTFontDescriptorRef descriptor = CTFontDescriptorCreateWithAttributes(descDict);
@@ -172,21 +169,12 @@
 	CTFontRef font = CTFontCreateWithFontDescriptor(descriptor, self.size, NULL);
 	CFRelease(descriptor);
 	
-	[dict setObject:(NSFont *)font forKey:NSFontAttributeName];
+	[dict setObject:(__bridge NSFont *)font forKey:NSFontAttributeName];
 	CFRelease(font);
     
 	return dict;
 
 #endif
 }
-
--(void)dealloc {
-	[_fontName release], _fontName = nil;
-	[_baseLineAdjustment release], _baseLineAdjustment = nil;
-	[_obliqueness release], _obliqueness = nil;
-	[_expansion release], _expansion = nil;
-	[super dealloc];
-}
-
 
 @end

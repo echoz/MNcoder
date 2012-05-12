@@ -36,7 +36,7 @@
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
-		_textPosition = [[aDecoder decodeObjectForKey:@"textPosition"] retain];
+		_textPosition = [aDecoder decodeObjectForKey:@"textPosition"];
 	}
 	
 	return self;
@@ -50,15 +50,15 @@
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(id)object isEqualToString:(NSString *)kCTSuperscriptAttributeName];
+	return [(__bridge id)object isEqualToString:(NSString *)kCTSuperscriptAttributeName];
 #else
-	return [(id)object isEqualToString:NSSuperscriptAttributeName];
+	return [(__bridge id)object isEqualToString:NSSuperscriptAttributeName];
 #endif
 }
 
 -(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
-		_textPosition = [(NSNumber *)object retain];
+		_textPosition = (__bridge NSNumber *)object;
 	}	
 	return self;
 }
@@ -70,11 +70,5 @@
 	return [NSDictionary dictionaryWithObject:self.textPosition forKey:NSSuperscriptAttributeName];
 #endif
 }
-
--(void)dealloc {
-	[_textPosition release], _textPosition = nil;
-	[super dealloc];
-}
-
 
 @end

@@ -29,7 +29,7 @@
 		3F8561E114CB705700B7FE8D /* MNASKern.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8561E014CB705700B7FE8D /* MNASKern.m */; };
 		3F8561EC14CB722300B7FE8D /* MNASLigature.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8561E914CB722300B7FE8D /* MNASLigature.m */; };
 		3F8561ED14CB722300B7FE8D /* MNASStrokeWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8561EB14CB722300B7FE8D /* MNASStrokeWidth.m */; };
-		3F95E55914C751E70096CE62 /* EGOTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F95E54F14C751E70096CE62 /* EGOTextView.m */; };
+		3F95E55914C751E70096CE62 /* EGOTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F95E54F14C751E70096CE62 /* EGOTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3F95E55A14C751E70096CE62 /* drag-dot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95E55114C751E70096CE62 /* drag-dot@2x.png */; };
 		3F95E55B14C751E70096CE62 /* loupe-hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95E55214C751E70096CE62 /* loupe-hi@2x.png */; };
 		3F95E55C14C751E70096CE62 /* loupe-lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95E55314C751E70096CE62 /* loupe-lo@2x.png */; };
@@ -446,6 +446,7 @@
 		3F18E44414B7D74600303392 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS/iOS-Prefix.pch";
 				INFOPLIST_FILE = "iOS/iOS-Info.plist";
@@ -457,6 +458,7 @@
 		3F18E44514B7D74600303392 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS/iOS-Prefix.pch";
 				INFOPLIST_FILE = "iOS/iOS-Info.plist";

@@ -36,7 +36,7 @@
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
-		_styleMask = [[aDecoder decodeObjectForKey:@"styleMask"] retain];
+		_styleMask = [aDecoder decodeObjectForKey:@"styleMask"];
 	}
 	
 	return self;
@@ -50,15 +50,15 @@
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(id)object isEqualToString:(NSString *)kCTUnderlineStyleAttributeName];
+	return [(__bridge id)object isEqualToString:(NSString *)kCTUnderlineStyleAttributeName];
 #else
-	return [(id)object isEqualToString:NSUnderlineStyleAttributeName];
+	return [(__bridge id)object isEqualToString:NSUnderlineStyleAttributeName];
 #endif
 }
 
 -(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
-		_styleMask = [(NSNumber *)object retain];
+		_styleMask = (__bridge NSNumber *)object;
 	}	
 	return self;
 }
@@ -69,11 +69,6 @@
 #else
 	return [NSDictionary dictionaryWithObject:self.styleMask forKey:NSUnderlineStyleAttributeName];
 #endif
-}
-
--(void)dealloc {
-	[_styleMask release], _styleMask = nil;
-	[super dealloc];
 }
 
 

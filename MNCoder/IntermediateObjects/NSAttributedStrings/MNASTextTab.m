@@ -54,14 +54,14 @@
 #if TARGET_OS_IPHONE
 
 +(id)textTabWithTabStop:(CTTextTabRef)tab {
-	return [[[self alloc] initWithTabStop:tab] autorelease];
+	return [[self alloc] initWithTabStop:tab];
 }
 
 -(id)initWithTabStop:(CTTextTabRef)tab {
 	if ((self = [super init])) {
 		_alignment = CTTextTabGetAlignment(tab);
 		_location = CTTextTabGetLocation(tab);
-		_options = [((NSDictionary *)CTTextTabGetOptions(tab)) copy];
+		_options = [((__bridge NSDictionary *)CTTextTabGetOptions(tab)) copy];
 	}
 	return self;
 }
@@ -69,7 +69,7 @@
 #else
 
 +(id)textTabWithTabStop:(NSTextTab *)tab {
-	return [[[self alloc] initWithTabStop:tab] autorelease];
+	return [[self alloc] initWithTabStop:tab];
 }
 
 -(id)initWithTabStop:(NSTextTab *)tab {
@@ -83,21 +83,16 @@
 
 #endif
 
--(void)dealloc {
-	[_options release], _options = nil;
-	[super dealloc];
-}
-
 #if TARGET_OS_IPHONE
 
 -(CTTextTabRef)platformRepresentation {
-	return CTTextTabCreate(self.alignment, self.location, (CFDictionaryRef)self.options);
+	return CTTextTabCreate(self.alignment, self.location, (__bridge CFDictionaryRef)self.options);
 }
 
 #else
 
 -(NSTextTab *)platformRepresentation {
-	return [[[NSTextTab alloc] initWithTextAlignment:self.alignment location:self.location options:self.options] autorelease];
+	return [[NSTextTab alloc] initWithTextAlignment:self.alignment location:self.location options:self.options];
 }
 
 #endif

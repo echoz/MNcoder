@@ -55,8 +55,6 @@
 
 -(void)dealloc {	
 	__archiver.delegate = nil;
-	[__archiver release], __archiver = nil;
-	[super dealloc];
 }
 
 #pragma mark - Override Accessors
@@ -84,7 +82,7 @@
 +(NSData *)archivedDataWithRootObject:(id)object {
     NSMutableData *resultData = [NSMutableData dataWithCapacity:0];
     
-    MNArchiver *archiver = [[[MNArchiver alloc] initForWritingWithMutableData:resultData] autorelease];
+    MNArchiver *archiver = [[MNArchiver alloc] initForWritingWithMutableData:resultData];
     archiver.outputFormat = NSPropertyListBinaryFormat_v1_0;
     [archiver registerSubstituteClass:[MNFont class]];
     [archiver registerSubstituteClass:[MNColor class]];
@@ -115,8 +113,8 @@
     
     for (Class cls in __subsituteClasses) {
 		
-		if ([cls isSubstituteForObject:object]) {
-			return [[[cls alloc] initWithSubsituteObject:object] autorelease];
+		if ([cls isSubstituteForObject:(__bridge void*)object]) {
+			return [[cls alloc] initWithSubsituteObject:(__bridge void*)object];
 		}
     }
     

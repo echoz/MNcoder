@@ -36,7 +36,7 @@
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
-		_shapeType = [[aDecoder decodeObjectForKey:@"shapeType"] retain];
+		_shapeType = [aDecoder decodeObjectForKey:@"shapeType"];
 	}
 	
 	return self;
@@ -50,15 +50,15 @@
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(id)object isEqualToString:(NSString *)kCTGlyphInfoAttributeName];
+	return [(__bridge id)object isEqualToString:(NSString *)kCTGlyphInfoAttributeName];
 #else
-	return [(id)object isEqualToString:NSGlyphInfoAttributeName];
+	return [(__bridge id)object isEqualToString:NSGlyphInfoAttributeName];
 #endif
 }
 
 -(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
-		_shapeType = [(NSNumber *)object retain];
+		_shapeType = (__bridge NSNumber *)object;
 	}	
 	return self;
 }
@@ -70,11 +70,5 @@
 	return [NSDictionary dictionaryWithObject:self.shapeType forKey:NSCharacterShapeAttributeName];
 #endif
 }
-
--(void)dealloc {
-	[_shapeType release], _shapeType = nil;
-	[super dealloc];
-}
-
 
 @end

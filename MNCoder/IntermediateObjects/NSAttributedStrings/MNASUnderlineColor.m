@@ -36,7 +36,7 @@
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
-		_color = [[aDecoder decodeObjectForKey:@"color"] retain];
+		_color = [aDecoder decodeObjectForKey:@"color"];
 	}
 	
 	return self;
@@ -50,18 +50,18 @@
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(id)object isEqualToString:(NSString *)kCTUnderlineColorAttributeName];
+	return [(__bridge id)object isEqualToString:(NSString *)kCTUnderlineColorAttributeName];
 #else
-	return [(id)object isEqualToString:NSUnderlineColorAttributeName];
+	return [(__bridge id)object isEqualToString:NSUnderlineColorAttributeName];
 #endif
 }
 
 -(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
 #if TARGET_OS_IPHONE
-		_color = [[UIColor colorWithCGColor:object] retain];
+		_color = [UIColor colorWithCGColor:object];
 #else
-		_color = [(id)object retain];
+		_color = (__bridge id)object;
 #endif
 
 	}	
@@ -73,16 +73,10 @@
 	CFStringRef keys[] = { kCTUnderlineColorAttributeName };
 	CFTypeRef values[] = { [self.color CGColor] };
 	
-	return [(NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks) autorelease];	
+	return (__bridge_transfer NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);	
 #else
 	return [NSDictionary dictionaryWithObject:self.color forKey:NSUnderlineColorAttributeName];
 #endif
 }
-
--(void)dealloc {
-	[_color release], _color = nil;
-	[super dealloc];
-}
-
 
 @end

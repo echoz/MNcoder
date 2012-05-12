@@ -75,15 +75,10 @@
 
 #endif
 
--(void)dealloc {
-	[_baseString release], _baseString = nil;
-	[super dealloc];
-}
-
 #if TARGET_OS_IPHONE
 
 -(NSDictionary *)platformRepresentation {
-	CTGlyphInfoRef glyphinfo = CTGlyphInfoCreateWithCharacterIdentifier(self.characterIdentifier, self.characterCollection, (CFStringRef)self.baseString);
+	CTGlyphInfoRef glyphinfo = CTGlyphInfoCreateWithCharacterIdentifier(self.characterIdentifier, self.characterCollection, (__bridge CFStringRef)self.baseString);
 	
 	CFStringRef keys[] = { kCTGlyphInfoAttributeName };
 	CFTypeRef values[] = { glyphinfo };
@@ -91,7 +86,7 @@
 	CFDictionaryRef dict = CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 	CFRelease(glyphinfo);
 	
-	return [(NSDictionary *)dict autorelease];	
+	return (__bridge_transfer NSDictionary *)dict;	
 }
 
 #else
@@ -106,9 +101,9 @@
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(id)object isEqualToString:(NSString *)kCTGlyphInfoAttributeName];
+	return [(__bridge id)object isEqualToString:(NSString *)kCTGlyphInfoAttributeName];
 #else
-	return [(id)object isEqualToString:NSGlyphInfoAttributeName];
+	return [(__bridge id)object isEqualToString:NSGlyphInfoAttributeName];
 #endif
 }
 
@@ -117,7 +112,7 @@
 	
 	return [self initWithGlyph:(CTGlyphInfoRef)object baseString:[string.string substringWithRange:range]];
 #else
-	return [self initWithGlyph:object baseString:[string.string substringWithRange:range]];	
+	return [self initWithGlyph:(__bridge NSGlyphInfo *)object baseString:[string.string substringWithRange:range]];	
 #endif
 }
 

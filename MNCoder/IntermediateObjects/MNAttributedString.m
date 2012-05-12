@@ -62,7 +62,7 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 	if ((self = [super init])) {
 		_string = [[aDecoder decodeObjectForKey:@"string"] copy];
 		_attributes = [[aDecoder decodeObjectForKey:@"attributes"] copy];
-		__substituteClasses = [[NSMutableSet setWithCapacity:0] retain];
+		__substituteClasses = [NSMutableSet setWithCapacity:0];
         
         [self registerSubstituteClass:[MNASParagraphyStyle class]];
 		[self registerSubstituteClass:[MNASGlyphInfo class]];
@@ -90,7 +90,7 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 
 -(id)initWithAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
-		__substituteClasses = [[NSMutableSet setWithCapacity:0] retain];
+		__substituteClasses = [NSMutableSet setWithCapacity:0];
 		
 		[self registerSubstituteClass:[MNASParagraphyStyle class]];
 		[self registerSubstituteClass:[MNASGlyphInfo class]];
@@ -134,7 +134,7 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 #if TARGET_OS_IPHONE
 	// translate for iOS
         range = [[self class] _rangeFromRangeDictionaryItem:[dict objectForKey:kMNAttributedStringAttributeRangeKey]];
-		CFAttributedStringSetAttributes((CFMutableAttributedStringRef)aString, CFRangeMake(range.location, range.length) , (CFDictionaryRef)attributeToInsert, false);
+		CFAttributedStringSetAttributes((__bridge CFMutableAttributedStringRef)aString, CFRangeMake(range.location, range.length) , (__bridge CFDictionaryRef)attributeToInsert, false);
 	
 #else
 	// translate for Mac
@@ -142,7 +142,7 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 #endif
 	}
 
-	return [aString autorelease];
+	return aString;
 }
 
 -(Class)_substituteClassForObject:(void *)object {
@@ -165,11 +165,10 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 		id subsituteObject = nil;
 		
 		for (NSString *key in attrs) {
-			subsituteClass = [self _substituteClassForObject:key];
+			subsituteClass = [self _substituteClassForObject:(__bridge void*)key];
 			if (subsituteClass) {
-				subsituteObject = [[subsituteClass alloc] initWithObject:[attrs objectForKey:key] range:range forAttributedString:string];
+				subsituteObject = [[subsituteClass alloc] initWithObject:(__bridge void*)[attrs objectForKey:key] range:range forAttributedString:string];
 				[attributes insertObject:[self _dictionaryForAttributes:subsituteObject range:range] atIndex:([attributes count]-1)];
-				[subsituteObject release], subsituteObject = nil;
 			} else {
 				NSLog(@"Attribute not translated ->> (%@): %@", key, [attrs objectForKey:key]);
 				
@@ -181,16 +180,8 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 	}];
 
 	[attributes removeLastObject];
-    [_attributes release], _attributes = nil;
     
 	_attributes = [attributes copy];
-}
-
--(void)dealloc {
-	[__substituteClasses release], __substituteClasses = nil;
-	[_string release], _string = nil;
-	[_attributes release], _string = nil;
-	[super dealloc];
 }
 
 -(NSDictionary *)_dictionaryForAttributes:(NSDictionary *)attrs range:(NSRange)aRange {
@@ -243,11 +234,11 @@ static BOOL _MNAttributedStringLossless = YES;
 #pragma mark - MNCIntermediateObject Protocol
 
 -(id)initWithSubsituteObject:(void *)object {
-	return [self initWithAttributedString:(id)object];
+	return [self initWithAttributedString:(__bridge id)object];
 }
 
 +(BOOL)isSubstituteForObject:(void *)object {
-	return [(id)object isKindOfClass:[NSAttributedString class]];	
+	return [(__bridge id)object isKindOfClass:[NSAttributedString class]];	
 }
 
 

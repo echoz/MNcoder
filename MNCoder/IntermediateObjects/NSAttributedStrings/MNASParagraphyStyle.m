@@ -82,7 +82,7 @@
 
 #if TARGET_OS_IPHONE
 +(id)paragraphStyleWithStyle:(CTParagraphStyleRef)paragraphStyle {
-	return [[[self alloc] initWithParagraphStyle:paragraphStyle] autorelease];
+	return [[self alloc] initWithParagraphStyle:paragraphStyle];
 }
 
 -(id)initWithParagraphStyle:(CTParagraphStyleRef)paragraphStyle {
@@ -123,7 +123,7 @@
 	for (MNASTextTab *textTab in self.tabStops) {
 		cttexttab = [textTab platformRepresentation];
 		
-		CFArrayAppendValue((CFMutableArrayRef)tempTabStops, cttexttab);
+		CFArrayAppendValue((__bridge CFMutableArrayRef)tempTabStops, cttexttab);
 		CFRelease(cttexttab);
 	}
 
@@ -153,13 +153,13 @@
 	CFDictionaryRef dict = CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 	CFRelease(paragraphStyle);
 	
-	return [(NSDictionary *)dict autorelease];	
+	return (__bridge_transfer NSDictionary *)dict;	
 }
 
 #else
 
 +(id)paragraphStyleWithStyle:(NSParagraphStyle *)paragraphStyle {
-	return [[[self alloc] initWithParagraphStyle:paragraphStyle] autorelease];
+	return [[self alloc] initWithParagraphStyle:paragraphStyle];
 }
 
 -(id)initWithParagraphStyle:(NSParagraphStyle *)paragraphStyle {
@@ -216,25 +216,19 @@
 	platRep.paragraphSpacingBefore = self.paragraphSpacingBefore;
 	
     NSDictionary *platformDict = [NSDictionary dictionaryWithObject:platRep forKey:NSParagraphStyleAttributeName];
-    [platRep release];
     
 	return platformDict;
 }
 
 #endif
 
--(void)dealloc {
-	[_tabStops release], _tabStops = nil;
-	[super dealloc];
-}
-
 #pragma mark - MNCIntermediateObject Protocl
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(id)object isEqualToString:(NSString *)kCTParagraphStyleAttributeName];
+	return [(__bridge id)object isEqualToString:(NSString *)kCTParagraphStyleAttributeName];
 #else
-	return [(id)object isEqualToString:NSParagraphStyleAttributeName];
+	return [(__bridge id)object isEqualToString:NSParagraphStyleAttributeName];
 #endif
 }
 
@@ -242,7 +236,7 @@
 #if TARGET_OS_IPHONE
 	return [self initWithParagraphStyle:(CTParagraphStyleRef)object];
 #else
-	return [self initWithParagraphStyle:(id)object];
+	return [self initWithParagraphStyle:(__bridge id)object];
 #endif
 }
 

@@ -36,7 +36,7 @@
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
-		_width = [[aDecoder decodeObjectForKey:@"width"] retain];
+		_width = [aDecoder decodeObjectForKey:@"width"];
 	}
 	
 	return self;
@@ -50,15 +50,15 @@
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(id)object isEqualToString:(NSString *)kCTStrokeWidthAttributeName];
+	return [(__bridge id)object isEqualToString:(NSString *)kCTStrokeWidthAttributeName];
 #else
-	return [(id)object isEqualToString:NSStrokeWidthAttributeName];
+	return [(__bridge id)object isEqualToString:NSStrokeWidthAttributeName];
 #endif
 }
 
 -(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
-		_width = [(NSNumber *)object retain];
+		_width = (__bridge NSNumber *)object;
 	}	
 	return self;
 }
@@ -69,11 +69,6 @@
 #else
 	return [NSDictionary dictionaryWithObject:self.width forKey:NSStrokeWidthAttributeName];
 #endif
-}
-
--(void)dealloc {
-	[_width release], _width = nil;
-	[super dealloc];
 }
 
 

@@ -38,14 +38,9 @@ NSString *const MNCoderRootObjectName = @"MNC0derRootObject";
 
 -(id)init {
     if ((self = [super init])) {
-        __subsituteClasses = [[NSMutableSet setWithCapacity:0] retain];
+        __subsituteClasses = [NSMutableSet setWithCapacity:0];
     }
     return self;
-}
-
--(void)dealloc {
-    [__subsituteClasses release], __subsituteClasses = nil;
-    [super dealloc];
 }
 
 #pragma mark - Instance Methods

@@ -98,13 +98,6 @@
 	return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
-- (void)dealloc {
-	[textView release];
-	[segmentedButtons release];
-	[actionButton release];
-	[super dealloc];
-}
-
 - (IBAction)actionButtonTapped:(id)sender {
 	if (self.segmentedButtons.selectedSegmentIndex == 0) {
 		// do archive

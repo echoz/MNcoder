@@ -36,7 +36,7 @@
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
-		_type = [[aDecoder decodeObjectForKey:@"type"] retain];
+		_type = [aDecoder decodeObjectForKey:@"type"];
 	}
 	
 	return self;
@@ -50,15 +50,15 @@
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(id)object isEqualToString:(NSString *)kCTLigatureAttributeName];
+	return [(__bridge id)object isEqualToString:(NSString *)kCTLigatureAttributeName];
 #else
-	return [(id)object isEqualToString:NSLigatureAttributeName];
+	return [(__bridge id)object isEqualToString:NSLigatureAttributeName];
 #endif
 }
 
 -(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
-		_type = [(NSNumber *)object retain];
+		_type = (__bridge NSNumber *)object;
 	}	
 	return self;
 }
@@ -70,11 +70,5 @@
 	return [NSDictionary dictionaryWithObject:self.type forKey:NSLigatureAttributeName];
 #endif
 }
-
--(void)dealloc {
-	[_type release], _type = nil;
-	[super dealloc];
-}
-
 
 @end

@@ -66,37 +66,29 @@
 	return self;
 }
 
--(void)dealloc {
-	[_decodedRootObject release], _decodedRootObject = nil;
-    [__unarchiver release], __unarchiver = nil;
-	[super dealloc];
-}
 
 #pragma mark - Instance Methods
 -(id)decodedRootObject {
 	if (!_decodedRootObject) {
-		_decodedRootObject = [[__unarchiver decodeObjectForKey:MNCoderRootObjectName] retain];
+		_decodedRootObject = [__unarchiver decodeObjectForKey:MNCoderRootObjectName];
 
         // after finishing the decode, the unarchiver can't be used anymore,
         // lets proactively release it to reclaim memory.
 		[__unarchiver finishDecoding];
-        [__unarchiver release], __unarchiver = nil;
     }
     
-    id test = [[_decodedRootObject retain] autorelease];
-    
-    return test;
+    return _decodedRootObject;
 }
 
 #pragma mark - Static Methods
 
 +(id)unarchiveObjectWithData:(NSData *)data {
-    MNUnarchiver *unarchiver = [[[MNUnarchiver alloc] initForReadingWithData:data] autorelease];
+    MNUnarchiver *unarchiver = [[MNUnarchiver alloc] initForReadingWithData:data];
     [unarchiver registerSubstituteClass:[MNFont class]];
     [unarchiver registerSubstituteClass:[MNColor class]];
 	[unarchiver registerSubstituteClass:[MNAttributedString class]];
     
-    return [[[unarchiver decodedRootObject] retain] autorelease];
+    return [unarchiver decodedRootObject];
 }
 
 +(id)unarchiveObjectWithFile:(NSString *)path {
@@ -107,9 +99,7 @@
     
     NSData *data = [NSData dataWithContentsOfFile:path];
     
-    id unarchivedObj = [MNUnarchiver unarchiveObjectWithData:data];
-    
-    return [[unarchivedObj retain] autorelease];
+    return [MNUnarchiver unarchiveObjectWithData:data];
 }
 
 #pragma mark - NSKeyedUnarchiver Delegate Methods
@@ -127,14 +117,12 @@
     return nil;
 }
 
--(id)unarchiver:(NSKeyedUnarchiver *)unarchiver didDecodeObject:(id)object NS_RETURNS_RETAINED {
+-(id)unarchiver:(NSKeyedUnarchiver *)unarchiver didDecodeObject:(id)object {
     
     for (Class cls in __subsituteClasses) {
         
         if ([object isKindOfClass:cls]) {
-            id platformRepresentation = [[object platformRepresentation] retain];
-            [object release];
-            
+                        
             // NSKeyedUnarchiver does not retain the replacement object thus a temp workaround with analyzer warning
             // is not to autorelease it.
             //
@@ -143,7 +131,7 @@
             // inference that this is not retained upon the return.
             //
             // Will be filing a radar for this issue. (http://openradar.appspot.com/radar?id=1517414)
-            return platformRepresentation;
+            return [object platformRepresentation];
         }
     }
     

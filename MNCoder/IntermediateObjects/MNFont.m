@@ -48,11 +48,6 @@
 	[aCoder encodeFloat:self.size forKey:@"size"];
 }
 
--(void)dealloc {
-	[_fontName release], _fontName = nil;
-	[super dealloc];
-}
-
 #pragma mark - Platform specific representation
 
 #if TARGET_OS_IPHONE
@@ -104,14 +99,14 @@
 #pragma mark - MNCIntermediateObject Protocol
 
 -(id)initWithSubsituteObject:(void *)object {
-	return [self initWithFont:(id)object];
+	return [self initWithFont:(__bridge id)object];
 }
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE 
-	return [(id)object isKindOfClass:[UIFont class]];
+	return [(__bridge id)object isKindOfClass:[UIFont class]];
 #else
-	return [(id)object isKindOfClass:[NSFont class]];
+	return [(__bridge id)object isKindOfClass:[NSFont class]];
 #endif
 }
 

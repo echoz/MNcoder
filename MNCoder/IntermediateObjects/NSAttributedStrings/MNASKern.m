@@ -36,7 +36,7 @@
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
-		_kern = [[aDecoder decodeObjectForKey:@"kern"] retain];
+		_kern = [aDecoder decodeObjectForKey:@"kern"];
 	}
 	
 	return self;
@@ -50,15 +50,15 @@
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(id)object isEqualToString:(NSString *)kCTKernAttributeName];
+	return [(__bridge id)object isEqualToString:(NSString *)kCTKernAttributeName];
 #else
-	return [(id)object isEqualToString:NSKernAttributeName];
+	return [(__bridge id)object isEqualToString:NSKernAttributeName];
 #endif
 }
 
 -(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
-		_kern = [(NSNumber *)object retain];
+		_kern = (__bridge NSNumber *)object;
 	}	
 	return self;
 }
@@ -70,11 +70,5 @@
 	return [NSDictionary dictionaryWithObject:self.kern forKey:NSKernAttributeName];
 #endif
 }
-
--(void)dealloc {
-	[_kern release], _kern = nil;
-	[super dealloc];
-}
-
 
 @end
