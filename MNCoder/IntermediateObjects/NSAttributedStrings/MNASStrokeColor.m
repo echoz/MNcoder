@@ -50,7 +50,7 @@
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(id)object isEqualToString:(NSString *)kCTStrokeColorAttributeName];
+	return (([(id)object isEqualToString:(NSString *)kCTStrokeColorAttributeName]) || ([(id)object isEqualToString:NSStrokeColorAttributeName]));
 #else
 	return [(id)object isEqualToString:NSStrokeColorAttributeName];
 #endif
@@ -59,7 +59,12 @@
 -(id)initWithAttributeName:(NSString *)attributeName value:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
 #if TARGET_OS_IPHONE
-		_color = [[UIColor colorWithCGColor:object] retain];
+        if ([attributeName isEqualToString:(NSString *)kCTStrokeColorAttributeName]) {
+            _color = [[UIColor colorWithCGColor:object] retain];
+            
+        } else {
+            _color = [(id)object retain];
+        }
 #else
 		_color = [(id)object retain];
 #endif
@@ -69,10 +74,16 @@
 
 -(NSDictionary *)platformRepresentation {
 #if TARGET_OS_IPHONE
-	CFStringRef keys[] = { kCTStrokeColorAttributeName };
-	CFTypeRef values[] = { [self.color CGColor] };
-	
-	return [(NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks) autorelease];	
+    if ([MNAttributedString hasUIKitAdditions]) {
+        return [NSDictionary dictionaryWithObject:self.color forKey:NSStrokeColorAttributeName];
+        
+    } else {
+        CFStringRef keys[] = { kCTStrokeColorAttributeName };
+        CFTypeRef values[] = { [self.color CGColor] };
+        
+        return [(NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks) autorelease];
+        
+    }
 #else
 	return [NSDictionary dictionaryWithObject:self.color forKey:NSStrokeColorAttributeName];
 #endif
