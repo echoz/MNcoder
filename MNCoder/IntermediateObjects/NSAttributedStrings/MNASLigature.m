@@ -50,7 +50,7 @@
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(id)object isEqualToString:(NSString *)kCTLigatureAttributeName];
+	return (([(id)object isEqualToString:(NSString *)kCTLigatureAttributeName]) || ([(id)object isEqualToString:NSLigatureAttributeName]));
 #else
 	return [(id)object isEqualToString:NSLigatureAttributeName];
 #endif
@@ -65,7 +65,13 @@
 
 -(NSDictionary *)platformRepresentation {
 #if TARGET_OS_IPHONE
-	return [NSDictionary dictionaryWithObject:self.type forKey:(NSString *)kCTLigatureAttributeName];
+    if ([MNAttributedString hasUIKitAdditions]) {
+        return [NSDictionary dictionaryWithObject:self.type forKey:NSLigatureAttributeName];
+
+    } else {
+        return [NSDictionary dictionaryWithObject:self.type forKey:(NSString *)kCTLigatureAttributeName];
+        
+    }
 #else
 	return [NSDictionary dictionaryWithObject:self.type forKey:NSLigatureAttributeName];
 #endif
