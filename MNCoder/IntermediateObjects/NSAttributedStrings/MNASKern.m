@@ -50,7 +50,7 @@
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(id)object isEqualToString:(NSString *)kCTKernAttributeName];
+	return (([(id)object isEqualToString:(NSString *)kCTKernAttributeName]) || ([(id)object isEqualToString:NSKernAttributeName]));
 #else
 	return [(id)object isEqualToString:NSKernAttributeName];
 #endif
@@ -65,7 +65,13 @@
 
 -(NSDictionary *)platformRepresentation {
 #if TARGET_OS_IPHONE
-	return [NSDictionary dictionaryWithObject:self.kern forKey:(NSString *)kCTKernAttributeName];
+    if ([MNAttributedString hasUIKitAdditions]) {
+        return [NSDictionary dictionaryWithObject:self.kern forKey:NSKernAttributeName];
+        
+    } else {
+        return [NSDictionary dictionaryWithObject:self.kern forKey:(NSString *)kCTKernAttributeName];
+        
+    }
 #else
 	return [NSDictionary dictionaryWithObject:self.kern forKey:NSKernAttributeName];
 #endif
