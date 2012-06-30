@@ -65,11 +65,7 @@
 
 -(NSDictionary *)platformRepresentation {
 #if TARGET_OS_IPHONE
-    if ([MNAttributedString hasUIKitAdditions]) {
-        return [NSDictionary dictionaryWithObject:self.styleMask forKey:NSUnderlineStyleAttributeName];
-    } else {
-        return [NSDictionary dictionaryWithObject:self.styleMask forKey:(NSString *)kCTUnderlineStyleAttributeName];
-    }
+    return [NSDictionary dictionaryWithObject:self.styleMask forKey:(NSString *)kCTUnderlineStyleAttributeName];
 #else
 	return [NSDictionary dictionaryWithObject:self.styleMask forKey:NSUnderlineStyleAttributeName];
 #endif
