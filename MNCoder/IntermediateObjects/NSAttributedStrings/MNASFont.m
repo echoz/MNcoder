@@ -78,7 +78,7 @@
 	return retValue;
 }
 
--(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
+-(id)initWithAttributeName:(NSString *)attributeName value:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
 #if TARGET_OS_IPHONE
 		CTFontDescriptorRef fontDesc = CTFontCopyFontDescriptor(object);

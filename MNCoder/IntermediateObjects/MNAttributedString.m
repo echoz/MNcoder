@@ -164,10 +164,12 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 		Class subsituteClass = nil;
 		id subsituteObject = nil;
 		
+        NSUInteger idx = 0;
+        
 		for (NSString *key in attrs) {
 			subsituteClass = [self _substituteClassForObject:key];
 			if (subsituteClass) {
-				subsituteObject = [[subsituteClass alloc] initWithObject:[attrs objectForKey:key] range:range forAttributedString:string];
+				subsituteObject = [[subsituteClass alloc] initWithAttributeName:key value:[attrs objectForKey:key] range:range forAttributedString:string];
 				[attributes insertObject:[self _dictionaryForAttributes:subsituteObject range:range] atIndex:([attributes count]-1)];
 				[subsituteObject release], subsituteObject = nil;
 			} else {
@@ -177,6 +179,7 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 					[attributes insertObject:[self _dictionaryForAttributes:[NSDictionary dictionaryWithObject:[attrs objectForKey:key] forKey:key] range:range] atIndex:([attributes count]-1)];
 				}
 			}
+            idx++;
 		}
 	}];
 
@@ -228,6 +231,15 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
     if ([cls conformsToProtocol:@protocol(MNAttributedStringAttributeProtocol)])
         [__substituteClasses removeObject:cls];
 }
+
+#pragma mark - Detection of UIKit Additions
+
+#if TARGET_OS_IPHONE
++(BOOL)hasUIKitAdditions {
+    return ([[[UIDevice currentDevice] systemVersion] compare:@"6.0"] != NSOrderedDescending);
+}
+#endif
+
 
 #pragma mark - Lossy switch
 static BOOL _MNAttributedStringLossless = YES;

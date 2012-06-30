@@ -37,7 +37,7 @@ extern NSString *const kMNAttributedStringAttributeRangeKey;
 @required
 -(NSDictionary *)platformRepresentation;
 +(BOOL)isSubstituteForObject:(void *)object;
--(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string;
+-(id)initWithAttributeName:(NSString *)attributeName value:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string;
 @end
 
 @interface MNAttributedString : NSObject <MNCIntermediateObjectProtocol> {
@@ -59,5 +59,9 @@ extern NSString *const kMNAttributedStringAttributeRangeKey;
 
 +(BOOL)lossless;
 +(void)setLossless:(BOOL)lossless;
+
+#if TARGET_OS_IPHONE
++(BOOL)hasUIKitAdditions;
+#endif
 
 @end
