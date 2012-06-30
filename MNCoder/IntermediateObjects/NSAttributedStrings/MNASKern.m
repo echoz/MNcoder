@@ -50,13 +50,13 @@
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(__bridge id)object isEqualToString:(NSString *)kCTKernAttributeName];
+	return (([(__bridge id)object isEqualToString:(NSString *)kCTKernAttributeName]) || ([(__bridge id)object isEqualToString:NSKernAttributeName]));
 #else
 	return [(__bridge id)object isEqualToString:NSKernAttributeName];
 #endif
 }
 
--(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
+-(id)initWithAttributeName:(NSString *)attributeName value:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
 		_kern = (__bridge NSNumber *)object;
 	}	
@@ -65,7 +65,13 @@
 
 -(NSDictionary *)platformRepresentation {
 #if TARGET_OS_IPHONE
-	return [NSDictionary dictionaryWithObject:self.kern forKey:(NSString *)kCTKernAttributeName];
+    if ([MNAttributedString hasUIKitAdditions]) {
+        return [NSDictionary dictionaryWithObject:self.kern forKey:NSKernAttributeName];
+        
+    } else {
+        return [NSDictionary dictionaryWithObject:self.kern forKey:(NSString *)kCTKernAttributeName];
+        
+    }
 #else
 	return [NSDictionary dictionaryWithObject:self.kern forKey:NSKernAttributeName];
 #endif

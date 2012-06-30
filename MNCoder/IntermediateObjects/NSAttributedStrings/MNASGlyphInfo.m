@@ -107,7 +107,7 @@
 #endif
 }
 
--(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
+-(id)initWithAttributeName:(NSString *)attributeName value:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 #if TARGET_OS_IPHONE
 	
 	return [self initWithGlyph:(CTGlyphInfoRef)object baseString:[string.string substringWithRange:range]];

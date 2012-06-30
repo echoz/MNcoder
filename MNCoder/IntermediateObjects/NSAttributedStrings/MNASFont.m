@@ -58,8 +58,8 @@
 #pragma mark - MNAttributedStringAttribute Protocol
 
 +(BOOL)isSubstituteForObject:(void *)object {
-#if TARGET_OS_IPHONE
-	return [(__bridge id)object isEqualToString:(NSString *)kCTFontAttributeName];
+#if TARGET_OS_IPHONE    
+	return (([(__bridge id)object isEqualToString:(NSString *)kCTFontAttributeName]) || ([(__bridge id)object isEqualToString:NSFontAttributeName]));
 #else
 	return [(__bridge id)object isEqualToString:NSFontAttributeName];
 #endif
@@ -78,12 +78,34 @@
 	return retValue;
 }
 
--(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
+-(id)initWithAttributeName:(NSString *)attributeName value:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
 #if TARGET_OS_IPHONE
-		CTFontDescriptorRef fontDesc = CTFontCopyFontDescriptor(object);
-		
-		_fontName = (__bridge NSString *)CTFontDescriptorCopyAttribute(fontDesc, kCTFontNameAttribute);
+        CTFontDescriptorRef fontDesc;
+        
+        if ([MNAttributedString hasUIKitAdditions]) {
+            if ([attributeName isEqualToString:NSFontAttributeName]) {
+                UIFont *theFont = (__bridge UIFont *)object;
+                
+                NSNumber *baselineOffset = [self _valueForAttribute:NSBaselineOffsetAttributeName atRange:range forAttributedString:string];
+                if (!baselineOffset)
+                    baselineOffset = [NSNumber numberWithFloat:0.0];
+                
+                CFStringRef desckeys[] = { kCTFontNameAttribute, kCTFontBaselineAdjustAttribute, kCTFontSizeAttribute };
+                CFTypeRef descvalues[] = { (__bridge CFStringRef)theFont.fontName, (__bridge CFNumberRef)baselineOffset, (__bridge CFNumberRef)[NSNumber numberWithFloat:theFont.pointSize] };
+                CFDictionaryRef descDict = CFDictionaryCreate(kCFAllocatorDefault, (const void **)&desckeys , (const void **)&descvalues, 3, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+                
+                fontDesc = CTFontDescriptorCreateWithAttributes(descDict);
+                CFRelease(descDict);
+                
+            } else {
+                fontDesc = CTFontCopyFontDescriptor(object);
+            }
+        } else {
+            fontDesc = CTFontCopyFontDescriptor(object);
+        }
+        		
+		_fontName =  (__bridge NSString *)CTFontDescriptorCopyAttribute(fontDesc, kCTFontNameAttribute);
 		
 		_baseLineAdjustment = (__bridge NSNumber *)CTFontDescriptorCopyAttribute(fontDesc, kCTFontBaselineAdjustAttribute);
 		
@@ -126,7 +148,7 @@
 
 -(NSDictionary *)platformRepresentation {
 #if TARGET_OS_IPHONE
-
+    
 	CFStringRef traitskeys[] = { kCTFontSlantTrait, kCTFontWidthTrait };
 	CFTypeRef traitsvalues[] = { (__bridge CFNumberRef)self.obliqueness, (__bridge CFNumberRef)self.expansion };
 
@@ -142,14 +164,15 @@
 	
     CTFontRef font = CTFontCreateWithFontDescriptor(descriptor, self.size, NULL);
     
-	CFStringRef keys[] = { kCTFontAttributeName };
-	CFTypeRef values[] = { font };
+    CFStringRef keys[] = { kCTFontAttributeName };
+    CFTypeRef values[] = { font };
     
     NSDictionary *platformRepresentation = (__bridge_transfer NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
     CFRelease(descriptor);
     CFRelease(font);
-	
-	return platformRepresentation;	
+    
+    return platformRepresentation;
+
 #else
 	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:4];
 	if (self.baseLineAdjustment)

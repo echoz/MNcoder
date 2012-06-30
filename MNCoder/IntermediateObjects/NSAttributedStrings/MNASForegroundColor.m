@@ -50,16 +50,22 @@
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(__bridge id)object isEqualToString:(NSString *)kCTForegroundColorAttributeName];
+	return (([(__bridge id)object isEqualToString:(NSString *)kCTForegroundColorAttributeName]) || ([(__bridge id)object isEqualToString:NSForegroundColorAttributeName]));
 #else
 	return [(__bridge id)object isEqualToString:NSForegroundColorAttributeName];
 #endif
 }
 
--(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
+-(id)initWithAttributeName:(NSString *)attributeName value:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
 #if TARGET_OS_IPHONE
-		_color = [UIColor colorWithCGColor:object];
+        if ([attributeName isEqualToString:(NSString *)kCTForegroundColorAttributeName]) {
+            _color = [UIColor colorWithCGColor:object];
+            
+        } else {
+            _color = (__bridge id)object;
+        }
+        
 #else
 		_color = (__bridge id)object;
 #endif

@@ -50,13 +50,13 @@
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(__bridge id)object isEqualToString:(NSString *)kCTStrokeWidthAttributeName];
+	return (([(__bridge id)object isEqualToString:(NSString *)kCTStrokeWidthAttributeName]) || ([(__bridge id)object isEqualToString:NSStrokeWidthAttributeName]));
 #else
 	return [(__bridge id)object isEqualToString:NSStrokeWidthAttributeName];
 #endif
 }
 
--(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
+-(id)initWithAttributeName:(NSString *)attributeName value:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
 		_width = (__bridge NSNumber *)object;
 	}	
@@ -65,7 +65,13 @@
 
 -(NSDictionary *)platformRepresentation {
 #if TARGET_OS_IPHONE
-	return [NSDictionary dictionaryWithObject:self.width forKey:(NSString *)kCTStrokeWidthAttributeName];
+    if ([MNAttributedString hasUIKitAdditions]) {
+        return [NSDictionary dictionaryWithObject:self.width forKey:NSStrokeWidthAttributeName];
+
+    } else {
+        return [NSDictionary dictionaryWithObject:self.width forKey:(NSString *)kCTStrokeWidthAttributeName];
+
+    }
 #else
 	return [NSDictionary dictionaryWithObject:self.width forKey:NSStrokeWidthAttributeName];
 #endif

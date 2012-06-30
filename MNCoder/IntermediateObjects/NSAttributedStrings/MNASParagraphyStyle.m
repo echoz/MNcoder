@@ -35,7 +35,7 @@
 @synthesize tailIndent = _tailIndent, tabStops = _tabStops, defaultTabInterval = _defaultTabInterval, lineHeightMultiple = _lineHeightMultiple;
 @synthesize maximumLineHeight = _maximumLineHeight, minimumLineHeight = _minimumLineHeight, lineSpacing = _lineSpacing;
 @synthesize paragraphSpacing = _paragraphSpacing, paragraphSpacingBefore = _paragraphSpacingBefore;
-@synthesize lineBreakMode = _lineBreakMode, baseWritingDirection = _baseWritingDirection;
+@synthesize lineBreakMode = _lineBreakMode, hyphenationFactor = _hyphenationFactor,baseWritingDirection = _baseWritingDirection;
 
 #pragma mark - NSCoding Protocol
 
@@ -44,6 +44,7 @@
 		_tabStops = [[aDecoder decodeObjectForKey:@"tabStops"] copy];
 		_alignment = [[aDecoder decodeObjectForKey:@"alignment"] unsignedIntegerValue];
 		_lineBreakMode = [[aDecoder decodeObjectForKey:@"lineBreakMode"] unsignedIntegerValue];
+        _hyphenationFactor = [aDecoder decodeFloatForKey:@"hyphenationFactor"];
 		_baseWritingDirection = [[aDecoder decodeObjectForKey:@"baseWritingDirection"] unsignedIntegerValue];
 		
 		_firstLineHeadIndent = [aDecoder decodeFloatForKey:@"firstLineHeadIdent"];
@@ -65,6 +66,7 @@
 	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:self.alignment] forKey:@"alignment"];
 	
 	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:self.lineBreakMode] forKey:@"lineBreakMode"];
+    [aCoder encodeFloat:self.hyphenationFactor forKey:@"hyphenationFactor"];
 	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:self.baseWritingDirection] forKey:@"baseWritingDirection"];
 	
 	[aCoder encodeFloat:self.firstLineHeadIndent forKey:@"firstLineHeadIdent"];
@@ -80,42 +82,31 @@
 	
 }
 
-#if TARGET_OS_IPHONE
-+(id)paragraphStyleWithStyle:(CTParagraphStyleRef)paragraphStyle {
-	return [[self alloc] initWithParagraphStyle:paragraphStyle];
-}
-
--(id)initWithParagraphStyle:(CTParagraphStyleRef)paragraphStyle {
-	if ((self = [super init])) {
-		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierAlignment, sizeof(CTTextAlignment), &_alignment);
-		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierLineBreakMode, sizeof(NSUInteger), &_lineBreakMode);
-		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierBaseWritingDirection, sizeof(NSUInteger), &_baseWritingDirection);
-		
-		NSArray *tempTabStops;
-		
-		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierTabStops, sizeof(CFArrayRef), &tempTabStops);
-		
-		NSMutableArray *mntexttabs = [NSMutableArray arrayWithCapacity:[tempTabStops count]];
-		for (id tabStop in tempTabStops) {
-			[mntexttabs addObject:[MNASTextTab textTabWithTabStop:(CTTextTabRef)tabStop]];
-		}
-		_tabStops = [mntexttabs copy];		
-		
-		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierFirstLineHeadIndent, sizeof(CGFloat), &_firstLineHeadIndent);
-		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierHeadIndent, sizeof(CGFloat), &_headIndent);
-		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierTailIndent, sizeof(CGFloat), &_tailIndent);
-		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierDefaultTabInterval, sizeof(CGFloat), &_defaultTabInterval);
-		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierLineHeightMultiple, sizeof(CGFloat), &_lineHeightMultiple);
-		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierMaximumLineHeight, sizeof(CGFloat), &_maximumLineHeight);
-		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierMinimumLineHeight, sizeof(CGFloat), &_minimumLineHeight);
-		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierLineSpacing, sizeof(CGFloat), &_lineSpacing);
-		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierParagraphSpacing, sizeof(CGFloat), &_paragraphSpacing);
-		CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierParagraphSpacingBefore, sizeof(CGFloat), &_paragraphSpacingBefore);
-	}
-	return self;
-}
-
 -(NSDictionary *)platformRepresentation {
+#if TARGET_OS_IPHONE
+    
+    if ([MNAttributedString hasUIKitAdditions]) {
+        NSMutableParagraphStyle *platRep = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        
+        platRep.alignment = self.alignment;
+        platRep.lineBreakMode = self.lineBreakMode;
+        platRep.hyphenationFactor = self.hyphenationFactor;
+        platRep.baseWritingDirection = self.baseWritingDirection;
+                
+        platRep.firstLineHeadIndent = self.firstLineHeadIndent;
+        platRep.headIndent = self.headIndent;
+        platRep.tailIndent = self.tailIndent;
+        platRep.lineHeightMultiple = self.lineHeightMultiple;
+        platRep.maximumLineHeight = self.maximumLineHeight;
+        platRep.minimumLineHeight = self.minimumLineHeight;
+        platRep.lineSpacing = self.lineSpacing;
+        platRep.paragraphSpacing = self.paragraphSpacing;
+        platRep.paragraphSpacingBefore = self.paragraphSpacingBefore;
+        
+        NSDictionary *platformDict = [NSDictionary dictionaryWithObject:platRep forKey:NSParagraphStyleAttributeName];
+        
+        return platformDict;
+    }
 
 	NSMutableArray *tempTabStops = [NSMutableArray arrayWithCapacity:[self.tabStops count]];
 	CTTextTabRef cttexttab;
@@ -153,48 +144,14 @@
 	CFDictionaryRef dict = CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 	CFRelease(paragraphStyle);
 	
-	return (__bridge_transfer NSDictionary *)dict;	
-}
+	return (__bridge_transfer NSDictionary *)dict;
 
 #else
-
-+(id)paragraphStyleWithStyle:(NSParagraphStyle *)paragraphStyle {
-	return [[self alloc] initWithParagraphStyle:paragraphStyle];
-}
-
--(id)initWithParagraphStyle:(NSParagraphStyle *)paragraphStyle {
-	if ((self = [super init])) {
-		_alignment = paragraphStyle.alignment;
-		_lineBreakMode = paragraphStyle.lineBreakMode;
-		_baseWritingDirection = paragraphStyle.baseWritingDirection;
-
-		NSMutableArray *mntexttabs = [NSMutableArray arrayWithCapacity:[paragraphStyle.tabStops count]];
-		for (NSTextTab *tabStop in paragraphStyle.tabStops) {
-			[mntexttabs addObject:[MNASTextTab textTabWithTabStop:tabStop]];
-		}
-		_tabStops = [mntexttabs copy];		
-		
-		_firstLineHeadIndent = paragraphStyle.firstLineHeadIndent;
-		_headIndent = paragraphStyle.headIndent;
-		_tailIndent = paragraphStyle.tailIndent;
-		_defaultTabInterval = paragraphStyle.defaultTabInterval;
-		_lineHeightMultiple = paragraphStyle.lineHeightMultiple;
-		_maximumLineHeight = paragraphStyle.maximumLineHeight;
-		_minimumLineHeight = paragraphStyle.minimumLineHeight;
-		_lineSpacing = paragraphStyle.lineSpacing;
-		_paragraphSpacing = paragraphStyle.paragraphSpacing;
-		_paragraphSpacingBefore = paragraphStyle.paragraphSpacingBefore;
-		
-	}
-	
-	return self;
-}
-
--(NSDictionary *)platformRepresentation {
 	NSMutableParagraphStyle *platRep = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	
 	platRep.alignment = self.alignment;
 	platRep.lineBreakMode = self.lineBreakMode;
+    platRep.hyphenationFactor = self.hyphenationFactor;
 	platRep.baseWritingDirection = self.baseWritingDirection;
 	
 	NSMutableArray *tempTabStops = [NSMutableArray arrayWithCapacity:[self.tabStops count]];
@@ -218,26 +175,101 @@
     NSDictionary *platformDict = [NSDictionary dictionaryWithObject:platRep forKey:NSParagraphStyleAttributeName];
     
 	return platformDict;
-}
-
+    
 #endif
+}
 
 #pragma mark - MNCIntermediateObject Protocl
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(__bridge id)object isEqualToString:(NSString *)kCTParagraphStyleAttributeName];
+	return (([(__bridge id)object isEqualToString:(NSString *)kCTParagraphStyleAttributeName]) || ([(__bridge id)object isEqualToString:NSParagraphStyleAttributeName]));
 #else
 	return [(__bridge id)object isEqualToString:NSParagraphStyleAttributeName];
 #endif
 }
 
--(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
+-(id)initWithAttributeName:(NSString *)attributeName value:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
+    if ((self = [super init])) {
 #if TARGET_OS_IPHONE
-	return [self initWithParagraphStyle:(CTParagraphStyleRef)object];
+        
+        if ([attributeName isEqualToString:(NSString *)kCTParagraphStyleAttributeName]) {
+            CTParagraphStyleRef paragraphStyle = (CTParagraphStyleRef)object;
+            
+            CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierAlignment, sizeof(CTTextAlignment), &_alignment);
+            CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierLineBreakMode, sizeof(NSUInteger), &_lineBreakMode);
+            CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierBaseWritingDirection, sizeof(NSUInteger), &_baseWritingDirection);
+            
+            NSArray *tempTabStops;
+            
+            CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierTabStops, sizeof(CFArrayRef), &tempTabStops);
+            
+            NSMutableArray *mntexttabs = [NSMutableArray arrayWithCapacity:[tempTabStops count]];
+            for (id tabStop in tempTabStops) {
+                [mntexttabs addObject:[MNASTextTab textTabWithTabStop:(CTTextTabRef)tabStop]];
+            }
+            _tabStops = [mntexttabs copy];
+            
+            CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierFirstLineHeadIndent, sizeof(CGFloat), &_firstLineHeadIndent);
+            CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierHeadIndent, sizeof(CGFloat), &_headIndent);
+            CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierTailIndent, sizeof(CGFloat), &_tailIndent);
+            CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierDefaultTabInterval, sizeof(CGFloat), &_defaultTabInterval);
+            CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierLineHeightMultiple, sizeof(CGFloat), &_lineHeightMultiple);
+            CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierMaximumLineHeight, sizeof(CGFloat), &_maximumLineHeight);
+            CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierMinimumLineHeight, sizeof(CGFloat), &_minimumLineHeight);
+            CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierLineSpacing, sizeof(CGFloat), &_lineSpacing);
+            CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierParagraphSpacing, sizeof(CGFloat), &_paragraphSpacing);
+            CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierParagraphSpacingBefore, sizeof(CGFloat), &_paragraphSpacingBefore);
+            _hyphenationFactor = 0.0;
+            
+        } else {
+            NSParagraphStyle *paragraphStyle = (__bridge id)object;
+            
+            _alignment = paragraphStyle.alignment;
+            _lineBreakMode = paragraphStyle.lineBreakMode;
+            _hyphenationFactor = paragraphStyle.hyphenationFactor;
+            _baseWritingDirection = paragraphStyle.baseWritingDirection;
+            
+            _tabStops = [NSArray array];
+            
+            _firstLineHeadIndent = paragraphStyle.firstLineHeadIndent;
+            _headIndent = paragraphStyle.headIndent;    
+            _tailIndent = paragraphStyle.tailIndent;
+            _lineHeightMultiple = paragraphStyle.lineHeightMultiple;
+            _maximumLineHeight = paragraphStyle.maximumLineHeight;
+            _minimumLineHeight = paragraphStyle.minimumLineHeight;
+            _lineSpacing = paragraphStyle.lineSpacing;
+            _paragraphSpacing = paragraphStyle.paragraphSpacing;
+            _paragraphSpacingBefore = paragraphStyle.paragraphSpacingBefore;
+        }
+        
 #else
-	return [self initWithParagraphStyle:(__bridge id)object];
+        _alignment = paragraphStyle.alignment;
+        _lineBreakMode = paragraphStyle.lineBreakMode;
+        _hyphenationFactor = paragraphStyle.hyphenationFactor;
+        _baseWritingDirection = paragraphStyle.baseWritingDirection;
+        
+        NSMutableArray *mntexttabs = [NSMutableArray arrayWithCapacity:[paragraphStyle.tabStops count]];
+        for (NSTextTab *tabStop in paragraphStyle.tabStops) {
+            [mntexttabs addObject:[MNASTextTab textTabWithTabStop:tabStop]];
+        }
+        _tabStops = [mntexttabs copy];
+        
+        _firstLineHeadIndent = paragraphStyle.firstLineHeadIndent;
+        _headIndent = paragraphStyle.headIndent;
+        _tailIndent = paragraphStyle.tailIndent;
+        _defaultTabInterval = paragraphStyle.defaultTabInterval;
+        _lineHeightMultiple = paragraphStyle.lineHeightMultiple;
+        _maximumLineHeight = paragraphStyle.maximumLineHeight;
+        _minimumLineHeight = paragraphStyle.minimumLineHeight;
+        _lineSpacing = paragraphStyle.lineSpacing;
+        _paragraphSpacing = paragraphStyle.paragraphSpacing;
+        _paragraphSpacingBefore = paragraphStyle.paragraphSpacingBefore;
 #endif
+        
+    }
+
+    return self;
 }
 
 @end

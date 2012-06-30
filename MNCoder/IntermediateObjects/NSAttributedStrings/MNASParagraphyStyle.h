@@ -50,6 +50,7 @@
     CGFloat _paragraphSpacingBefore;
     
     NSUInteger _lineBreakMode;
+    CGFloat _hyphenationFactor;
     NSInteger _baseWritingDirection;
 
 }
@@ -70,18 +71,10 @@
 // ADD Text Blocks
 
 @property (readonly) NSUInteger lineBreakMode;
+@property (readonly) CGFloat hyphenationFactor;
 
-// ADD hyphenationFactor
 // ADD tighteningFactorForTruncation
 
 @property (readonly) NSInteger baseWritingDirection;
-
-#if TARGET_OS_IPHONE
-+(id)paragraphStyleWithStyle:(CTParagraphStyleRef)paragraphStyle;
--(id)initWithParagraphStyle:(CTParagraphStyleRef)paragraphStyle;
-#else
-+(id)paragraphStyleWithStyle:(NSParagraphStyle *)paragraphStyle;
--(id)initWithParagraphStyle:(NSParagraphStyle *)paragraphStyle;
-#endif
 
 @end

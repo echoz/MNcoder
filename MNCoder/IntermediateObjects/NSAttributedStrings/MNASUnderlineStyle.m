@@ -50,13 +50,13 @@
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(__bridge id)object isEqualToString:(NSString *)kCTUnderlineStyleAttributeName];
+        return (([(__bridge id)object isEqualToString:(NSString *)kCTUnderlineStyleAttributeName]) || ([(__bridge id)object isEqualToString:NSUnderlineStyleAttributeName]));
 #else
 	return [(__bridge id)object isEqualToString:NSUnderlineStyleAttributeName];
 #endif
 }
 
--(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
+-(id)initWithAttributeName:(NSString *)attributeName value:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
 		_styleMask = (__bridge NSNumber *)object;
 	}	
@@ -65,7 +65,7 @@
 
 -(NSDictionary *)platformRepresentation {
 #if TARGET_OS_IPHONE
-	return [NSDictionary dictionaryWithObject:self.styleMask forKey:(NSString *)kCTUnderlineStyleAttributeName];
+    return [NSDictionary dictionaryWithObject:self.styleMask forKey:(NSString *)kCTUnderlineStyleAttributeName];
 #else
 	return [NSDictionary dictionaryWithObject:self.styleMask forKey:NSUnderlineStyleAttributeName];
 #endif

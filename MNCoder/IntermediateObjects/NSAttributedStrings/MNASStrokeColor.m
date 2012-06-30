@@ -50,16 +50,21 @@
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE
-	return [(__bridge id)object isEqualToString:(NSString *)kCTStrokeColorAttributeName];
+	return (([(__bridge id)object isEqualToString:(NSString *)kCTStrokeColorAttributeName]) || ([(__bridge id)object isEqualToString:NSStrokeColorAttributeName]));
 #else
 	return [(__bridge id)object isEqualToString:NSStrokeColorAttributeName];
 #endif
 }
 
--(id)initWithObject:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
+-(id)initWithAttributeName:(NSString *)attributeName value:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string {
 	if ((self = [super init])) {
 #if TARGET_OS_IPHONE
-		_color = [UIColor colorWithCGColor:object];
+        if ([attributeName isEqualToString:(NSString *)kCTStrokeColorAttributeName]) {
+            _color = [UIColor colorWithCGColor:object];
+            
+        } else {
+            _color = (__bridge id)object;
+        }
 #else
 		_color = (__bridge id)object;
 #endif
@@ -69,10 +74,16 @@
 
 -(NSDictionary *)platformRepresentation {
 #if TARGET_OS_IPHONE
-	CFStringRef keys[] = { kCTStrokeColorAttributeName };
-	CFTypeRef values[] = { [self.color CGColor] };
-	
-	return (__bridge_transfer NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);	
+    if ([MNAttributedString hasUIKitAdditions]) {
+        return [NSDictionary dictionaryWithObject:self.color forKey:NSStrokeColorAttributeName];
+        
+    } else {
+        CFStringRef keys[] = { kCTStrokeColorAttributeName };
+        CFTypeRef values[] = { [self.color CGColor] };
+        
+        return (__bridge NSDictionary *)CFDictionaryCreate(kCFAllocatorDefault, (const void **)&keys , (const void **)&values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+        
+    }
 #else
 	return [NSDictionary dictionaryWithObject:self.color forKey:NSStrokeColorAttributeName];
 #endif
