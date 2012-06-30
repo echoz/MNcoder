@@ -31,6 +31,16 @@ Specifically for Attributed strings, you can set whether it will be a lossless t
 - Links
 - Text attachments
 
+##### iOS 6
+iOS 6 introduces the NSAttributedString UIKit additions. While welcomed, there are only a handful of attributes compared to the OS X counter parts. And even then, of the handful, only some are implemented because there is a need to maintain some sort of parity between the CoreText and UIKit additions. As such, these attributes are not implemented.
+
+- NSBackgroundColorAttributeName
+- NSBaselineOffsetAttributeName: Dealt with in ParagraphStyle
+- NSStrikethroughStyleAttributeName
+- NSShadowAttributeName
+
+Additionally, to be as lossless as possible, platform representation of the various attributes will default to the ones that contain the most information. Sometimes this may be coretext sometimes the UIKit additions provide more information.
+
 #### Sample Project
 The same project provided opens as a workspace, MNcoder.xcworkspace and contain 2 projects, one for iOS and one for Mac OS X for testing. All archivng and unarchiving does so in the NSTemporaryDirectory() under the file name MNCoderTest.plist or whatever is set in the #define in the MNCoder.h file.
 
