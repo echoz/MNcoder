@@ -251,6 +251,8 @@
         }
         
 #else
+        NSParagraphStyle *paragraphStyle = object;
+        
         _alignment = paragraphStyle.alignment;
         _lineBreakMode = paragraphStyle.lineBreakMode;
         _hyphenationFactor = paragraphStyle.hyphenationFactor;
