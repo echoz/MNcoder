@@ -51,7 +51,7 @@
 
 -(IBAction)archiveTapped:(id)sender {
 	NSAttributedString *astring = (NSMutableAttributedString *)[textView textStorage];
-	[MNArchiver archiveRootObject:astring toFile:[NSString stringWithFormat:@"%@MNCoderTest.plist", NSTemporaryDirectory()]];
+	[MNArchiver archiveRootObject:astring toFile:[NSString stringWithFormat:@"%@MNCoderTest.plist", @"/tmp/"]];
 }
 
 -(IBAction)unarchiveTapped:(id)sender {
@@ -78,7 +78,7 @@
 	[[unarchiveTextView textStorage] setAttributedString:test];
      */
     
-	NSAttributedString *test = [MNUnarchiver unarchiveObjectWithFile:[NSString stringWithFormat:@"%@MNCoderTest.plist", NSTemporaryDirectory()]];
+	NSAttributedString *test = [MNUnarchiver unarchiveObjectWithFile:[NSString stringWithFormat:@"%@MNCoderTest.plist", @"/tmp/"]];
 	[[unarchiveTextView textStorage] setAttributedString:test];
 }
 

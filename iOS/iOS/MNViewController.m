@@ -102,7 +102,7 @@
 	if (self.segmentedButtons.selectedSegmentIndex == 0) {
 		// do archive
 		NSAttributedString *astring = self.textView.attributedString;
-		[MNArchiver archiveRootObject:astring toFile:[NSString stringWithFormat:@"%@MNCoderTest.plist", NSTemporaryDirectory()]];
+		[MNArchiver archiveRootObject:astring toFile:[NSString stringWithFormat:@"%@MNCoderTest.plist", @"/tmp/"]];
 	} else {
 		// do unarchive
         /*
@@ -127,7 +127,7 @@
 		[self.textView setAttributedString:test];
         */
 
-		NSAttributedString *test = [MNUnarchiver unarchiveObjectWithFile:[NSString stringWithFormat:@"%@MNCoderTest.plist", NSTemporaryDirectory()]];
+		NSAttributedString *test = [MNUnarchiver unarchiveObjectWithFile:[NSString stringWithFormat:@"%@MNCoderTest.plist", @"/tmp/"]];
 		[self.textView setAttributedString:test];
 	}
 	
