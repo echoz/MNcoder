@@ -28,7 +28,7 @@
 //
 
 #import "MNCAttributedString.h"
-#import "MNColor.h"
+#import "MNCColor.h"
 
 #import <Foundation/Foundation.h>
 #if TARGET_OS_IPHONE
