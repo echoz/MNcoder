@@ -27,7 +27,7 @@
 
 //
 
-#import "MNAttributedString.h"
+#import "MNCAttributedString.h"
 #import "MNColor.h"
 
 #import <Foundation/Foundation.h>
@@ -35,7 +35,7 @@
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNASUnderlineColor : NSObject <MNAttributedStringAttributeProtocol> {
+@interface MNASUnderlineColor : NSObject <MNCAttributedStringAttributeProtocol> {
 @private
 #if TARGET_OS_IPHONE
     UIColor *_color;

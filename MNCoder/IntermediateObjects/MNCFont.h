@@ -35,7 +35,7 @@
 
 #import "MNCIntermediateObjectProtocol.h"
 
-@interface MNFont : NSObject <MNCIntermediateObjectProtocol> {
+@interface MNCFont : NSObject <MNCIntermediateObjectProtocol> {
 @private
     NSString *_fontName;
     CGFloat _size;

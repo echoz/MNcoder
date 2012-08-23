@@ -43,9 +43,9 @@
 #import "MNCIntermediateObjectProtocol.h"
 
 // preconfigured intermediate objects
-#import "MNFont.h"
-#import "MNColor.h"
-#import "MNAttributedString.h"
+#import "MNCFont.h"
+#import "MNCColor.h"
+#import "MNCAttributedString.h"
 
 @implementation MNUnarchiver
 @synthesize decodedRootObject=_decodedRootObject;
@@ -92,9 +92,9 @@
 
 +(id)unarchiveObjectWithData:(NSData *)data {
     MNUnarchiver *unarchiver = [[[MNUnarchiver alloc] initForReadingWithData:data] autorelease];
-    [unarchiver registerSubstituteClass:[MNFont class]];
-    [unarchiver registerSubstituteClass:[MNColor class]];
-	[unarchiver registerSubstituteClass:[MNAttributedString class]];
+    [unarchiver registerSubstituteClass:[MNCFont class]];
+    [unarchiver registerSubstituteClass:[MNCColor class]];
+	[unarchiver registerSubstituteClass:[MNCAttributedString class]];
     
     return [[[unarchiver decodedRootObject] retain] autorelease];
 }
