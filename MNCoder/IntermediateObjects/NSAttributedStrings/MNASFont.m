@@ -87,14 +87,10 @@
         if ([MNAttributedString hasUIKitAdditions]) {
             if ([attributeName isEqualToString:NSFontAttributeName]) {
                 UIFont *theFont = (UIFont *)object;
-                
-                NSNumber *baselineOffset = [self _valueForAttribute:NSBaselineOffsetAttributeName atRange:range forAttributedString:string];
-                if (!baselineOffset)
-                    baselineOffset = [NSNumber numberWithFloat:0.0];
-                
-                CFStringRef desckeys[] = { kCTFontNameAttribute, kCTFontBaselineAdjustAttribute, kCTFontSizeAttribute };
-                CFTypeRef descvalues[] = { (CFStringRef)theFont.fontName, (CFNumberRef)baselineOffset, (CFNumberRef)[NSNumber numberWithFloat:theFont.pointSize] };
-                CFDictionaryRef descDict = CFDictionaryCreate(kCFAllocatorDefault, (const void **)&desckeys , (const void **)&descvalues, 3, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+                                
+                CFStringRef desckeys[] = { kCTFontNameAttribute, kCTFontSizeAttribute };
+                CFTypeRef descvalues[] = { (CFStringRef)theFont.fontName, (CFNumberRef)[NSNumber numberWithFloat:theFont.pointSize] };
+                CFDictionaryRef descDict = CFDictionaryCreate(kCFAllocatorDefault, (const void **)&desckeys , (const void **)&descvalues, 2, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
                 
                 fontDesc = CTFontDescriptorCreateWithAttributes(descDict);
                 CFRelease(descDict);
