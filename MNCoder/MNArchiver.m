@@ -30,9 +30,9 @@
 #import "MNArchiver.h"
 #import "MNCIntermediateObjectProtocol.h"
 
-#import "MNFont.h"
-#import "MNColor.h"
-#import "MNAttributedString.h"
+#import "MNCFont.h"
+#import "MNCColor.h"
+#import "MNCAttributedString.h"
 
 @implementation MNArchiver
 
@@ -86,9 +86,9 @@
     
     MNArchiver *archiver = [[[MNArchiver alloc] initForWritingWithMutableData:resultData] autorelease];
     archiver.outputFormat = NSPropertyListBinaryFormat_v1_0;
-    [archiver registerSubstituteClass:[MNFont class]];
-    [archiver registerSubstituteClass:[MNColor class]];
-	[archiver registerSubstituteClass:[MNAttributedString class]];
+    [archiver registerSubstituteClass:[MNCFont class]];
+    [archiver registerSubstituteClass:[MNCColor class]];
+	[archiver registerSubstituteClass:[MNCAttributedString class]];
     
     [archiver encodeRootObject:object];
     

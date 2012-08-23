@@ -86,7 +86,7 @@
 -(NSDictionary *)platformRepresentation {
 #if TARGET_OS_IPHONE
     
-    if ([MNAttributedString hasUIKitAdditions]) {
+    if ([MNCAttributedString hasUIKitAdditions]) {
         NSMutableParagraphStyle *platRep = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
         
         platRep.alignment = self.alignment;

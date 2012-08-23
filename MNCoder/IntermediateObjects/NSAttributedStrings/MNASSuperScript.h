@@ -27,14 +27,14 @@
 
 //
 
-#import "MNAttributedString.h"
+#import "MNCAttributedString.h"
 
 #import <Foundation/Foundation.h>
 #if TARGET_OS_IPHONE
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNASSuperScript : NSObject <MNAttributedStringAttributeProtocol> {
+@interface MNASSuperScript : NSObject <MNCAttributedStringAttributeProtocol> {
 @private
     NSNumber *_textPosition;
 

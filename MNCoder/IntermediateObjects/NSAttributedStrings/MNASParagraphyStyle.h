@@ -32,9 +32,9 @@
 #import <CoreText/CoreText.h>
 #endif
 
-#import "MNAttributedString.h"
+#import "MNCAttributedString.h"
 
-@interface MNASParagraphyStyle : NSObject <MNAttributedStringAttributeProtocol> {
+@interface MNASParagraphyStyle : NSObject <MNCAttributedStringAttributeProtocol> {
 @private
     NSUInteger _alignment;
     CGFloat _firstLineHeadIndent;

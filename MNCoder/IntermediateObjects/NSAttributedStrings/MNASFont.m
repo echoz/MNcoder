@@ -84,7 +84,7 @@
         
         CTFontDescriptorRef fontDesc;
         
-        if ([MNAttributedString hasUIKitAdditions]) {
+        if ([MNCAttributedString hasUIKitAdditions]) {
             if ([attributeName isEqualToString:NSFontAttributeName]) {
                 UIFont *theFont = (UIFont *)object;
                                 
