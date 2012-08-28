@@ -27,14 +27,14 @@
 
 //
 
-#import "MNAttributedString.h"
+#import "MNCAttributedString.h"
 
 #import <Foundation/Foundation.h>
 #if TARGET_OS_IPHONE
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNASCharacterShape : NSObject <MNAttributedStringAttributeProtocol> {
+@interface MNASCharacterShape : NSObject <MNCAttributedStringAttributeProtocol> {
 @private
     NSNumber *_shapeType;
 }

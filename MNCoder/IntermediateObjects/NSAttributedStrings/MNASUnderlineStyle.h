@@ -27,14 +27,14 @@
 
 //
 
-#import "MNAttributedString.h"
+#import "MNCAttributedString.h"
 
 #import <Foundation/Foundation.h>
 #if TARGET_OS_IPHONE
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNASUnderlineStyle : NSObject <MNAttributedStringAttributeProtocol> {
+@interface MNASUnderlineStyle : NSObject <MNCAttributedStringAttributeProtocol> {
 @private
     NSNumber *_styleMask;
 

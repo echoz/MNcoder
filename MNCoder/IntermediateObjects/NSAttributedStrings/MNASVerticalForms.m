@@ -80,7 +80,7 @@
 -(NSDictionary *)platformRepresentation {
 #if TARGET_OS_IPHONE
 
-    if ([MNAttributedString hasUIKitAdditions]) {
+    if ([MNCAttributedString hasUIKitAdditions]) {
         return [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:self.enabled] forKey:NSVerticalGlyphFormAttributeName];
     } else {
         CFBooleanRef verticalFormsEnabled;

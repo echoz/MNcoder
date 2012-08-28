@@ -65,7 +65,7 @@
 
 -(NSDictionary *)platformRepresentation {
 #if TARGET_OS_IPHONE
-    if ([MNAttributedString hasUIKitAdditions]) {
+    if ([MNCAttributedString hasUIKitAdditions]) {
         return [NSDictionary dictionaryWithObject:self.type forKey:NSLigatureAttributeName];
 
     } else {

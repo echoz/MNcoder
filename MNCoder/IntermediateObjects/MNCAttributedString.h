@@ -33,14 +33,14 @@
 extern NSString *const kMNAttributedStringAttributeAttributeKey;
 extern NSString *const kMNAttributedStringAttributeRangeKey;
 
-@protocol MNAttributedStringAttributeProtocol <NSObject, NSCoding>
+@protocol MNCAttributedStringAttributeProtocol <NSObject, NSCoding>
 @required
 -(NSDictionary *)platformRepresentation;
 +(BOOL)isSubstituteForObject:(void *)object;
 -(id)initWithAttributeName:(NSString *)attributeName value:(void *)object range:(NSRange)range forAttributedString:(NSAttributedString *)string;
 @end
 
-@interface MNAttributedString : NSObject <MNCIntermediateObjectProtocol> {
+@interface MNCAttributedString : NSObject <MNCIntermediateObjectProtocol> {
 @private
 	NSMutableSet *__substituteClasses;
     

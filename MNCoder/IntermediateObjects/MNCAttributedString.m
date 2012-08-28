@@ -27,7 +27,7 @@
 
 //
 
-#import "MNAttributedString.h"
+#import "MNCAttributedString.h"
 
 #import "MNASParagraphyStyle.h"
 #import "MNASGlyphInfo.h"
@@ -46,14 +46,14 @@
 NSString *const kMNAttributedStringAttributeAttributeKey = @"kMNAttributedStringAttributeAttributeKey";
 NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttributeRangeKey";
 
-@interface MNAttributedString (/* Private Methods */)
+@interface MNCAttributedString (/* Private Methods */)
 -(void)_buildIntermediateRepresentationFromString:(NSAttributedString *)string;
 -(NSDictionary *)_dictionaryForAttributes:(NSDictionary *)attrs range:(NSRange)aRange;
 +(NSRange)_rangeFromRangeDictionaryItem:(id)rangeItem;
 +(NSString *)_rangeStringFromRange:(NSRange)range;
 @end
 
-@implementation MNAttributedString
+@implementation MNCAttributedString
 @synthesize string = _string, attributes = _attributes;
 
 #pragma mark - NSCoding Protocol
@@ -125,7 +125,7 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 
         attributeObj = [dict objectForKey:kMNAttributedStringAttributeAttributeKey];
         
-        if ([attributeObj conformsToProtocol:@protocol(MNAttributedStringAttributeProtocol)]) {
+        if ([attributeObj conformsToProtocol:@protocol(MNCAttributedStringAttributeProtocol)]) {
             attributeToInsert = [attributeObj platformRepresentation];
         } else {
             attributeToInsert = attributeObj;
@@ -175,7 +175,7 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 			} else {
 				NSLog(@"Attribute not translated ->> (%@): %@", key, [attrs objectForKey:key]);
 				
-				if (([MNAttributedString lossless]) && ([[attrs objectForKey:key] conformsToProtocol:@protocol(NSCoding)])) {
+				if (([MNCAttributedString lossless]) && ([[attrs objectForKey:key] conformsToProtocol:@protocol(NSCoding)])) {
 					[attributes insertObject:[self _dictionaryForAttributes:[NSDictionary dictionaryWithObject:[attrs objectForKey:key] forKey:key] range:range] atIndex:([attributes count]-1)];
 				}
 			}
@@ -223,12 +223,12 @@ NSString *const kMNAttributedStringAttributeRangeKey = @"kMNAttributedStringAttr
 
 #pragma mark - Substitute Class Methods
 -(void)registerSubstituteClass:(Class)cls {
-    if ([cls conformsToProtocol:@protocol(MNAttributedStringAttributeProtocol)])
+    if ([cls conformsToProtocol:@protocol(MNCAttributedStringAttributeProtocol)])
         [__substituteClasses addObject:cls];
 }
 
 -(void)unregisterSubtituteClass:(Class)cls {
-    if ([cls conformsToProtocol:@protocol(MNAttributedStringAttributeProtocol)])
+    if ([cls conformsToProtocol:@protocol(MNCAttributedStringAttributeProtocol)])
         [__substituteClasses removeObject:cls];
 }
 

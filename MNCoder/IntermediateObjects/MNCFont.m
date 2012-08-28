@@ -1,5 +1,5 @@
 //
-//  MNColor.m
+//  MNFont.m
 //  MNCoder
 //
 //  Created by Jeremy Foo on 1/7/12.
@@ -27,86 +27,95 @@
 
 //
 
-#import "MNColor.h"
+#import "MNCFont.h"
 
-@implementation MNColor
-@synthesize red = _red, green = _green, blue = _blue, alpha = _alpha;
+@implementation MNCFont
+@synthesize fontName = _fontName, size = _size;
 
 #pragma mark - NSCoding Protocol
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
-		_red = [aDecoder decodeFloatForKey:@"red"];
-		_green = [aDecoder decodeFloatForKey:@"green"];
-		_blue = [aDecoder decodeFloatForKey:@"blue"];
-		_alpha = [aDecoder decodeFloatForKey:@"alpha"];
+		_fontName = [[aDecoder decodeObjectForKey:@"fontName"] copy];
+		_size = [aDecoder decodeFloatForKey:@"size"];
 	}
 	
 	return self;
 }
 
 -(void)encodeWithCoder:(NSCoder *)aCoder {
-	[aCoder encodeFloat:self.red forKey:@"red"];
-	[aCoder encodeFloat:self.green forKey:@"green"];
-	[aCoder encodeFloat:self.blue forKey:@"blue"];
-	[aCoder encodeFloat:self.alpha forKey:@"alpha"];
+	[aCoder encodeObject:self.fontName forKey:@"fontName"];
+	[aCoder encodeFloat:self.size forKey:@"size"];
+}
+
+-(void)dealloc {
+	[_fontName release], _fontName = nil;
+	[super dealloc];
 }
 
 #pragma mark - Platform specific representation
 
 #if TARGET_OS_IPHONE
 
--(id)initWithColor:(UIColor *)color {
+-(id)initWithFont:(UIFont *)font {
 	if ((self = [super init])) {
-		[color getRed:&_red green:&_green blue:&_blue alpha:&_alpha];
+		_fontName = [font.fontName copy] ;
+		_size = font.pointSize;
 	}
 	return self;
 }
 
--(UIColor *)color {
-	return [UIColor colorWithRed:self.red green:self.green blue:self.blue alpha:self.alpha];
+-(UIFont *)font {
+    UIFont *test = [UIFont fontWithName:self.fontName size:self.size];
+    
+    if (test) {
+        return test;
+    } else {
+        return [UIFont systemFontOfSize:self.size];
+    }
 }
 
 #else
 
--(id)initWithColor:(NSColor *)color {
+-(id)initWithFont:(NSFont *)font {
 	if ((self = [super init])) {
-        
-		NSColor *calibratedColor = [color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-        
-        _red = [calibratedColor redComponent];
-        _green = [calibratedColor greenComponent];
-        _blue = [calibratedColor blueComponent];
-        _alpha = [calibratedColor alphaComponent];
+		_fontName = [font.fontName copy];
+		_size = font.pointSize;
 	}
 	return self;
 }
 
--(NSColor *)color {
-	return [NSColor colorWithCalibratedRed:self.red green:self.green blue:self.blue alpha:self.alpha];
+-(NSFont *)font {
+    NSFont *test = [NSFont fontWithName:self.fontName size:self.size];
+    
+    if (test) {
+        return test;
+    } else {
+        return [NSFont systemFontOfSize:self.size];
+    }
 }
 #endif
 
 -(NSString *)description {
-    return [NSString stringWithFormat:@"MNColor: red(%f) green(%f) blue(%f) alpha(%f)", self.red, self.green, self.blue, self.alpha];
+    return [NSString stringWithFormat:@"MNFont: fontName(%@) pointSize(%f)", self.fontName, self.size];
 }
+
 
 #pragma mark - MNCIntermediateObject Protocol
 
 -(id)initWithSubsituteObject:(void *)object {
-	return [self initWithColor:object];
+	return [self initWithFont:(id)object];
 }
 
 +(BOOL)isSubstituteForObject:(void *)object {
 #if TARGET_OS_IPHONE 
-	return [(id)object isKindOfClass:[UIColor class]];
+	return [(id)object isKindOfClass:[UIFont class]];
 #else
-	return [(id)object isKindOfClass:[NSColor class]];
+	return [(id)object isKindOfClass:[NSFont class]];
 #endif
 }
 
 -(id)platformRepresentation {
-	return [self color];
+	return [self font];
 }
-
 @end

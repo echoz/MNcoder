@@ -27,15 +27,15 @@
 
 //
 
-#import "MNAttributedString.h"
-#import "MNColor.h"
+#import "MNCAttributedString.h"
+#import "MNCColor.h"
 
 #import <Foundation/Foundation.h>
 #if TARGET_OS_IPHONE
 #import <CoreText/CoreText.h>
 #endif
 
-@interface MNASStrokeColor : NSObject <MNAttributedStringAttributeProtocol> {
+@interface MNASStrokeColor : NSObject <MNCAttributedStringAttributeProtocol> {
 @private
 #if TARGET_OS_IPHONE
     UIColor *_color;
